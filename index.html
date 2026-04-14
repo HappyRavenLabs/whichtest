@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Browser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600&family=Google+Sans+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+
+<style>
+/* ── Theme tokens ─────────────────────────────────── */
+:root {
+  --md-primary: #1a73e8;
+  --md-primary-container: #d2e3fc;
+  --md-on-primary: #fff;
+  --md-on-primary-container: #002884;
+  --md-surface: #f8f9fa;
+  --md-surface-1: #fff;
+  --md-surface-2: #f0f4f9;
+  --md-surface-3: #e8edf5;
+  --md-on-surface: #1a1a2e;
+  --md-on-surface-var: #444751;
+  --md-outline: #c4c7ce;
+  --md-outline-var: #e2e5ec;
+  --md-chip-bg: #e8f0fe;
+  --md-chip-text: #1a73e8;
+  --md-chip-active-bg: #1a73e8;
+  --md-chip-active-text: #fff;
+  --md-card-shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.05);
+  --md-radius: 12px;
+  --md-radius-sm: 8px;
+  --md-radius-pill: 100px;
+  --md-font: 'Google Sans', sans-serif;
+  --md-mono: 'Google Sans Mono', monospace;
+  --md-transition: 220ms cubic-bezier(.2,.0,0,1);
+  --md-tooltip-bg: #2d2f31;
+  --md-tooltip-text: #f1f3f4;
+  --md-code-bg: #f0f4f9;
+  --md-blockquote-border: #1a73e8;
+  --md-blockquote-bg: #e8f0fe;
+}
+
+[data-theme="dark"] {
+  --md-primary: #8ab4f8;
+  --md-primary-container: #193b6f;
+  --md-on-primary: #00174a;
+  --md-on-primary-container: #d2e3fc;
+  --md-surface: #1a1c1e;
+  --md-surface-1: #232528;
+  --md-surface-2: #2c2f33;
+  --md-surface-3: #35383d;
+  --md-on-surface: #e2e5ec;
+  --md-on-surface-var: #9aa0ab;
+  --md-outline: #50535a;
+  --md-outline-var: #3a3d42;
+  --md-chip-bg: #193b6f;
+  --md-chip-text: #8ab4f8;
+  --md-chip-active-bg: #8ab4f8;
+  --md-chip-active-text: #00174a;
+  --md-card-shadow: 0 2px 6px rgba(0,0,0,.35);
+  --md-tooltip-bg: #f1f3f4;
+  --md-tooltip-text: #2d2f31;
+  --md-code-bg: #2c2f33;
+  --md-blockquote-border: #8ab4f8;
+  --md-blockquote-bg: #193b6f44;
+}
+
+[data-theme="hc"] {
+  --md-primary: #000;
+  --md-primary-container: #000;
+  --md-on-primary: #fff;
+  --md-on-primary-container: #fff;
+  --md-surface: #fff;
+  --md-surface-1: #fff;
+  --md-surface-2: #f5f5f5;
+  --md-surface-3: #e8e8e8;
+  --md-on-surface: #000;
+  --md-on-surface-var: #000;
+  --md-outline: #000;
+  --md-outline-var: #000;
+  --md-chip-bg: #000;
+  --md-chip-text: #fff;
+  --md-chip-active-bg: #000;
+  --md-chip-active-text: #fff;
+  --md-card-shadow: 0 0 0 2px #000;
+  --md-tooltip-bg: #000;
+  --md-tooltip-text: #fff;
+  --md-code-bg: #e8e8e8;
+  --md-blockquote-border: #000;
+  --md-blockquote-bg: #f5f5f5;
+}
+
+/* ── Reset & base ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--md-font);
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+  min-height: 100vh;
+  transition: background var(--md-transition), color var(--md-transition);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Top bar ──────────────────────────────────────── */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--md-surface-1);
+  border-bottom: 1px solid var(--md-outline-var);
+  padding: 0 16px;
+  display: flex; align-items: center; gap: 12px;
+  height: 64px;
+  transition: background var(--md-transition), border-color var(--md-transition);
+}
+
+.topbar-logo {
+  font-size: 20px; font-weight: 600;
+  color: var(--md-primary);
+  letter-spacing: -.3px;
+  flex-shrink: 0;
+}
+
+.topbar-sep { flex: 1; }
+
+.theme-group {
+  display: flex; gap: 4px; align-items: center;
+  background: var(--md-surface-2);
+  border-radius: var(--md-radius-pill);
+  padding: 4px;
+  border: 1px solid var(--md-outline-var);
+}
+
+.theme-btn {
+  width: 36px; height: 36px;
+  border-radius: var(--md-radius-pill);
+  border: none; cursor: pointer;
+  background: transparent;
+  color: var(--md-on-surface-var);
+  font-size: 16px;
+  display: grid; place-items: center;
+  transition: background var(--md-transition), color var(--md-transition);
+  flex-shrink: 0;
+}
+.theme-btn:hover { background: var(--md-surface-3); color: var(--md-on-surface); }
+.theme-btn.active {
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+}
+
+/* ── Layout ───────────────────────────────────────── */
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px 80px;
+}
+
+/* ── Breadcrumb ───────────────────────────────────── */
+.breadcrumb {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+  font-size: 13px; color: var(--md-on-surface-var);
+  margin-bottom: 24px; min-height: 24px;
+}
+.breadcrumb-item { cursor: pointer; transition: color var(--md-transition); }
+.breadcrumb-item:hover { color: var(--md-primary); }
+.breadcrumb-item.current { color: var(--md-primary); font-weight: 500; cursor: default; }
+.breadcrumb-sep { color: var(--md-outline); font-size: 11px; user-select: none; }
+
+/* ── Section heading ──────────────────────────────── */
+.section-label {
+  font-size: 13px; font-weight: 500;
+  color: var(--md-on-surface-var);
+  text-transform: uppercase; letter-spacing: .8px;
+  margin-bottom: 12px;
+}
+
+/* ── Chip grid ────────────────────────────────────── */
+.chip-grid {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 32px;
+}
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--md-radius-pill);
+  background: var(--md-chip-bg);
+  color: var(--md-chip-text);
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; border: none;
+  transition: all var(--md-transition);
+  white-space: nowrap;
+  line-height: 1;
+}
+.chip:hover {
+  filter: brightness(0.92);
+  transform: translateY(-1px);
+}
+.chip.active {
+  background: var(--md-chip-active-bg);
+  color: var(--md-chip-active-text);
+}
+.chip-count {
+  font-size: 11px; opacity: .7;
+  background: rgba(255,255,255,.25);
+  border-radius: 100px; padding: 1px 5px;
+}
+[data-theme="light"] .chip:not(.active) .chip-count { background: rgba(0,0,0,.1); }
+
+/* ── Items grid ───────────────────────────────────── */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.item-card {
+  background: var(--md-surface-1);
+  border: 1px solid var(--md-outline-var);
+  border-radius: var(--md-radius);
+  padding: 16px;
+  cursor: pointer;
+  transition: all var(--md-transition);
+  box-shadow: var(--md-card-shadow);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.item-card:hover {
+  border-color: var(--md-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(26,115,232,.15);
+}
+.item-card-icon {
+  font-size: 20px; margin-bottom: 4px;
+}
+.item-card-title {
+  font-size: 15px; font-weight: 600;
+  color: var(--md-on-surface);
+  line-height: 1.3;
+}
+.item-card-sub {
+  font-size: 12px; color: var(--md-on-surface-var);
+}
+.item-card-arrow {
+  margin-top: auto; align-self: flex-end;
+  font-size: 12px; color: var(--md-primary);
+  opacity: 0; transition: opacity var(--md-transition);
+}
+.item-card:hover .item-card-arrow { opacity: 1; }
+
+/* ── Content card ─────────────────────────────────── */
+.content-card {
+  background: var(--md-surface-1);
+  border: 1px solid var(--md-outline-var);
+  border-radius: var(--md-radius);
+  padding: 32px 36px;
+  box-shadow: var(--md-card-shadow);
+  animation: slideUp 280ms cubic-bezier(.2,.0,0,1) both;
+  max-width: 800px;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.content-name {
+  font-size: 26px; font-weight: 600;
+  color: var(--md-on-surface);
+  margin-bottom: 24px;
+  line-height: 1.2;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--md-outline-var);
+}
+
+/* ── Markdown rendered content ────────────────────── */
+.md-body { line-height: 1.75; font-size: 15.5px; }
+
+.md-body h1, .md-body h2 {
+  font-size: 20px; font-weight: 600;
+  color: var(--md-on-surface);
+  margin: 28px 0 12px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--md-outline-var);
+}
+.md-body h3 {
+  font-size: 16px; font-weight: 600;
+  color: var(--md-on-surface);
+  margin: 20px 0 8px;
+}
+.md-body p { margin-bottom: 14px; }
+.md-body ul, .md-body ol { padding-left: 1.5em; margin-bottom: 14px; }
+.md-body li { margin-bottom: 6px; }
+.md-body strong { font-weight: 600; color: var(--md-on-surface); }
+
+.md-body blockquote {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--md-blockquote-border);
+  background: var(--md-blockquote-bg);
+  border-radius: 0 var(--md-radius-sm) var(--md-radius-sm) 0;
+  font-style: italic; color: var(--md-on-surface-var);
+}
+.md-body blockquote p { margin: 0; }
+
+.md-body code {
+  font-family: var(--md-mono);
+  font-size: 13px;
+  background: var(--md-code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.md-body pre {
+  background: var(--md-code-bg);
+  border: 1px solid var(--md-outline-var);
+  border-radius: var(--md-radius-sm);
+  padding: 16px;
+  overflow-x: auto; margin: 16px 0;
+}
+.md-body pre code { background: none; padding: 0; font-size: 13.5px; }
+
+.md-body table {
+  width: 100%; border-collapse: collapse;
+  margin: 16px 0; font-size: 14px;
+}
+.md-body th {
+  background: var(--md-surface-2);
+  color: var(--md-on-surface);
+  font-weight: 600;
+  padding: 10px 14px;
+  border: 1px solid var(--md-outline-var);
+  text-align: left;
+}
+.md-body td {
+  padding: 9px 14px;
+  border: 1px solid var(--md-outline-var);
+  color: var(--md-on-surface-var);
+}
+.md-body tr:nth-child(even) td { background: var(--md-surface-2); }
+
+.md-body img {
+  max-width: 100%; height: auto;
+  border-radius: var(--md-radius-sm);
+  margin: 12px 0;
+  border: 1px solid var(--md-outline-var);
+}
+
+/* KaTeX display math */
+.katex-display {
+  overflow-x: auto; overflow-y: hidden;
+  padding: 4px 0;
+}
+
+/* ── Tooltip ──────────────────────────────────────── */
+.tooltip-term {
+  cursor: help;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  color: var(--md-primary);
+  position: relative;
+}
+
+.tooltip-popup {
+  position: fixed;
+  z-index: 9999;
+  max-width: 280px;
+  background: var(--md-tooltip-bg);
+  color: var(--md-tooltip-text);
+  font-size: 13px; line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: var(--md-radius-sm);
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  pointer-events: none;
+  opacity: 0; transition: opacity 160ms ease;
+}
+.tooltip-popup.visible { opacity: 1; }
+
+/* ── Empty / loading states ───────────────────────── */
+.state-box {
+  text-align: center; padding: 60px 20px;
+  color: var(--md-on-surface-var);
+}
+.state-box-icon { font-size: 48px; margin-bottom: 12px; }
+.state-box-title { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+.state-box-sub { font-size: 14px; }
+
+/* ── Spinner ──────────────────────────────────────── */
+.spinner {
+  width: 32px; height: 32px; margin: 0 auto 16px;
+  border: 3px solid var(--md-outline-var);
+  border-top-color: var(--md-primary);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Fade animations for level transitions ─────────── */
+.fade-in { animation: fadeIn 220ms ease both; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Back button ──────────────────────────────────── */
+.back-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px 8px 12px;
+  border-radius: var(--md-radius-pill);
+  background: var(--md-surface-2);
+  border: 1px solid var(--md-outline-var);
+  color: var(--md-on-surface-var);
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; margin-bottom: 20px;
+  transition: all var(--md-transition);
+}
+.back-btn:hover { background: var(--md-surface-3); color: var(--md-primary); border-color: var(--md-primary); }
+
+/* ── Error banner ─────────────────────────────────── */
+.error-banner {
+  background: #fce8e6; color: #c5221f;
+  border: 1px solid #f9c6c3; border-radius: var(--md-radius-sm);
+  padding: 14px 18px; margin-bottom: 24px; font-size: 14px;
+}
+[data-theme="dark"] .error-banner { background: #4a1f1f; color: #f28b82; border-color: #6b2d2d; }
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 600px) {
+  .topbar { padding: 0 12px; height: 56px; }
+  .topbar-logo { font-size: 17px; }
+  .layout { padding: 16px 12px 60px; }
+  .content-card { padding: 20px 16px; }
+  .content-name { font-size: 21px; }
+  .theme-btn { width: 32px; height: 32px; font-size: 14px; }
+  .items-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="topbar-logo">&#128218; Knowledge</span>
+  <span class="topbar-sep"></span>
+  <div class="theme-group" role="group" aria-label="Theme switcher">
+    <button class="theme-btn active" id="btn-light" onclick="setTheme('light')" title="Light mode">&#9728;&#65039;</button>
+    <button class="theme-btn" id="btn-dark"  onclick="setTheme('dark')"  title="Dark mode">&#127769;</button>
+    <button class="theme-btn" id="btn-hc"    onclick="setTheme('hc')"    title="High contrast">&#11835;</button>
+  </div>
+</header>
+
+<main class="layout">
+  <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></nav>
+  <div id="app">
+    <div class="state-box">
+      <div class="spinner"></div>
+      <div class="state-box-title">Loading feed.yaml…</div>
+      <div class="state-box-sub">Make sure feed.yaml is in the same directory as index.html</div>
+    </div>
+  </div>
+</main>
+
+<div class="tooltip-popup" id="tooltip"></div>
+
+<script>
+/* ── Theme ───────────────────────────────────────── */
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  ['light','dark','hc'].forEach(x => document.getElementById('btn-'+x).classList.toggle('active', x===t));
+  localStorage.setItem('kb-theme', t);
+}
+const saved = localStorage.getItem('kb-theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+setTheme(saved);
+
+/* ── Tooltip ─────────────────────────────────────── */
+const tip = document.getElementById('tooltip');
+let tipTimeout;
+document.addEventListener('mouseover', e => {
+  const el = e.target.closest('.tooltip-term');
+  if (!el) return;
+  clearTimeout(tipTimeout);
+  tip.textContent = el.dataset.tip;
+  const r = el.getBoundingClientRect();
+  const tw = 280, th = 80;
+  let left = r.left + r.width/2 - tw/2;
+  let top  = r.top - th - 10 + window.scrollY;
+  if (left < 8) left = 8;
+  if (left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
+  if (top < window.scrollY + 8) top = r.bottom + 8 + window.scrollY;
+  tip.style.left = left + 'px';
+  tip.style.top  = top  + 'px';
+  tip.classList.add('visible');
+});
+document.addEventListener('mouseout', e => {
+  if (!e.target.closest('.tooltip-term')) return;
+  tipTimeout = setTimeout(() => tip.classList.remove('visible'), 200);
+});
+
+/* ── YAML + Markdown processing ──────────────────── */
+async function loadYAML() {
+  const r = await fetch('feed.yaml');
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return jsyaml.load(await r.text());
+}
+
+function renderContent(raw) {
+  // Process [[term|explanation]] tooltip syntax before markdown
+  const withTooltips = raw.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, term, explanation) => {
+    const safe = explanation.replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    return `<span class="tooltip-term" data-tip="${safe}">${term}</span>`;
+  });
+
+  // Convert markdown (marked handles the rest)
+  const html = marked.parse(withTooltips, { breaks: false, gfm: true });
+  return html;
+}
+
+function mathRender(el) {
+  renderMathInElement(el, {
+    delimiters: [
+      {left:'$$', right:'$$', display:true},
+      {left:'$', right:'$',   display:false},
+      {left:'\\(', right:'\\)', display:false},
+      {left:'\\[', right:'\\]', display:true}
+    ],
+    throwOnError: false
+  });
+}
+
+/* ── State ───────────────────────────────────────── */
+let allItems = [];
+let path = [];  // selected hierarchy path so far
+
+function getChildrenAtPath(p) {
+  // Return distinct next-level values for items matching path p
+  const matching = allItems.filter(item =>
+    p.every((v, i) => item.hierarchy[i] === v)
+  );
+  // Next level index
+  const depth = p.length;
+  const seen = new Set();
+  const children = [];
+  for (const item of matching) {
+    const val = item.hierarchy[depth];
+    if (val && !seen.has(val)) {
+      seen.add(val);
+      // Count how many items live under this next node
+      const count = matching.filter(it => it.hierarchy[depth] === val).length;
+      children.push({ value: val, count });
+    }
+  }
+  return children;
+}
+
+function getLeafItems(p) {
+  // Items where hierarchy exactly matches p (leaf selection)
+  return allItems.filter(item =>
+    item.hierarchy.length === p.length &&
+    p.every((v, i) => item.hierarchy[i] === v)
+  );
+}
+
+function getItemsAtPath(p) {
+  // Items whose hierarchy starts with p and have no further children
+  return allItems.filter(item =>
+    p.every((v, i) => item.hierarchy[i] === v) &&
+    item.hierarchy.length === p.length
+  );
+}
+
+/* ── Render ──────────────────────────────────────── */
+const app = document.getElementById('app');
+const breadcrumbEl = document.getElementById('breadcrumb');
+
+function renderBreadcrumb() {
+  const crumbs = [{ label: 'Home', idx: -1 }];
+  path.forEach((p, i) => crumbs.push({ label: p, idx: i }));
+
+  breadcrumbEl.innerHTML = crumbs.map((c, i) => {
+    const isCurrent = i === crumbs.length - 1;
+    return `
+      <span class="breadcrumb-item${isCurrent ? ' current' : ''}"
+            onclick="${isCurrent ? '' : `navigate(${c.idx})`}">${c.label}</span>
+      ${i < crumbs.length-1 ? '<span class="breadcrumb-sep">›</span>' : ''}
+    `;
+  }).join('');
+}
+
+function navigate(idx) {
+  // idx = -1 means home, otherwise trim path to idx+1
+  path = idx === -1 ? [] : path.slice(0, idx + 1);
+  render();
+}
+
+function render() {
+  renderBreadcrumb();
+  const children = getChildrenAtPath(path);
+  const leaves = getItemsAtPath(path);
+
+  // Back button
+  const backBtn = path.length > 0
+    ? `<button class="back-btn fade-in" onclick="navigate(${path.length-2})">&#8592; Back</button>`
+    : '';
+
+  if (leaves.length > 0 && children.length === 0) {
+    // At a leaf — show content card(s)
+    app.innerHTML = backBtn + leaves.map(item => `
+      <div class="content-card fade-in">
+        <div class="content-name">${item.name}</div>
+        <div class="md-body" id="md-${item._id}">${renderContent(item.content)}</div>
+      </div>
+    `).join('<br>');
+
+    leaves.forEach(item => {
+      const el = document.getElementById('md-'+item._id);
+      if (el) mathRender(el);
+    });
+    return;
+  }
+
+  // Show navigation chips/cards
+  const isHome = path.length === 0;
+
+  app.innerHTML = `
+    ${backBtn}
+    ${children.length > 0 ? `
+      <div class="section-label fade-in">${isHome ? 'Browse topics' : 'Select category'}</div>
+      <div class="chip-grid fade-in">
+        ${children.map(ch => `
+          <button class="chip" onclick="selectLevel('${escStr(ch.value)}')">
+            ${ch.value}
+            <span class="chip-count">${ch.count}</span>
+          </button>
+        `).join('')}
+      </div>
+    ` : ''}
+    ${leaves.length > 0 ? `
+      <div class="section-label fade-in" style="margin-top:${children.length?'8px':'0'}">Articles</div>
+      <div class="items-grid fade-in">
+        ${leaves.map(item => `
+          <div class="item-card" onclick="openItem(${item._id})">
+            <div class="item-card-title">${item.name}</div>
+            <div class="item-card-sub">${item.hierarchy.join(' › ')}</div>
+            <div class="item-card-arrow">Open →</div>
+          </div>
+        `).join('')}
+      </div>
+    ` : ''}
+    ${children.length === 0 && leaves.length === 0 ? `
+      <div class="state-box fade-in">
+        <div class="state-box-icon">&#128270;</div>
+        <div class="state-box-title">Nothing here yet</div>
+        <div class="state-box-sub">No items found at this path</div>
+      </div>
+    ` : ''}
+  `;
+}
+
+function escStr(s) { return s.replace(/'/g, "\\'"); }
+
+function selectLevel(value) {
+  path.push(value);
+  render();
+}
+
+function openItem(id) {
+  const item = allItems.find(x => x._id === id);
+  if (!item) return;
+  path = [...item.hierarchy];
+  render();
+}
+
+/* ── Boot ────────────────────────────────────────── */
+loadYAML().then(data => {
+  allItems = (data.items || []).map((item, i) => ({ ...item, _id: i }));
+  render();
+}).catch(err => {
+  app.innerHTML = `
+    <div class="error-banner">
+      <strong>Could not load feed.yaml</strong> — ${err.message}<br>
+      <small>Serve this page via a local web server (e.g. <code>python3 -m http.server</code>) so the YAML file can be fetched.</small>
+    </div>
+    <div class="state-box">
+      <div class="state-box-icon">&#9888;&#65039;</div>
+      <div class="state-box-title">feed.yaml not found</div>
+      <div class="state-box-sub">Place feed.yaml in the same folder and run a local server.</div>
+    </div>
+  `;
+  document.getElementById('breadcrumb').innerHTML = '';
+});
+</script>
+</body>
+</html>

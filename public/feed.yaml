@@ -1,0 +1,28 @@
+items:
+  - id: math
+    label:
+      en: Mathematics
+      pl: Matematyka
+    children:
+      - id: algebra
+        label:
+          en: Algebra
+          pl: Algebra
+        children:
+          - id: linear
+            label:
+              en: Linear algebra
+              pl: Algebra liniowa
+            content:
+              en: |
+                {{term:matrix}} is a rectangular array of numbers.
+
+                $$Ax = b$$
+              pl: |
+                {{term:matrix}} to prostokątna tablica liczb.
+
+                $$Ax = b$$
+            glossary:
+              matrix:
+                en: A rectangular array of numbers.
+                pl: Prostokątna tablica liczb.
