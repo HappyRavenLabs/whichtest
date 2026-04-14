@@ -1,7 +1,7 @@
 # WhichTest
 
 <div align="center">
-  <img src="public/whichtest_logo.png" alt="WhichTestLogo" width="400"/>
+  <img src="public/whichtest_logo.svg" alt="WhichTestLogo" width="400"/>
 </div>
 
 <br>
