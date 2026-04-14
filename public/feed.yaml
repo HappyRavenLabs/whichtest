@@ -1,8 +1,8 @@
 items:
-  - id: math
+  - id: operation
     label:
-      en: Mathematics
-      pl: Matematyka
+      en: Causality
+      pl: Przyczynowość
     children:
       - id: algebra
         label:
@@ -19,10 +19,35 @@ items:
 
                 $$Ax = b$$
               pl: |
-                {{term:matrix}} to prostokątna tablica liczb.
+                {{term:matrix}} to prostokątna {{term:tablica}} liczb.
 
                 $$Ax = b$$
             glossary:
               matrix:
                 en: A rectangular array of numbers.
                 pl: Prostokątna tablica liczb.
+              tablica:
+                en: A table or array.
+                pl: Tablica lub zbiór danych.
+  - id: comparison
+    label:
+      en: Comparison
+      pl: Porównanie populacji
+    children:
+      - id: set_theory
+        label:
+          en: Set theory
+          pl: Teoria zbiorów
+        content:
+          en: |
+            A {{term:set}} is a collection of distinct objects.
+
+            $$A = \\{1, 2, 3\\}$$
+          pl: |
+            {{term:set}} to zbiór różnych obiektów.
+
+            $$A = \\{1, 2, 3\\}$$
+        glossary:
+          set:
+            en: A collection of distinct objects.
+            pl: Zbiór różnych obiektów.
