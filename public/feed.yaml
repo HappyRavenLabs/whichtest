@@ -1,53 +1,63 @@
+# Global glossary definitions
+glossary:
+  algebra:
+    en: "A branch of mathematics dealing with symbols and the rules for manipulating those symbols"
+    pl: "Dział matematyki zajmujący się symbolami i regułami manipulowania tymi symbolami"
+  calculus:
+    en: "A branch of mathematics focused on limits, functions, derivatives, integrals, and infinite series"
+    pl: "Dział matematyki skupiony na granicach, funkcjach, pochodnych, całkach i szeregach nieskończonych"
+  operations:
+    en: "Mathematical procedures like addition, subtraction, multiplication, and division"
+    pl: "Procedury matematyczne takie jak dodawanie, odejmowanie, mnożenie i dzielenie"
+  analysis:
+    en: "A branch of mathematics that deals with continuous change and includes differential and integral calculus"
+    pl: "Dział matematyki zajmujący się ciągłymi zmianami i obejmujący rachunek różniczkowy i całkowy"
+  hypothesis:
+    en: "A proposed explanation for a phenomenon, used as a starting point for investigation"
+    pl: "Proponowane wyjaśnienie zjawiska, używane jako punkt wyjścia do badań"
+  scientific-method:
+    en: "A systematic approach to understanding the natural world through observation and experimentation"
+    pl: "Systematyczne podejście do zrozumienia świata naturalnego poprzez obserwację i eksperymenty"
+  physics:
+    en: "The science of matter, energy, and the interaction between them"
+    pl: "Nauka o materii, energii i interakcji między nimi"
+
 items:
-  - id: operation
-    label:
-      en: Causality
-      pl: Przyczynowość
+  - id: "math"
+    label: 
+      en: "Mathematics [Custom Display Text]{{term:algebra}}"
+      pl: "Matematyka [Tekst Wyświetlany]{{term:algebra}}"
+    content:
+      en: "Welcome to the mathematics section! Here you can learn about {{term:algebra}} and [advanced concepts]{{term:calculus}}."
+      pl: "Witamy w sekcji matematyki! Tutaj możesz nauczyć się {{term:algebra}} i [zaawansowanych konceptów]{{term:calculus}}."
     children:
-      - id: algebra
-        label:
-          en: Algebra
-          pl: Algebra
-        children:
-          - id: linear
-            label:
-              en: Linear algebra
-              pl: Algebra liniowa
-            content:
-              en: |
-                {{term:matrix}} is a rectangular array of numbers.
-
-                $$Ax = b$$
-              pl: |
-                {{term:matrix}} to prostokątna {{term:tablica}} liczb.
-
-                $$Ax = b$$
-            glossary:
-              matrix:
-                en: A rectangular array of numbers.
-                pl: Prostokątna tablica liczb.
-              tablica:
-                en: A table or array.
-                pl: Tablica lub zbiór danych.
-  - id: comparison
-    label:
-      en: Comparison
-      pl: Porównanie populacji
-    children:
-      - id: set_theory
-        label:
-          en: Set theory
-          pl: Teoria zbiorów
+      - id: "basic-algebra"
+        label: 
+          en: "Basic {{term:algebra}}"
+          pl: "Podstawowa {{term:algebra}}"
         content:
-          en: |
-            A {{term:set}} is a collection of distinct objects.
-
-            $$A = \\{1, 2, 3\\}$$
-          pl: |
-            {{term:set}} to zbiór różnych obiektów.
-
-            $$A = \\{1, 2, 3\\}$$
-        glossary:
-          set:
-            en: A collection of distinct objects.
-            pl: Zbiór różnych obiektów.
+          en: "Learn the fundamentals of {{term:algebra}} including [basic operations]{{term:operations}}."
+          pl: "Naucz się podstaw {{term:algebra}} włącznie z [podstawowymi operacjami]{{term:operations}}."
+      - id: "advanced-math"
+        label:
+          en: "[Advanced Topics]{{term:calculus}}"
+          pl: "[Zaawansowane Tematy]{{term:calculus}}"
+        content:
+          en: "Explore {{term:calculus}} and other [higher-level mathematics]{{term:analysis}}."
+          pl: "Odkryj {{term:calculus}} i inne [matematykę wyższego poziomu]{{term:analysis}}."
+  
+  - id: "science"
+    label:
+      en: "Science [Experiments]{{term:hypothesis}}"
+      pl: "Nauka [Eksperymenty]{{term:hypothesis}}"
+    content:
+      en: "Welcome to science! Here we test our {{term:hypothesis}} through [systematic observation]{{term:scientific-method}}."
+      pl: "Witamy w nauce! Tutaj testujemy nasze {{term:hypothesis}} poprzez [systematyczne obserwacje]{{term:scientific-method}}."
+    children:
+      - id: "physics"
+        label:
+          en: "Physics"
+          pl: "Fizyka"
+        content:
+          en: "Study the fundamental principles of {{term:physics}} and [natural phenomena]{{term:hypothesis}}."
+          pl: "Studiuj podstawowe zasady {{term:physics}} i [zjawiska naturalne]{{term:hypothesis}}."

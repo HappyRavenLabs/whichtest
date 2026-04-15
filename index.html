@@ -707,9 +707,20 @@ function getLocalizedText(value, language, fallback = 'en') {
   return first || '';
 }
 
-function renderContent(raw, glossary = {}) {
-  // Process feed syntax {{term:key}} using glossary for active language.
-  const withTermGlossary = raw.replace(/\{\{term:([^}]+)\}\}/g, (_, key) => {
+function processGlossaryTerms(text, glossary = {}) {
+  if (!text || typeof text !== 'string') return text;
+  
+  // Process new syntax [custom_text]{{term:key}}
+  const withCustomTerms = text.replace(/\[([^\]]+)\]\{\{term:([^}]+)\}\}/g, (_, customText, key) => {
+    const k = String(key).trim();
+    const explanation = getLocalizedText(glossary[k], currentLang);
+    if (!explanation) return customText; // Return custom text if no glossary entry found
+    const safeExp = explanation.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    return `<span class="tooltip-term" data-tip="${safeExp}">${customText}</span>`;
+  });
+
+  // Process original syntax {{term:key}} using glossary for active language.
+  const withTermGlossary = withCustomTerms.replace(/\{\{term:([^}]+)\}\}/g, (_, key) => {
     const k = String(key).trim();
     const explanation = getLocalizedText(glossary[k], currentLang);
     if (!explanation) return k;
@@ -723,8 +734,14 @@ function renderContent(raw, glossary = {}) {
     return `<span class="tooltip-term" data-tip="${safe}">${term}</span>`;
   });
 
+  return withTooltips;
+}
+
+function renderContent(raw, glossary = {}) {
+  const processedText = processGlossaryTerms(raw, glossary);
+  
   // Convert markdown (marked handles the rest)
-  const html = marked.parse(withTooltips, { breaks: false, gfm: true });
+  const html = marked.parse(processedText, { breaks: false, gfm: true });
   return html;
 }
 
@@ -746,6 +763,7 @@ let path = []; // selected path of node ids
 let rootNode = { id: 'root', label: { en: 'Home', pl: 'Start' }, children: [] };
 let currentLang = 'en';
 let languages = ['en'];
+let globalGlossary = {};
 
 function getLanguagesFromFeed(node, bag = new Set()) {
   if (!node || typeof node !== 'object') return bag;
@@ -778,8 +796,9 @@ function findNodeByPath(pathIds) {
   return node;
 }
 
-function getNodeLabel(node) {
-  return getLocalizedText(node.label, currentLang) || node.id || '';
+function getNodeLabel(node, glossary = {}) {
+  const rawLabel = getLocalizedText(node.label, currentLang) || node.id || '';
+  return processGlossaryTerms(rawLabel, glossary);
 }
 
 /* ── Render ──────────────────────────────────────── */
@@ -789,10 +808,21 @@ const breadcrumbEl = document.getElementById('breadcrumb');
 function renderBreadcrumb() {
   const crumbs = [{ label: currentLang === 'pl' ? 'Start' : 'Home', idx: -1 }];
   let cursor = rootNode;
+  let accumulatedGlossary = { ...globalGlossary };
+  
+  // Start with global glossary and add root glossary if it exists
+  if (cursor.glossary) {
+    accumulatedGlossary = { ...accumulatedGlossary, ...cursor.glossary };
+  }
+  
   path.forEach((id, i) => {
     const next = (cursor.children || []).find(child => child.id === id);
     if (next) {
-      crumbs.push({ label: getNodeLabel(next), idx: i });
+      // Add this node's glossary to accumulated glossary
+      if (next.glossary) {
+        accumulatedGlossary = { ...accumulatedGlossary, ...next.glossary };
+      }
+      crumbs.push({ label: getNodeLabel(next, accumulatedGlossary), idx: i });
       cursor = next;
     }
   });
@@ -821,9 +851,31 @@ function render() {
   const activeNode = findNodeByPath(path) || rootNode;
   renderBreadcrumb();
   const children = activeNode.children || [];
-  const nodeTitle = getNodeLabel(activeNode);
+  
+  // Accumulate glossary from all parent nodes, starting with global glossary
+  let accumulatedGlossary = { ...globalGlossary };
+  let cursor = rootNode;
+  
+  for (const pathId of path) {
+    // Add current node's glossary before moving to next
+    if (cursor.glossary) {
+      accumulatedGlossary = { ...accumulatedGlossary, ...cursor.glossary };
+    }
+    
+    const next = (cursor.children || []).find(child => child.id === pathId);
+    if (next) {
+      cursor = next;
+    }
+  }
+  
+  // Add the final node's glossary
+  if (cursor.glossary) {
+    accumulatedGlossary = { ...accumulatedGlossary, ...cursor.glossary };
+  }
+  
+  const nodeTitle = getNodeLabel(activeNode, accumulatedGlossary);
   const localizedContent = getLocalizedText(activeNode.content, currentLang);
-  const glossary = activeNode.glossary || {};
+  const glossary = accumulatedGlossary;
 
   // Back button
   const backBtn = path.length > 0
@@ -847,7 +899,7 @@ function render() {
       <div class="chip-grid fade-in">
         ${children.map(ch => `
           <button class="chip" onclick="selectLevel('${escStr(ch.id)}')">
-            ${getNodeLabel(ch)}
+            ${getNodeLabel(ch, glossary)}
             <span class="chip-count">${(ch.children || []).length || (ch.content ? 1 : 0)}</span>
           </button>
         `).join('')}
@@ -900,10 +952,12 @@ function setLanguage(lang) {
 /* ── Boot ────────────────────────────────────────── */
 loadYAML().then(data => {
   allItems = data.items || [];
+  globalGlossary = data.glossary || {};
   rootNode = {
     id: 'root',
     label: { en: 'Home', pl: 'Start' },
-    children: allItems
+    children: allItems,
+    glossary: globalGlossary
   };
 
   const langs = Array.from(getLanguagesFromFeed(rootNode));
