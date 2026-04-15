@@ -482,6 +482,132 @@ body {
 }
 [data-theme="dark"] .error-banner { background: #4a1f1f; color: #f28b82; border-color: #6b2d2d; }
 
+/* ── Authors section ──────────────────────────────── */
+.authors-section {
+  margin: 40px 16px;
+  padding: 32px;
+  border-radius: var(--md-radius);
+  background: var(--md-surface-1);
+  border: 1px solid var(--md-outline-var);
+  box-shadow: var(--md-card-shadow);
+}
+
+.authors-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--md-on-surface);
+  margin-bottom: 32px;
+}
+
+.authors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.author-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  background: var(--md-surface-2);
+  border-radius: var(--md-radius);
+  border: 1px solid var(--md-outline-var);
+  transition: all var(--md-transition);
+}
+
+.author-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(26,115,232,.15);
+  border-color: var(--md-primary);
+}
+
+.author-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--md-primary);
+  margin-bottom: 16px;
+  object-fit: cover;
+  transition: all var(--md-transition);
+  background: var(--md-surface-3);
+}
+
+.author-card:hover .author-avatar {
+  border-color: var(--md-primary);
+  box-shadow: 0 0 0 4px rgba(26,115,232,.1);
+}
+
+.author-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--md-on-surface);
+  margin-bottom: 8px;
+}
+
+.author-role {
+  font-size: 14px;
+  color: var(--md-primary);
+  font-weight: 500;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.author-description {
+  font-size: 14px;
+  color: var(--md-on-surface-var);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.author-links {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.author-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--md-chip-bg);
+  color: var(--md-chip-text);
+  text-decoration: none;
+  transition: all var(--md-transition);
+  font-size: 14px;
+}
+
+.author-link:hover {
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .authors-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .authors-section {
+    margin: 32px 16px;
+    padding: 24px;
+  }
+  
+  .author-avatar {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 /* ── Footer ─────────────────────────────────────── */
 .footer {
   margin: 20px 16px 28px;
@@ -603,6 +729,45 @@ body {
     </div>
   </div>
 </main>
+
+<section class="authors-section">
+  <h2 class="authors-title">Meet the Authors</h2>
+  <div class="authors-grid">
+    <div class="author-card">
+      <img src="https://via.placeholder.com/120x120/4285f4/ffffff?text=JD" 
+           alt="John Doe" 
+           class="author-avatar">
+      <h3 class="author-name">Dr. John Doe</h3>
+      <div class="author-role">Lead Developer</div>
+      <p class="author-description">
+        John is a passionate software engineer with over 10 years of experience in educational technology. 
+        He specializes in creating interactive learning platforms and has a PhD in Computer Science.
+      </p>
+      <div class="author-links">
+        <a href="mailto:john@example.com" class="author-link" title="Email">✉</a>
+        <a href="https://github.com/johndoe" class="author-link" title="GitHub" target="_blank" rel="noopener">🔗</a>
+        <a href="https://linkedin.com/in/johndoe" class="author-link" title="LinkedIn" target="_blank" rel="noopener">💼</a>
+      </div>
+    </div>
+    
+    <div class="author-card">
+      <img src="https://via.placeholder.com/120x120/34a853/ffffff?text=JS" 
+           alt="Jane Smith" 
+           class="author-avatar">
+      <h3 class="author-name">Prof. Jane Smith</h3>
+      <div class="author-role">Educational Researcher</div>
+      <p class="author-description">
+        Jane is an educational technology researcher and professor with expertise in learning analytics 
+        and knowledge representation. She has published numerous papers on digital learning environments.
+      </p>
+      <div class="author-links">
+        <a href="mailto:jane@example.com" class="author-link" title="Email">✉</a>
+        <a href="https://scholar.google.com/citations?user=janesmith" class="author-link" title="Google Scholar" target="_blank" rel="noopener">🎓</a>
+        <a href="https://orcid.org/0000-0000-0000-0000" class="author-link" title="ORCID" target="_blank" rel="noopener">🔬</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer class="footer">
   <div class="footer-inner">
