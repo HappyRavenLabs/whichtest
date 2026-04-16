@@ -731,42 +731,7 @@ body {
 </main>
 
 <section class="authors-section">
-  <h2 class="authors-title">Meet the Authors</h2>
-  <div class="authors-grid">
-    <div class="author-card">
-      <img src="https://via.placeholder.com/120x120/4285f4/ffffff?text=JD" 
-           alt="John Doe" 
-           class="author-avatar">
-      <h3 class="author-name">Dr. John Doe</h3>
-      <div class="author-role">Lead Developer</div>
-      <p class="author-description">
-        John is a passionate software engineer with over 10 years of experience in educational technology. 
-        He specializes in creating interactive learning platforms and has a PhD in Computer Science.
-      </p>
-      <div class="author-links">
-        <a href="mailto:john@example.com" class="author-link" title="Email">✉</a>
-        <a href="https://github.com/johndoe" class="author-link" title="GitHub" target="_blank" rel="noopener">🔗</a>
-        <a href="https://linkedin.com/in/johndoe" class="author-link" title="LinkedIn" target="_blank" rel="noopener">💼</a>
-      </div>
-    </div>
-    
-    <div class="author-card">
-      <img src="https://via.placeholder.com/120x120/34a853/ffffff?text=JS" 
-           alt="Jane Smith" 
-           class="author-avatar">
-      <h3 class="author-name">Prof. Jane Smith</h3>
-      <div class="author-role">Educational Researcher</div>
-      <p class="author-description">
-        Jane is an educational technology researcher and professor with expertise in learning analytics 
-        and knowledge representation. She has published numerous papers on digital learning environments.
-      </p>
-      <div class="author-links">
-        <a href="mailto:jane@example.com" class="author-link" title="Email">✉</a>
-        <a href="https://scholar.google.com/citations?user=janesmith" class="author-link" title="Google Scholar" target="_blank" rel="noopener">🎓</a>
-        <a href="https://orcid.org/0000-0000-0000-0000" class="author-link" title="ORCID" target="_blank" rel="noopener">🔬</a>
-      </div>
-    </div>
-  </div>
+  <!-- Authors will be loaded dynamically from public/authors.yaml -->
 </section>
 
 <footer class="footer">
@@ -863,6 +828,26 @@ async function loadYAML() {
   throw lastError || new Error('No feed file could be loaded');
 }
 
+async function loadAuthors() {
+  const authorsPaths = ['public/authors.yaml', 'authors.yaml'];
+  let lastError = null;
+  for (const fp of authorsPaths) {
+    try {
+      const r = await fetch(fp);
+      if (!r.ok) {
+        lastError = new Error(`${fp}: HTTP ${r.status}`);
+        continue;
+      }
+      const data = jsyaml.load(await r.text());
+      return data.authors || [];
+    } catch (err) {
+      lastError = err;
+    }
+  }
+  console.warn('Could not load authors file:', lastError?.message || 'Unknown error');
+  return []; // Return empty array if authors file can't be loaded
+}
+
 function getLocalizedText(value, language, fallback = 'en') {
   if (typeof value === 'string') return value;
   if (!value || typeof value !== 'object') return '';
@@ -929,6 +914,7 @@ let rootNode = { id: 'root', label: { en: 'Home', pl: 'Start' }, children: [] };
 let currentLang = 'en';
 let languages = ['en'];
 let globalGlossary = {};
+let authors = [];
 
 function getLanguagesFromFeed(node, bag = new Set()) {
   if (!node || typeof node !== 'object') return bag;
@@ -1112,12 +1098,54 @@ function setLanguage(lang) {
   localStorage.setItem('kb-lang', lang);
   renderLanguageSwitcher();
   render();
+  renderAuthors(); // Re-render authors when language changes
+}
+
+function renderAuthors() {
+  const authorsSection = document.querySelector('.authors-section');
+  if (!authorsSection || !authors.length) return;
+
+  const authorsTitle = currentLang === 'pl' ? 'Poznaj Autorów' : 'Meet the Authors';
+  
+  const authorsGrid = authors.map(author => {
+    const name = getLocalizedText(author.name, currentLang) || author.id;
+    const role = getLocalizedText(author.role, currentLang) || '';
+    const description = getLocalizedText(author.description, currentLang) || '';
+    
+    const linksHtml = (author.links || []).map(link => {
+      const title = getLocalizedText(link.title, currentLang) || link.type;
+      return `<a href="${link.url}" class="author-link" title="${title}" target="_blank" rel="noopener">${link.icon}</a>`;
+    }).join('');
+
+    return `
+      <div class="author-card">
+        <img src="${author.img}" 
+             alt="${name}" 
+             class="author-avatar">
+        <h3 class="author-name">${name}</h3>
+        <div class="author-role">${role}</div>
+        <p class="author-description">${description}</p>
+        <div class="author-links">
+          ${linksHtml}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  authorsSection.innerHTML = `
+    <h2 class="authors-title">${authorsTitle}</h2>
+    <div class="authors-grid">
+      ${authorsGrid}
+    </div>
+  `;
 }
 
 /* ── Boot ────────────────────────────────────────── */
-loadYAML().then(data => {
+Promise.all([loadYAML(), loadAuthors()]).then(([data, authorsData]) => {
   allItems = data.items || [];
   globalGlossary = data.glossary || {};
+  authors = authorsData;
+  
   rootNode = {
     id: 'root',
     label: { en: 'Home', pl: 'Start' },
@@ -1134,6 +1162,7 @@ loadYAML().then(data => {
 
   renderLanguageSwitcher();
   render();
+  renderAuthors();
 }).catch(err => {
   app.innerHTML = `
     <div class="error-banner">

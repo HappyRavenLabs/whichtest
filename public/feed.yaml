@@ -1,63 +1,108 @@
 # Global glossary definitions
 glossary:
-  algebra:
-    en: "A branch of mathematics dealing with symbols and the rules for manipulating those symbols"
-    pl: "Dział matematyki zajmujący się symbolami i regułami manipulowania tymi symbolami"
-  calculus:
-    en: "A branch of mathematics focused on limits, functions, derivatives, integrals, and infinite series"
-    pl: "Dział matematyki skupiony na granicach, funkcjach, pochodnych, całkach i szeregach nieskończonych"
-  operations:
-    en: "Mathematical procedures like addition, subtraction, multiplication, and division"
-    pl: "Procedury matematyczne takie jak dodawanie, odejmowanie, mnożenie i dzielenie"
-  analysis:
-    en: "A branch of mathematics that deals with continuous change and includes differential and integral calculus"
-    pl: "Dział matematyki zajmujący się ciągłymi zmianami i obejmujący rachunek różniczkowy i całkowy"
-  hypothesis:
-    en: "A proposed explanation for a phenomenon, used as a starting point for investigation"
-    pl: "Proponowane wyjaśnienie zjawiska, używane jako punkt wyjścia do badań"
-  scientific-method:
-    en: "A systematic approach to understanding the natural world through observation and experimentation"
-    pl: "Systematyczne podejście do zrozumienia świata naturalnego poprzez obserwację i eksperymenty"
-  physics:
-    en: "The science of matter, energy, and the interaction between them"
-    pl: "Nauka o materii, energii i interakcji między nimi"
+  distribution:
+    en: "Data distribution is essentially the 'shape' of the data. It shows how often different values occur in a dataset. "
+    pl: "Rozkład danych to tak naprawdę 'kształt' danych. Pokazuje on, jak często występują różne wartości w zbiorze danych. "
+  normal:
+    en: "The normal distribution, also known as the Gaussian distribution, resembles a bell curve. Hence its alternative name: bell curve."
+    pl: "Rozkład normalny, znany również jako rozkład Gaussa, przypomina dzwon. Stąd też jego alternatywna nazwa: krzywa dzwonowa."
+  categorical:
+    en: "Categorical data describe qualitative variables, e.g. gender, eye color, education. They can be nominal (without natural order) or ordinal (with natural order)."
+    pl: "Dane kategoryczne, opisują zmienne jakościowe, np. płeć, kolor oczu, wykształcenie. Mogą być nominalne (bez naturalnego porządku) lub porządkowe (z naturalnym porządkiem)."
+  numerical:
+    en: "Numerical data represent measurable quantities and can be divided into discrete (e.g., number of children) or continuous (e.g., height) types. Another classification is interval data (with constant differences, e.g., temperature in degrees Celsius) and ratio data (with absolute zero, e.g., weight or temperature in kelvins)."
+    pl: "Dane numeryczne to dane ilościowe, liczby, które można mierzyć. Mogą być dyskretne (np. liczba dzieci) lub ciągłe (np. wzrost). Inny podział to: dane interwałowe (mające stałe różnice, np. temperatura w stopniach Celsjusza) i ilorazowe (mające bezwzględne zero, np. waga lub temperatura w kelwinach)."
+  multinomial:
+    en: "The multinomial distribution describes the probabilities of different outcomes in a categorical dataset, e.g., series of rolls of a die."
+    pl: "Rozkład wielomianowy opisuje prawdopodobieństwo wystąpienia różnych kategorii w zbiorze danych kategorycznych, np. wylosowanie cyfry 1-6 w serii kilku rzutów kostką."
 
 items:
-  - id: "math"
+  - id: "distribution"
     label: 
-      en: "Mathematics [Custom Display Text]{{term:algebra}}"
-      pl: "Matematyka [Tekst Wyświetlany]{{term:algebra}}"
-    content:
-      en: "Welcome to the mathematics section! Here you can learn about {{term:algebra}} and [advanced concepts]{{term:calculus}}."
-      pl: "Witamy w sekcji matematyki! Tutaj możesz nauczyć się {{term:algebra}} i [zaawansowanych konceptów]{{term:calculus}}."
+      en: "How does the data [distribution]{{term:distribution}} look like?"
+      pl: "Jak wygląda [rozkład]{{term:distribution}} danych?"
     children:
-      - id: "basic-algebra"
-        label: 
-          en: "Basic {{term:algebra}}"
-          pl: "Podstawowa {{term:algebra}}"
-        content:
-          en: "Learn the fundamentals of {{term:algebra}} including [basic operations]{{term:operations}}."
-          pl: "Naucz się podstaw {{term:algebra}} włącznie z [podstawowymi operacjami]{{term:operations}}."
-      - id: "advanced-math"
+      - id: "categorical"
         label:
-          en: "[Advanced Topics]{{term:calculus}}"
-          pl: "[Zaawansowane Tematy]{{term:calculus}}"
-        content:
-          en: "Explore {{term:calculus}} and other [higher-level mathematics]{{term:analysis}}."
-          pl: "Odkryj {{term:calculus}} i inne [matematykę wyższego poziomu]{{term:analysis}}."
-  
-  - id: "science"
-    label:
-      en: "Science [Experiments]{{term:hypothesis}}"
-      pl: "Nauka [Eksperymenty]{{term:hypothesis}}"
-    content:
-      en: "Welcome to science! Here we test our {{term:hypothesis}} through [systematic observation]{{term:scientific-method}}."
-      pl: "Witamy w nauce! Tutaj testujemy nasze {{term:hypothesis}} poprzez [systematyczne obserwacje]{{term:scientific-method}}."
-    children:
-      - id: "physics"
+          en: "[Categorical]{{term:categorical}} data"
+          pl: "[Dane kategoryczne]{{term:categorical}}"
+        children:
+          - id: "goodness-of-fit"
+            label:
+              en: "Does the data fit a theoretical [distribution]{{term:distribution}}?"
+              pl: "Czy dane pasują do [rozkładu]{{term:distribution}} teoretycznego?"
+            children:
+              - id: "chi-squared"
+                label:
+                  en: "Chi-squared test"
+                  pl: "Test chi-kwadrat"
+                content:
+                  en: |
+                    The chi-squared goodness-of-fit test is used to assess whether categorical data **deviate** from a specified theoretical distribution. 
+                    For example, whether the level of education in a sample corresponds to a [multinomial]{{term:multinomial}} distribution.
+
+                    $$
+                    H_0: \text{The data fit the theoretical distribution}
+                    $$
+                    $$
+                    H_a: \text{The data do not fit the theoretical distribution}
+                    $$
+                  pl: | 
+                    Test dopasowanie $\chi^2$ (czytaj: chi-kwadrat) jest używany do oceny, 
+                    czy dane kategoryczne **odbiegają** od określonego rozkładu teoretycznego.
+                    Np. czy poziom wykształcenia w próbie odpowiada rozkładowi [wielomianowemu]{{term:multinomial}}.
+
+                    $$
+                    H_0: \text{Dane pasują do rozkładu teoretycznego}
+                    $$
+                    $$
+                    H_a: \text{Dane nie pasują do rozkładu teoretycznego}
+                    $$
+
+      - id: "numerical"
         label:
-          en: "Physics"
-          pl: "Fizyka"
-        content:
-          en: "Study the fundamental principles of {{term:physics}} and [natural phenomena]{{term:hypothesis}}."
-          pl: "Studiuj podstawowe zasady {{term:physics}} i [zjawiska naturalne]{{term:hypothesis}}."
+          en: "[Numerical]{{term:numerical}} data"
+          pl: "[Dane numeryczne]{{term:numerical}}"
+        children:
+          - id: "is-normal"
+            label: 
+              en: "Is the distribution [normal]{{term:normal}}?"
+              pl: "Czy rozkład jest [normalny]{{term:normal}}?"
+            children:
+              - id: "shapiro-wilk"
+                label:
+                  en: "Shapiro-Wilk test"
+                  pl: "Test Shapiro-Wilka"
+                content:
+                  en: |
+                    The Shapiro-Wilk test, alongside the Kolmogorov-Smirnov test, allows us to assess whether the data we are examining **deviate** from a normal distribution.
+                    $$
+                    H_0: \text{The data come from a normal distribution}
+                    $$
+                    $$
+                    H_a: \text{The data do not come from a normal distribution}
+                    $$
+
+                    Although the Shapiro-Wilk test is recommended for small samples, in practice it is often used for larger datasets as well. Numerous studies show that the S-W test is generally a better indicator of data deviating from normality [1].
+
+                    ---
+
+                    [1] Shapiro, Samuel S., Martin B. Wilk, and Hwei J. Chen. "A comparative study of various tests for normality." Journal of the American statistical association 63.324 (1968): 1343-1372.
+                  pl: |
+                    Test Shapiro-Wilka, obok testu Kołmogorowa-Smirnowa, umożliwia ocenę, czy dane, które badamy **odbiegają** od rozkładu normalnego.
+                    $$
+                    H_0: \text{Dane pochodzą z rozkładu normalnego}
+                    $$
+                    $$
+                    H_a: \text{Dane nie pochodzą z rozkładu normalnego}
+                    $$
+
+                    Chociaż test Shapiro-Wilka jest rekomendowany dla małych próbek, 
+                    to w praktyce jest często stosowany również dla większych zbiorów danych. 
+                    Liczne badania wykazują, że test S-W jest na ogół lepszym wyznacznikiem danych odbiegających od normalnych [1].
+
+                    ---
+
+                    [1] Shapiro, Samuel S., Martin B. Wilk, and Hwei J. Chen. "A comparative study of various tests for normality." Journal of the American statistical association 63.324 (1968): 1343-1372.
+
+

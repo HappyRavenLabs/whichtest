@@ -1,0 +1,112 @@
+name: Deploy to Custom Domain
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      target_server:
+        description: 'Target server (e.g., user@yourserver.com)'
+        required: true
+        type: string
+      target_path:
+        description: 'Target path on server (e.g., /var/www/html/)'
+        required: true
+        type: string
+        default: '/var/www/html/'
+
+jobs:
+  deploy-to-custom-domain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Validate YAML files
+        run: |
+          # Install yq for YAML validation
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+          
+          # Validate feed.yaml
+          if [ -f "public/feed.yaml" ]; then
+            echo "Validating public/feed.yaml..."
+            yq eval '.' public/feed.yaml > /dev/null
+            echo "✅ public/feed.yaml is valid"
+          else
+            echo "❌ public/feed.yaml not found"
+            exit 1
+          fi
+      
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
+      - name: Deploy to server
+        run: |
+          # Add server to known hosts
+          server_host=$(echo "${{ github.event.inputs.target_server }}" | cut -d'@' -f2)
+          ssh-keyscan -H $server_host >> ~/.ssh/known_hosts
+          
+          # Create temporary deployment directory
+          temp_dir=$(mktemp -d)
+          cp -r . $temp_dir/
+          cd $temp_dir
+          
+          # Remove git files and other unnecessary files
+          rm -rf .git .github .gitignore
+          
+          # Create .htaccess for Apache servers (optional)
+          cat > .htaccess << 'EOF'
+          # Enable compression
+          <IfModule mod_deflate.c>
+              AddOutputFilterByType DEFLATE text/plain
+              AddOutputFilterByType DEFLATE text/html
+              AddOutputFilterByType DEFLATE text/xml
+              AddOutputFilterByType DEFLATE text/css
+              AddOutputFilterByType DEFLATE application/xml
+              AddOutputFilterByType DEFLATE application/xhtml+xml
+              AddOutputFilterByType DEFLATE application/rss+xml
+              AddOutputFilterByType DEFLATE application/javascript
+              AddOutputFilterByType DEFLATE application/x-javascript
+              AddOutputFilterByType DEFLATE application/json
+              AddOutputFilterByType DEFLATE application/yaml
+          </IfModule>
+          
+          # Cache headers for static assets
+          <IfModule mod_expires.c>
+              ExpiresActive on
+              ExpiresByType text/css "access plus 1 month"
+              ExpiresByType application/javascript "access plus 1 month"
+              ExpiresByType image/png "access plus 1 month"
+              ExpiresByType image/svg+xml "access plus 1 month"
+              ExpiresByType image/x-icon "access plus 1 month"
+              ExpiresByType application/yaml "access plus 1 day"
+          </IfModule>
+          
+          # Security headers
+          <IfModule mod_headers.c>
+              Header always set X-Content-Type-Options nosniff
+              Header always set X-Frame-Options DENY
+              Header always set X-XSS-Protection "1; mode=block"
+          </IfModule>
+          EOF
+          
+          # Deploy files using rsync
+          rsync -avz --delete \
+            --exclude='.git*' \
+            --exclude='node_modules' \
+            --exclude='*.log' \
+            ./ ${{ github.event.inputs.target_server }}:${{ github.event.inputs.target_path }}
+          
+          echo "🚀 Deployment to custom domain completed!"
+          
+      - name: Verify deployment
+        run: |
+          # Basic connectivity test
+          server_host=$(echo "${{ github.event.inputs.target_server }}" | cut -d'@' -f2)
+          if ping -c 1 $server_host > /dev/null 2>&1; then
+            echo "✅ Server $server_host is reachable"
+          else
+            echo "⚠️ Warning: Server $server_host might not be reachable"
+          fi

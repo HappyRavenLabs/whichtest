@@ -1,0 +1,31 @@
+authors:
+  - id: jw
+    name:
+      en: "Dr. Jakub Walczak"
+      pl: "Dr Jakub Walczak"
+    role:
+      en: "Scientist"
+      pl: "Naukowiec"
+    img: "public/jwalczak.png"
+    description:
+      en: "Hi, I'm Jakub, since 2019 I am a researcher at the Institute of Information Technology at Lodz University of Technology. My academic pursuits are focused on artificial intelligence, specifically machine learning and its applications across various domains. I am passionate about exploring how machine learning can be leveraged to solve complex problems and drive innovation in technology."
+      pl: "Cześć, jestem Jakub, od 2019 roku jestem zawodowo związany z Politechniką Łódzką. Moje badania koncentrują się na sztucznej inteligencji, a w szczególności na uczeniu maszynowym i jego zastosowaniach w różnych dziedzinach. Najbardziej ciekawi mnie, jak uczenie maszynowe może być wykorzystane do rozwiązywania złożonych problemów i napędzania innowacji w technologii."
+    links:
+      - type: "email"
+        url: "mailto:jakub.walczak@p.lodz.pl"
+        title:
+          en: "Email"
+          pl: "E-mail"
+        icon: "✉"
+      - type: "github"
+        url: "https://github.com/jamesWalczak"
+        title:
+          en: "GitHub"
+          pl: "GitHub"
+        icon: "🔗"
+      - type: "linkedin"
+        url: "https://orcid.org/0000-0002-5632-9484"
+        title:
+          en: "ORCiD"
+          pl: "ORCiD"
+        icon: "🎓"
