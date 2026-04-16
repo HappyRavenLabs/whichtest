@@ -24,8 +24,8 @@ items:
     children:
       - id: "categorical"
         label:
-          en: "[Categorical]{{term:categorical}} data"
-          pl: "[Dane kategoryczne]{{term:categorical}}"
+          en: "I have [categorical]{{term:categorical}} data"
+          pl: "Mam [dane kategoryczne]{{term:categorical}}"
         children:
           - id: "goodness-of-fit"
             label:
@@ -61,8 +61,8 @@ items:
 
       - id: "numerical"
         label:
-          en: "[Numerical]{{term:numerical}} data"
-          pl: "[Dane numeryczne]{{term:numerical}}"
+          en: "I have [numerical]{{term:numerical}} data"
+          pl: "Mam [dane numeryczne]{{term:numerical}}"
         children:
           - id: "is-normal"
             label: 
