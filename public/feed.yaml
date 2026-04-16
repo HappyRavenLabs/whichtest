@@ -1,8 +1,8 @@
 # Global glossary definitions
 glossary:
   distribution:
-    en: "Data distribution is essentially the 'shape' of the data. It shows how often different values occur in a dataset. "
-    pl: "Rozkład danych to tak naprawdę 'kształt' danych. Pokazuje on, jak często występują różne wartości w zbiorze danych. "
+    en: "Data distribution is essentially the \"shape\" of the data. It shows how often different values occur in a dataset."
+    pl: "Rozkład danych to tak naprawdę \"kształt\" danych. Pokazuje on, jak często występują różne wartości w zbiorze danych."
   normal:
     en: "The normal distribution, also known as the Gaussian distribution, resembles a bell curve. Hence its alternative name: bell curve."
     pl: "Rozkład normalny, znany również jako rozkład Gaussa, przypomina dzwon. Stąd też jego alternatywna nazwa: krzywa dzwonowa."
@@ -15,7 +15,15 @@ glossary:
   multinomial:
     en: "The multinomial distribution describes the probabilities of different outcomes in a categorical dataset, e.g., series of rolls of a die."
     pl: "Rozkład wielomianowy opisuje prawdopodobieństwo wystąpienia różnych kategorii w zbiorze danych kategorycznych, np. wylosowanie cyfry 1-6 w serii kilku rzutów kostką."
-
+  population:
+    en: "The population is the set of all units that interest us in the context of the study, e.g., all residents of Poland, all customers of a given company, all temperature measurements in a given period of time."
+    pl: "Populacja to zbiór wszystkich jednostek, które interesują nas w kontekście badania, np. wszyscy mieszkańcy Polski, wszyscy klienci danej firmy, wszystkie pomiary temperatury w danym okresie czasu."
+  paired:
+    en: "Paired data refers to data that is linked between studies, e.g., the same patients before and after therapy, measurements of the same group of people at two different points in time, measurements of the same group of people under two different conditions (e.g., at rest and after exertion)."
+    pl:  Sparowane dane, to dane, które są ze sobą powiązane między badaniami, np. ci sami pacjenci przed i po zastosowaniu terapii, pomiary tej samej grupy osób w dwóch różnych momentach czasu, pomiary tej samej grupy osób w dwóch różnych warunkach (np. w spoczynku i po wysiłku).
+  variance:
+    en: "Variance is a measure of the dispersion of data points around the mean. High variance indicates that the data points are more spread out, while low variance suggests that they are more clustered around the mean."
+    pl: "Wariancja danych to miara rozproszenia danych wokół średniej. Wysoka wariancja oznacza, że dane są bardziej rozproszone, podczas gdy niska wariancja wskazuje, że dane są bardziej skupione wokół średniej."
 items:
   - id: "distribution"
     label: 
@@ -105,4 +113,134 @@ items:
 
                     [1] Shapiro, Samuel S., Martin B. Wilk, and Hwei J. Chen. "A comparative study of various tests for normality." Journal of the American statistical association 63.324 (1968): 1343-1372.
 
+  - id: "compare"
+    label:
+      en: Do [populacje]{{term:populations}} różnią się między sobą?
+      pl: Czy [populacje]{{term:populations}} różnią się między sobą?
+    children:
+      - id: "two-samples"
+        label:
+          en: I have two groups of data
+          pl: Mam dwie grupy danych
+        children:
+          - id: "is-normal"
+            label: 
+              en: "The distribution of both groups is [normal]{{term:normal}}?"
+              pl: "Rozkład w obugrupach jest [normalny]{{term:normal}}?"
+            children:
+              - id: "paired-samples"
+                label:
+                  en: The groups are [paired]{{term:paired}}
+                  pl: Grupy są [sparowane]{{term:paired}}
+                children:
+                  - id: "paired-t-test"
+                    label:
+                      en: "Student's t-test for paired samples"
+                      pl: "Test t-Studenta dla prób sparowanych"
+                    content:
+                      en: |
 
+                      pl: | 
+                      
+                        
+              - id: "unpaired-samples"
+                label:
+                  en: The groups are not [paired]{{term:paired}}
+                  pl: Grupy nie są [sparowane]{{term:paired}}
+                children:
+                  - id: "variances-equal"
+                    label:
+                      en: "The groups have equal [variances]{{term:variance}}"
+                      pl: "Grupy mają równe [wariancje]{{term:variance}}"
+                    children:
+                      - id: "t-test"
+                        label:
+                          en: "Student's t-test for independent samples"
+                          pl: "Test t-Studenta dla prób niezależnych"
+                        content:
+                          en: |
+
+                          pl: | 
+                          
+                            Test t-studenta służy do porównania średnich wartości dwóch grup
+                  - id: "variances-unequal"
+                    label:
+                      en: "The groups have unequal [variances]{{term:variance}}"
+                      pl: "Grupy mają nierówne [wariancje]{{term:variance}}"
+                    children:
+                      - id: "welch-t-test"
+                        label:
+                          en: "Welch's t-test"
+                          pl: "Test t-Studenta z korektą Welscha"
+                        content:
+                          en: |
+
+                          pl: | 
+                          
+                            Test t-studenta z korektą Welscha jest stosowany w przypadku, gdy wariancje w grupach różnią się od siebie.
+          - id: "not-normal"
+            label:
+              en: "The distribution of at least one group is not [normal]{{term:normal}}"
+              pl: "Rozkład przynajmniej jednej grupy nie jest [normalny]{{term:normal}}"
+            children:
+              - id: "paired-samples"
+                label:
+                  en: The groups are [paired]{{term:paired}}
+                  pl: Grupy są [sparowane]{{term:paired}}
+                children:
+                  - id: "wilcoxon-signed-rank-test"
+                    label:
+                      en: Wilcoxon signed-rank test
+                      pl: Test Wilcoxona dla prób sparowanych
+                    content:
+                      en: | 
+                      pl: | 
+              - id: "unpaired-samples"
+                label:
+                  en: The groups are not [paired]{{term:paired}}
+                  pl: Grupy nie są [sparowane]{{term:paired}}
+                children:
+                  - id: "mann-whitney-u-test"
+                    label:
+                      en: Mann-Whitney U test
+                      pl: Test U Manna-Whitneya
+                    content:
+                      en: |
+
+                      pl: |
+      - id: "more-than-two-samples"
+        label:
+          en: I have more than two groups of data
+          pl: Mam więcej niż dwie grupy danych
+        children:
+          - id: "is-normal"
+            label:
+              en: "The distribution of all groups is [normal]{{term:normal}}?"
+              pl: "Rozkład we wszystkich grupach jest [normalny]{{term:normal}}?"
+            children:
+              - id: "variances-equal"
+                label:
+                  en: "All groups have equal [variances]{{term:variance}}"
+                  pl: "Wszystkie grupy mają równe [wariancje]{{term:variance}}"
+                children:
+                  - id: "anova"
+                    label:
+                      en: "One-way ANOVA"
+                      pl: "Jednoczynnikowa analiza wariancji (ANOVA)"
+                    content:
+                      en: |
+                      pl: |
+              - id: "variances-unequal"
+                label:
+                  en: "At least one group has unequal [variance]{{term:variance}}"
+                  pl: "Przynajmniej jedna grupa ma nierówną [wariancję]{{term:variance}}"
+                children:
+                  - id: "welch-anova"
+                    label:
+                      en: "Welch's ANOVA"
+                      pl: "ANOVA z korektą Welscha"
+  - id: "correlation"
+    label:
+      en: Is there a relationship between two variables?
+      pl: Czy istnieje związek między dwiema zmiennymi?
+      
