@@ -24,6 +24,15 @@ glossary:
   variance:
     en: "Variance is a measure of the dispersion of data points around the mean. High variance indicates that the data points are more spread out, while low variance suggests that they are more clustered around the mean."
     pl: "Wariancja danych to miara rozproszenia danych wokół średniej. Wysoka wariancja oznacza, że dane są bardziej rozproszone, podczas gdy niska wariancja wskazuje, że dane są bardziej skupione wokół średniej."
+  non-parametric:
+    en: Non-parametric test is a statistical test that does not assume a specific distribution of the data, usually normal. Such a test has significantly fewer assumptions than a parametric test, but it is also less sensitive, meaning it has lower statistical power.
+    pl: Test nieparametryczny to test statystyczny, który nie zakłada określonego rozkładu danych, zawzyczaj normalnego. Taki test ma zdecydowanie mniejszą liczbę założeń niż test parametryczny, ale jest też mniej czuły, czyli ma mniejszą moc statystyczną.
+  ranks:
+    en: Ranks are the positions of data points in an ordered dataset, e.g., the dataset [100, -10, 2, -4] would have ranks [4, 1, 3, 2], as -10 is the smallest value and 100 is the largest.
+    pl: Rangi to pozycje danych w uporządkowanym zbiorze danych, np. dane [100, -10, 2, -4] będą miały rangi [4, 1, 3, 2], ponieważ -10 jest najmniejszą wartością, a 100 największą.
+  omnibus:
+    en: Omnibus tests are statistical tests that check for overall differences between groups, without specifying which groups differ. 
+    pl: Test omnibusowy sprawdza, czy zachodzą jakiekolwiek istotne różnice między grupami danych, ale nie wskazuje, które grupy różnią się między sobą.
 items:
   - id: "distribution"
     label: 
@@ -140,44 +149,44 @@ items:
                   pl: "Test t-Studenta dla jednej próbki"
                 content:
                   en: |
-                    The one-sample t-test is used to compare the mean value of a sample ($\bar{x}$) to a theoretical value ($\mu_0$).
+                    The one-sample t-test is used to compare the mean value in a population ($\mu$) to a theoretical value ($\mu_0$).
 
                     $$
-                    H_0: \bar{x} = \mu_0
+                    H_0: \mu = \mu_0
                     $$
                     For a two-tailed test, the alternative hypothesis is:
                     $$
-                    H_a: \bar{x} \neq \mu_0
+                    H_a: \mu \neq \mu_0
                     $$
                     while for a one-tailed test:
                     $$
-                    H_a: \bar{x} > \mu_0
+                    H_a: \mu > \mu_0
                     $$
                     or
                     $$
-                    H_a: \bar{x} < \mu_0
+                    H_a: \mu < \mu_0
                     $$
 
                     Under the assumption of the null hypothesis, the distribution of data is a t-Student distribution with $n-1$ degrees of freedom, where $n$ is the sample size.
                   pl: |
-                    Test t-Studenta dla jednej próbki służy do porównania średniej wartości z próby ($\bar{x}$) z wartością teoretyczną ($\mu_0$).
+                    Test t-Studenta dla jednej próbki służy do porównania średniej wartości w populacji ($\mu$) z wartością teoretyczną ($\mu_0$).
 
                     $$
-                    H_0: \bar{x} = \mu_0
+                    H_0: \mu = \mu_0
                     $$
 
                     dla testu dwustronnego hipoteza alternatywna brzmi:
                     $$
-                    H_a: \bar{x} \neq \mu_0
+                    H_a: \mu \neq \mu_0
                     $$
 
                     podczas gdy dla testu jednostronnego:
                     $$
-                    H_a: \bar{x} > \mu_0
+                    H_a: \mu > \mu_0
                     $$
                     lub
                     $$
-                    H_a: \bar{x} < \mu_0
+                    H_a: \mu < \mu_0
                     $$
 
                     Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n-1$ stopniami swobody, gdzie $n$ to liczebność próby.
@@ -276,42 +285,42 @@ items:
                     content:
                       en: |
                         The t-test for paired samples is used when the data in both groups being compared are related to each other, e.g., patients before and after therapy.
-                        This test compares the mean $\bar{x}_a$ from the group before manipulation (e.g., before therapy) and $\bar{x}_A$ — from the group after manipulation (e.g., after therapy).
+                        This test compares the mean $\mu_a$ from the group before manipulation (e.g., before therapy) and $\mu_A$ — from the group after manipulation (e.g., after therapy).
 
                         $$
-                        H_0: \bar{x}_a = \bar{x}_A
+                        H_0: \mu_a = \mu_A
                         $$
                         $$
-                        H_a: \bar{x}_a \neq \bar{x}_A
+                        H_a: \mu_a \neq \mu_A
                         $$
                         Other forms of the alternative hypothesis are:
                         $$
-                        H_a: \bar{x}_a > \bar{x}_A
+                        H_a: \mu_a > \mu_A
                         $$
                         or
                         $$
-                        H_a: \bar{x}_a < \bar{x}_A
+                        H_a: \mu_a < \mu_A
                         $$
 
                         Under the assumption of the null hypothesis, the distribution of data is a t-Student distribution with $n-1$ degrees of freedom, where $n$ is the number of pairs of data (e.g., number of patients).
                       pl: | 
                         Test t-Studenta dla prób sparowanych jest stosowany, gdy dane w obu badanych grupach są ze sobą związane, np. pacjenci przed i po terapii. 
-                        Test ten porównuje średnią $\bar{x}_a$ z grupy przed manipulacją (np. przed terapią) i $\bar{x}_A$ — z grupy po manipulacji (np. po terapii).
+                        Test ten porównuje średnią $\mu_a$ z grupy przed manipulacją (np. przed terapią) i $\mu_A$ — z grupy po manipulacji (np. po terapii).
 
                         $$
-                        H_0: \bar{x}_a = \bar{x}_A
+                        H_0: \mu_a = \mu_A
                         $$
                         $$
-                        H_a: \bar{x}_a \neq \bar{x}_A
+                        H_a: \mu_a \neq \mu_A
                         $$
 
                         Inne formy hipotezy alternatywnej to:
                         $$
-                        H_a: \bar{x}_a > \bar{x}_A
+                        H_a: \mu_a > \mu_A
                         $$
                         lub
                         $$
-                        H_a: \bar{x}_a < \bar{x}_A
+                        H_a: \mu_a < \mu_A
                         $$
 
                         Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n-1$ stopniami swobody, gdzie $n$ to liczebność pary danych (np. liczba pacjentów).
@@ -336,21 +345,21 @@ items:
                           pl: | 
                             Jeden z wariantów testu t-Studenta jest stosowany do prób niezależnych, pod warunkiem, że [wariancje]{{term:variance}} w obu grupach są równe.
                             Mamy tu udo czynienia z dwiema osobnymi grupami danych, między którymi nie ma żadnego związku, np. grupa mężczyzn i grupa kobiet albo grupa pacjentów przyjmujących lek oraz grupa pacjentów przyjmujących placebo.
-                            Test ten porównuje średnią $\bar{x}_1$ z pierwszej grupy i $\bar{x}_2$ z drugiej grupy.
+                            Test ten porównuje średnią $\mu_1$ z pierwszej grupy i $\mu_2$ z drugiej grupy.
 
                             $$
-                            H_0: \bar{x}_1 = \bar{x}_2
+                            H_0: \mu_1 = \mu_2
                             $$
                             $$
-                            H_a: \bar{x}_1 \neq \bar{x}_2
+                            H_a: \mu_1 \neq \mu_2
                             $$
                             Inne formy hipotezy alternatywnej to:
                             $$
-                            H_a: \bar{x}_1 > \bar{x}_2
+                            H_a: \mu_1 > \mu_2
                             $$
                             lub
                             $$
-                            H_a: \bar{x}_1 < \bar{x}_2
+                            H_a: \mu_1 < \mu_2
                             $$
 
                             Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n_1 + n_2 - 2$ stopniami swobody, gdzie $n_1$ i $n_2$ to liczebności obu grup.
@@ -366,20 +375,20 @@ items:
                         content:
                           en: |
                             When we are dealing with two independent groups of data, but the [variances]{{term:variance}} in these groups are different from each other (heterogeneity of variance), we can use the Welch's t-test, which is a modification of the standard Student's t-test for independent samples.
-                            This test compares the mean $\bar{x}_1$ from the first group and $\bar{x}_2$ from the second group.
+                            This test compares the mean $\mu_1$ from the first group and $\mu_2$ from the second group.
                             $$
-                            H_0: \bar{x}_1 = \bar{x}_2
+                            H_0: \mu_1 = \mu_2
                             $$
                             $$
-                            H_a: \bar{x}_1 \neq \bar{x}_2
+                            H_a: \mu_1 \neq \mu_2
                             $$
                             Other forms of the alternative hypothesis are:  
                             $$
-                            H_a: \bar{x}_1 > \bar{x}_2
+                            H_a: \mu_1 > \mu_2
                             $$
                             or
                             $$
-                            H_a: \bar{x}_1 < \bar{x}_2
+                            H_a: \mu_1 < \mu_2
                             $$
 
                             Under the assumption of the null hypothesis, the distribution 
@@ -396,21 +405,21 @@ items:
                             Gdy mamy do czynienia z dwiema niezależnymi grupami danych, 
                             ale [wariancje]{{term:variance}} w tych grupach są od siebie różne (heterogeniczność wariancji), 
                             możemy skorzystać z testu t-Studenta z korektą Welscha, który jest modyfikacją standardowego testu t-Studenta dla prób niezależnych.
-                            Test ten porównuje średnią $\bar{x}_1$ z pierwszej grupy i $\bar{x}_2$ z drugiej grupy.
+                            Test ten porównuje średnią $\mu_1$ z pierwszej grupy i $\mu_2$ z drugiej grupy.
 
                             $$
-                            H_0: \bar{x}_1 = \bar{x}_2
+                            H_0: \mu_1 = \mu_2
                             $$
                             $$
-                            H_a: \bar{x}_1 \neq \bar{x}_2
+                            H_a: \mu_1 \neq \mu_2
                             $$
                             Inne formy hipotezy alternatywnej to:
                             $$
-                            H_a: \bar{x}_1 > \bar{x}_2
+                            H_a: \mu_1 > \mu_2
                             $$
                             lub
                             $$
-                            H_a: \bar{x}_1 < \bar{x}_2
+                            H_a: \mu_1 < \mu_2
                             $$
 
                             Przy założeniu prawdziwości hipotezy zerowej, 
@@ -439,7 +448,48 @@ items:
                       pl: Test Wilcoxona dla prób sparowanych
                     content:
                       en: | 
-                      pl: | 
+                        Wilcoxon signed-rank test for paired samples is 
+                        a non-parametric alternative to the Student's t-test for paired groups.
+                        The test is based on the ranks of the differences 
+                        between pairs of data, rather than on the data values themselves, 
+                        comparing the median $M_a$ from the group before manipulation 
+                        (e.g., before therapy) and the median $M_A$ from the 
+                        group after manipulation (e.g., after therapy).
+
+                        $$
+                        H_0: M_a = M_A
+                        $$
+                        $$
+                        H_a: M_a \neq M_A
+                        $$
+                        Alternative forms of the alternative hypothesis are:
+                        $$
+                        H_a: M_a > M_A
+                        $$
+                        or
+                        $$
+                        H_a: M_a < M_A
+                        $$
+                      pl: |
+                        Test Wilcoxona dla prób zależnych (sparowanych) jest 
+                        [nieparametryczną]{{term:non-parametric}} alternatywą dla testu t-Studenta dla grup sparowanych.
+                        Test bazuje na [rangach]{{term:ranks}} różnic między parami danych, a nie na samych wartościach danych,
+                        porównując medianę $M_a$ z grupy przed manipulacją (np. przed terapią) i medianę $M_A$ z grupy po manipulacji (np. po terapii).
+
+                        $$ 
+                        H_0: M_a = M_A
+                        $$
+                        $$
+                        H_a: M_a \neq M_A
+                        $$
+                        Alternatywne formy hipotezy alternatywnej to:
+                        $$
+                        H_a: M_a > M_A
+                        $$
+                        lub
+                        $$
+                        H_a: M_a < M_A
+                        $$
               - id: "unpaired-samples"
                 label:
                   en: The groups are not [paired]{{term:paired}}
@@ -451,8 +501,26 @@ items:
                       pl: Test U Manna-Whitneya
                     content:
                       en: |
+                        The Mann-Whitney U test is a non-parametric 
+                        alternative to the Student's t-test for independent samples, 
+                        used when the data in at least one of the groups do not have a normal distribution.
 
+                        $$
+                        H_0: \text{There is no difference between the groups}
+                        $$
+                        $$
+                        H_a: \text{There is a difference between the groups}
+                        $$
                       pl: |
+
+                        Test U Manna-Whitneya jest [nieparametryczną]{{term:non-parametric}} 
+                        alternatywą dla testu t-Studenta dla prób niezależnych, 
+                        stosowaną, gdy dane w co najmniej jednej z grup nie 
+                        mają [rozkładu]{{term:distribution}} normalnego.
+                        
+                        $$H_0: \text{Nie ma różnicy między grupami}$$
+                        $$H_a: \text{Istnieje różnica między grupami}$$
+                        
       - id: "more-than-two-samples"
         label:
           en: From several other groups of data (>2)
@@ -474,18 +542,214 @@ items:
                       pl: "Jednoczynnikowa analiza wariancji (ANOVA)"
                     content:
                       en: |
+
+                        ANOVA, or one-way analysis of variance, 
+                        is an [omnibus]{{term:omnibus}} test, after 
+                        which — in the case of obtaining statistically 
+                        significant results — a so-called post-hoc test should be performed.
+
+                        The ANOVA test allows us to assess whether 
+                        there is a significant difference between the means in 3 or more $k$ groups of data.
+
+                        $$
+                        H_0: \mu_1 = \mu_2 = ... = \mu_k
+                        $$
+                        $$
+                        H_a: \exists \ i, j \ such \ that \ \mu_i \neq \mu_j
+                        $$
+
+                        The ANOVA test requires the calculation of two types of degrees of freedom:
+                        - degrees of freedom between groups:
+                          $$
+                          df_{between} = k - 1
+                          $$
+                        - degrees of freedom within groups:
+                          $$
+                          df_{within} = n - k
+                          $$
+                        where $n$ is the total sample size (**the sum of the sample sizes from all groups**), and $k$ is the number of groups.
+
+                        The recommended post-hoc test after the ANOVA test is the Tukey's test.
                       pl: |
+
+                        ANOVA, czyli jednoczynnikowa analiza wariancji, 
+                        jest tzw. [testem omnibusowym]{{term:omnibus}}, 
+                        po którym — w przypadku uzyskania wyników istotnych 
+                        statystycznie — należy wykonać tzw. test post-hoc (z łaciny: po fakcie).
+
+                        Test ANOVA pozwala ocenić, czy w 3 lub więcej $k$ grupach danych istnieje istotna różnica między średnimi.
+
+                        $$
+                        H_0: \mu_1 = \mu_2 = ... = \mu_k
+                        $$
+                        $$
+                        H_a: \exists \ i, j \ such \ that \ \mu_i \neq \mu_j
+                        $$
+
+                        Test ANOVA wymaga obliczenia dwóch rodzajów stopni swobody:
+                        - stopnie swobody między grupami:
+                          $$
+                          df_{between} = k - 1
+                          $$
+                        - stopnie swobody wewnątrz grup:
+                          $$
+                          df_{within} = n - k
+                          $$
+                        gdzie $n$ to liczebność całej próby (**suma liczebności próbek ze wszystkich grup**), a $k$ to liczba grup.
+
+                        Rekomendowany test post-hoc po teście ANOVA to test Tukeya.
               - id: "variances-unequal"
                 label:
-                  en: "At least one group has unequal [variance]{{term:variance}}"
-                  pl: "Przynajmniej jedna grupa ma nierówną [wariancję]{{term:variance}}"
+                  en: "At least one group has different [variance]{{term:variance}}"
+                  pl: "Przynajmniej jedna grupa ma inną [wariancję]{{term:variance}}"
                 children:
                   - id: "welch-anova"
                     label:
                       en: "Welch's ANOVA"
                       pl: "ANOVA z korektą Welscha"
+                    content:
+                      en: |
+                        
+                        When there are differences in [variances]{{term:variance}} between groups, 
+                        the one-way analysis of variance with Welch's correction should be used.
+
+                        $$
+                        H_0: \mu_1 = \mu_2 = ... = \mu_k
+                        $$
+                        $$
+                        H_a: \exists \ i, j \ such \ that \ \mu_i \neq \mu_j
+                        $$
+
+                        Similar to the standard ANOVA test, the Welch's ANOVA test requires the calculation of two types of degrees of freedom:
+                        - degrees of freedom between groups:
+                          $$
+                          df_{between} = k - 1
+                          $$
+                          - degrees of freedom within groups:
+                          $$
+                          df_{within} = v
+                          $$
+                        
+                        The value of $v$ is calculated based on the Welch-Satterthwaite approximation, which for $k$ groups with sample sizes $n_1, n_2, ..., n_k$ and variances $s_1^2, s_2^2, ..., s_k^2$ looks as follows:
+
+                        $$
+                        v \approx \frac{\left(\sum_{i=1}^k \frac{n_i}{s_i^2}\right)^2}{\sum_{i=1}^k \frac{n_i^2}{s_i^4 (n_i - 1)}}
+                        $$
+
+                        The recommended post-hoc test after the ANOVA test with Welch's correction is the Games-Howell test.
+                      pl: |
+
+                        W przypadku, gdy występują różnice 
+                        [wariancji]{{term:variance}} między grupami, 
+                        należy wykorzystać test jednokierunkowej analizy wariancji z korektą Welscha.
+
+                        $$
+                        H_0: \mu_1 = \mu_2 = ... = \mu_k
+                        $$
+                        $$
+                        H_a: \exists \ i, j \ such \ that \ \mu_i \neq \mu_j
+                        $$
+
+                        Podobnie jak standardowy test ANOVA, test z korektą Welscha wymaga obliczenia dwóch rodzajów stopni swobody:
+                        - stopnie swobody między grupami:
+                          $$
+                          df_{between} = k - 1
+                          $$
+                          - stopnie swobody wewnątrz grup:
+                          $$
+                          df_{within} = v
+                          $$
+                        
+                        Wartość $v$ liczonaa jest na podstawie przybliżenia Welcha-Satterthwaite'a, który dla $k$ grup o liczebnościach $n_1, n_2, ..., n_k$ i wariancjach $s_1^2, s_2^2, ..., s_k^2$ wygląda następująco:
+
+                        $$
+                        v \approx \frac{\left(\sum_{i=1}^k \frac{n_i}{s_i^2}\right)^2}{\sum_{i=1}^k \frac{n_i^2}{s_i^4 (n_i - 1)}}
+                        $$
+
+                        Rekomendowany test post-hoc po teście ANOVA z korektą Welscha to test Games-Howell'a.
+          - id: "not-normal"
+            label:
+              en: "The distribution of at least one group is not [normal]{{term:normal}}"
+              pl: "Rozkład przynajmniej jednej grupy nie jest [normalny]{{term:normal}}"
+            children:
+              - id: "kruskal-wallis-test"
+                label:
+                  en: Kruskal-Wallis test
+                  pl: Test Kruskala-Wallisa
+                content:
+                  en: |
+                    The Kruskal-Wallis test is a non-parametric alternative to the 
+                    one-way ANOVA, used when the data in at least one of the groups do not have a normal distribution.
+
+                    $$
+                    H_0: \text{There is no difference between the groups}
+                    $$
+                    $$
+                    H_a: \text{There is a difference between the groups}
+                    $$
+
+                    The recommended post-hoc test after the Kruskal-Wallis test is Dunn's test with an appropriate correction, e.g., Bonferroni's.
+                  pl: |
+                    Test Kruskala-Wallisa jest [nieparametryczną]{{term:non-parametric}} 
+                    alternatywą dla jednoczynnikowej analizy wariancji, 
+                    stosowaną, gdy dane w co najmniej jednej z grup nie mają [rozkładu]{{term:distribution}} normalnego.
+
+                    $$
+                    H_0: \text{Nie ma różnicy między grupami}
+                    $$
+                    $$
+                    H_a: \text{Istnieje różnica między grupami}
+                    $$
+
+                    Rekomendowany test post-hoc po teście Kruskala-Wallisa to test Dunna z odpowiednią poprawką, np. Bonferroniego.
   - id: "correlation"
     label:
       en: Is there a relationship between two variables?
       pl: Czy istnieje związek między dwiema zmiennymi?
+      children:
+        - id: "numerical-variables"
+          label:
+            en: Both variables are [numerical]{{term:numerical}}
+            pl: Obie zmienne są [numeryczne]{{term:numerical}}
+          children:
+            - id: "is-normal"
+              label:
+                en: "The distribution of both variables is [normal]{{term:normal}}"
+                pl: "Rozkład obu zmiennych jest [normalny]{{term:normal}}"
+              children:
+                - id: "pearson-correlation"
+                  label:
+                    en: Pearson's correlation
+                    pl: Korelacja Pearsona
+                  content:
+                    en: |
+                    pl: |
+            - id: "not-normal"
+              label:
+                en: "The distribution of at least one variable is not [normal]{{term:normal}}"
+                pl: "Rozkład przynajmniej jednej zmiennej nie jest [normalny]{{term:normal}}"
+              children:
+                - id: "spearman-correlation"
+                  label:
+                    en: Spearman's rank correlation
+                    pl: Korelacja rang Spearmana
+                  content:
+                    en: |
+                    pl: |
+        - id: "categorical-variables"
+          label:
+            en: Both variables are [categorical]{{term:categorical}}
+            pl: Obie zmienne są [kategoryczne]{{term:categorical}}
+          children:
+            - id: "chi-square-test"
+              label:
+                en: Chi-square test of independence
+                pl: Test chi-kwadrat niezależności
+              content:
+                en: |
+                pl: |
+  - id: "variance"
+    label:
+      en: Is there a difference in [variances]{{term:variance}} between groups?
+      pl: Czy istnieje różnica w [wariancjach]{{term:variance}} między grupami?
       
