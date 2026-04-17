@@ -672,36 +672,53 @@ items:
               en: "The distribution of at least one group is not [normal]{{term:normal}}"
               pl: "Rozkład przynajmniej jednej grupy nie jest [normalny]{{term:normal}}"
             children:
-              - id: "kruskal-wallis-test"
+              - id: "paired-samples"
                 label:
-                  en: Kruskal-Wallis test
-                  pl: Test Kruskala-Wallisa
-                content:
-                  en: |
-                    The Kruskal-Wallis test is a non-parametric alternative to the 
-                    one-way ANOVA, used when the data in at least one of the groups do not have a normal distribution.
+                  en: The groups are [paired]{{term:paired}}
+                  pl: Grupy są [sparowane]{{term:paired}}
+                children:
+                  - id: "friedman-test"
+                    label:
+                      en: Friedman test
+                      pl: Test Friedmana
+                    content:
+                      en: |
+                      pl: |
+              - id: "unpaired-samples"
+                label:
+                  en: The groups are not [paired]{{term:paired}}
+                  pl: Grupy nie są [sparowane]{{term:paired}}
+                children:
+                  - id: "kruskal-wallis-test"
+                    label:
+                      en: Kruskal-Wallis test
+                      pl: Test Kruskala-Wallisa
+                    content:
+                      en: |
+                        The Kruskal-Wallis test is a non-parametric alternative to the 
+                        one-way ANOVA, used when the data in at least one of the groups do not have a normal distribution.
 
-                    $$
-                    H_0: \text{There is no difference between the groups}
-                    $$
-                    $$
-                    H_a: \text{There is a difference between the groups}
-                    $$
+                        $$
+                        H_0: \text{There is no difference between the groups}
+                        $$
+                        $$
+                        H_a: \text{There is a difference between the groups}
+                        $$
 
-                    The recommended post-hoc test after the Kruskal-Wallis test is Dunn's test with an appropriate correction, e.g., Bonferroni's.
-                  pl: |
-                    Test Kruskala-Wallisa jest [nieparametryczną]{{term:non-parametric}} 
-                    alternatywą dla jednoczynnikowej analizy wariancji, 
-                    stosowaną, gdy dane w co najmniej jednej z grup nie mają [rozkładu]{{term:distribution}} normalnego.
+                        The recommended post-hoc test after the Kruskal-Wallis test is Dunn's test with an appropriate correction, e.g., Bonferroni's.
+                      pl: |
+                        Test Kruskala-Wallisa jest [nieparametryczną]{{term:non-parametric}} 
+                        alternatywą dla jednoczynnikowej analizy wariancji, 
+                        stosowaną, gdy dane w co najmniej jednej z grup nie mają [rozkładu]{{term:distribution}} normalnego.
 
-                    $$
-                    H_0: \text{Nie ma różnicy między grupami}
-                    $$
-                    $$
-                    H_a: \text{Istnieje różnica między grupami}
-                    $$
+                        $$
+                        H_0: \text{Nie ma różnicy między grupami}
+                        $$
+                        $$
+                        H_a: \text{Istnieje różnica między grupami}
+                        $$
 
-                    Rekomendowany test post-hoc po teście Kruskala-Wallisa to test Dunna z odpowiednią poprawką, np. Bonferroniego.
+                        Rekomendowany test post-hoc po teście Kruskala-Wallisa to test Dunna z odpowiednią poprawką, np. Bonferroniego.
   - id: "correlation"
     label:
       en: Is there a relationship between two variables?
