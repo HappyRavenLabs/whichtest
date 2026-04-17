@@ -29,6 +29,9 @@ items:
     label: 
       en: "How does the data [distribution]{{term:distribution}} look like?"
       pl: "Jak wygląda [rozkład]{{term:distribution}} danych?"
+    content:
+      en: Using goodness-of-fit tests, we can check whether the sample we have deviates from a theoretical distribution, e.g., normal or multinomial.
+      pl: Korzystając z testów istotności możemy sprawdzić, czy próbka, którą dysponujemy odbiega od założonego [rozkładu]{{term:distribution}} teoretycznego, np. normalnego, czy wielomianowego.
     children:
       - id: "categorical"
         label:
@@ -74,8 +77,8 @@ items:
         children:
           - id: "is-normal"
             label: 
-              en: "Is the distribution [normal]{{term:normal}}?"
-              pl: "Czy rozkład jest [normalny]{{term:normal}}?"
+              en: "I want to check if the [distribution]{{term:distribution}} is [normal]{{term:normal}}"
+              pl: "Chcę sprawdzić, czy [rozkład]{{term:distribution}} jest [normalny]{{term:normal}}"
             children:
               - id: "shapiro-wilk"
                 label:
@@ -115,18 +118,151 @@ items:
 
   - id: "compare"
     label:
-      en: Do [populacje]{{term:populations}} różnią się między sobą?
-      pl: Czy [populacje]{{term:populations}} różnią się między sobą?
+      en: Does [population]{{term:populations}} differ from ...?
+      pl: Czy [populacja]{{term:populations}} różni się od ...?
+    content:
+      en: Having one group of data, we can compare its [distribution]{{term:distribution}} parameters to theoretical value (one sample) or to other groups of data.
+      pl: Mając jedną grupę danych, możemy porównać parametry jej [rozkładu]{{term:distribution}} z wartościami teoretycznymi (jedna próbka) lub z innymi grupami danych.
     children:
-      - id: "two-samples"
+      - id: "single-sample"
         label:
-          en: I have two groups of data
-          pl: Mam dwie grupy danych
+          en: Theoretically expected value
+          pl: Teoretycznej wartości
         children:
           - id: "is-normal"
             label: 
-              en: "The distribution of both groups is [normal]{{term:normal}}?"
-              pl: "Rozkład w obugrupach jest [normalny]{{term:normal}}?"
+              en: "The distribution of the data is [normal]{{term:normal}}"
+              pl: "Rozkład danych jest [normalny]{{term:normal}}"
+            children:
+              - id: "one-sample-t-test"
+                label:
+                  en: "One-sample t-test"
+                  pl: "Test t-Studenta dla jednej próbki"
+                content:
+                  en: |
+                    The one-sample t-test is used to compare the mean value of a sample ($\bar{x}$) to a theoretical value ($\mu_0$).
+
+                    $$
+                    H_0: \bar{x} = \mu_0
+                    $$
+                    For a two-tailed test, the alternative hypothesis is:
+                    $$
+                    H_a: \bar{x} \neq \mu_0
+                    $$
+                    while for a one-tailed test:
+                    $$
+                    H_a: \bar{x} > \mu_0
+                    $$
+                    or
+                    $$
+                    H_a: \bar{x} < \mu_0
+                    $$
+
+                    Under the assumption of the null hypothesis, the distribution of data is a t-Student distribution with $n-1$ degrees of freedom, where $n$ is the sample size.
+                  pl: |
+                    Test t-Studenta dla jednej próbki służy do porównania średniej wartości z próby ($\bar{x}$) z wartością teoretyczną ($\mu_0$).
+
+                    $$
+                    H_0: \bar{x} = \mu_0
+                    $$
+
+                    dla testu dwustronnego hipoteza alternatywna brzmi:
+                    $$
+                    H_a: \bar{x} \neq \mu_0
+                    $$
+
+                    podczas gdy dla testu jednostronnego:
+                    $$
+                    H_a: \bar{x} > \mu_0
+                    $$
+                    lub
+                    $$
+                    H_a: \bar{x} < \mu_0
+                    $$
+
+                    Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n-1$ stopniami swobody, gdzie $n$ to liczebność próby.
+          - id: "not-normal"
+            label:
+              en: "The distribution of the data is not [normal]{{term:normal}}"
+              pl: "Rozkład danych nie jest [normalny]{{term:normal}}"
+            children:
+              - id: "is-symmetric"
+                label:
+                  en: "The distribution of the data is roughly symmetric"
+                  pl: "Rozkład danych jest mniej więcej symetryczny"
+                children:
+                - id: "wilcoxon-signed-rank-test"
+                  label:
+                    en: "Wilcoxon signed-rank test"
+                    pl: "Test Wilcoxona dla jednej próbki"
+                  content:
+                    en: |
+
+                    pl: |
+                      Test Wilcoxona dla jednej próbki pozwala ocenić, 
+                      czy istnieje istotna różnica między medianą z badanej próby ($M$) a wartością teoretyczną ($M_0$). 
+
+                      $$
+                      H_0: M = M_0
+                      $$
+                      $$
+                      H_a: M \neq M_0
+                      $$
+
+
+                      Dla danych o [rozkładzie]{{term:distribution}} symetrycznym, 
+                      test Wilcoxona dla jednej próbki jest uznawany za lepszy, 
+                      ponieważ, w przeciwieństwie do testu znaków, bierze pod uwagę 
+                      nie tylko kierunek różnicy, ale także jej wielkość.
+              - id: "not-symmetric"
+                label:
+                  en: "[The distribution]{{term:distribution}} of the data is rather not symmetric"
+                  pl: "[Rozkład]{{term:distribution}} danych raczej nie jest symetryczny"
+                children:
+                  - id: "sign-test"
+                    label:
+                      en: "Sign test"
+                      pl: "Test znaków"
+                    content:
+                      en: |
+                        The sign test is a simple test for comparing the median of a single sample to a theoretical value $M_0$. 
+
+                        $$
+                        H_0: M = M_0
+                        $$
+                        $$
+                        H_a: M \neq M_0
+                        $$
+
+                        The test consists of counting how many observations in the sample are greater than, and how many are less than the theoretical value $M_0$. Values equal to the median are ignored, reducing the sample size by the number of observations equal to the median.
+
+                        The distribution of data under the assumption of the null hypothesis is a binomial distribution with parameter $p=0.5$.
+                      pl: |
+                        Test znaków jest prostym testem do porównania mediany jednej próbki z wartością teoretyczną $M_0$. 
+
+                        $$
+                        H_0: M = M_0
+                        $$
+                        $$
+                        H_a: M \neq M_0
+                        $$
+
+                        Test polega na zliczeniu, ile obserwacji z badanej próbki jest większych, 
+                        a ile mniejszych od wartości teoretycznej $M_0$. Wartości równe medianie sśą ignorowane, 
+                        zmniejszając liczebność próby o liczbę obserwacji równych medianie.
+
+                        Rozkładem danych przy założeniu prawdziwości hipotezy zerowej jest rozkład dwumianowy z parametrem $p=0.5$.
+
+
+      - id: "two-samples"
+        label:
+          en: From the other group of data
+          pl: Od innej grupy danych
+        children:
+          - id: "is-normal"
+            label: 
+              en: "The distribution of both groups is [normal]{{term:normal}}"
+              pl: "Rozkład w obu grupach jest [normalny]{{term:normal}}"
             children:
               - id: "paired-samples"
                 label:
@@ -139,9 +275,46 @@ items:
                       pl: "Test t-Studenta dla prób sparowanych"
                     content:
                       en: |
+                        The t-test for paired samples is used when the data in both groups being compared are related to each other, e.g., patients before and after therapy.
+                        This test compares the mean $\bar{x}_a$ from the group before manipulation (e.g., before therapy) and $\bar{x}_A$ — from the group after manipulation (e.g., after therapy).
 
+                        $$
+                        H_0: \bar{x}_a = \bar{x}_A
+                        $$
+                        $$
+                        H_a: \bar{x}_a \neq \bar{x}_A
+                        $$
+                        Other forms of the alternative hypothesis are:
+                        $$
+                        H_a: \bar{x}_a > \bar{x}_A
+                        $$
+                        or
+                        $$
+                        H_a: \bar{x}_a < \bar{x}_A
+                        $$
+
+                        Under the assumption of the null hypothesis, the distribution of data is a t-Student distribution with $n-1$ degrees of freedom, where $n$ is the number of pairs of data (e.g., number of patients).
                       pl: | 
-                      
+                        Test t-Studenta dla prób sparowanych jest stosowany, gdy dane w obu badanych grupach są ze sobą związane, np. pacjenci przed i po terapii. 
+                        Test ten porównuje średnią $\bar{x}_a$ z grupy przed manipulacją (np. przed terapią) i $\bar{x}_A$ — z grupy po manipulacji (np. po terapii).
+
+                        $$
+                        H_0: \bar{x}_a = \bar{x}_A
+                        $$
+                        $$
+                        H_a: \bar{x}_a \neq \bar{x}_A
+                        $$
+
+                        Inne formy hipotezy alternatywnej to:
+                        $$
+                        H_a: \bar{x}_a > \bar{x}_A
+                        $$
+                        lub
+                        $$
+                        H_a: \bar{x}_a < \bar{x}_A
+                        $$
+
+                        Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n-1$ stopniami swobody, gdzie $n$ to liczebność pary danych (np. liczba pacjentów).
                         
               - id: "unpaired-samples"
                 label:
@@ -161,8 +334,26 @@ items:
                           en: |
 
                           pl: | 
-                          
-                            Test t-studenta służy do porównania średnich wartości dwóch grup
+                            Jeden z wariantów testu t-Studenta jest stosowany do prób niezależnych, pod warunkiem, że [wariancje]{{term:variance}} w obu grupach są równe.
+                            Mamy tu udo czynienia z dwiema osobnymi grupami danych, między którymi nie ma żadnego związku, np. grupa mężczyzn i grupa kobiet albo grupa pacjentów przyjmujących lek oraz grupa pacjentów przyjmujących placebo.
+                            Test ten porównuje średnią $\bar{x}_1$ z pierwszej grupy i $\bar{x}_2$ z drugiej grupy.
+
+                            $$
+                            H_0: \bar{x}_1 = \bar{x}_2
+                            $$
+                            $$
+                            H_a: \bar{x}_1 \neq \bar{x}_2
+                            $$
+                            Inne formy hipotezy alternatywnej to:
+                            $$
+                            H_a: \bar{x}_1 > \bar{x}_2
+                            $$
+                            lub
+                            $$
+                            H_a: \bar{x}_1 < \bar{x}_2
+                            $$
+
+                            Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n_1 + n_2 - 2$ stopniami swobody, gdzie $n_1$ i $n_2$ to liczebności obu grup.
                   - id: "variances-unequal"
                     label:
                       en: "The groups have unequal [variances]{{term:variance}}"
@@ -174,10 +365,64 @@ items:
                           pl: "Test t-Studenta z korektą Welscha"
                         content:
                           en: |
+                            When we are dealing with two independent groups of data, but the [variances]{{term:variance}} in these groups are different from each other (heterogeneity of variance), we can use the Welch's t-test, which is a modification of the standard Student's t-test for independent samples.
+                            This test compares the mean $\bar{x}_1$ from the first group and $\bar{x}_2$ from the second group.
+                            $$
+                            H_0: \bar{x}_1 = \bar{x}_2
+                            $$
+                            $$
+                            H_a: \bar{x}_1 \neq \bar{x}_2
+                            $$
+                            Other forms of the alternative hypothesis are:  
+                            $$
+                            H_a: \bar{x}_1 > \bar{x}_2
+                            $$
+                            or
+                            $$
+                            H_a: \bar{x}_1 < \bar{x}_2
+                            $$
 
+                            Under the assumption of the null hypothesis, the distribution 
+                            of data is a t-Student distribution with $v$ degrees of freedom,
+                             where $v$ is calculated according to the Welch-Satterthwaite formula.
+                            For two groups with sample sizes $n_1$ and $n_2$ and variances
+                             $s_1^2$ and $s_2^2$, the number of degrees of freedom $v$ 
+                             is calculated according to the formula:  
+
+                            $$
+                            v = \frac{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)^2}{\frac{\left( \frac{s_1^2}{n_1} \right)^2}{n_1 - 1} + \frac{\left( \frac{s_2^2}{n_2} \right)^2}{n_2 - 1}}
+                            $$
                           pl: | 
-                          
-                            Test t-studenta z korektą Welscha jest stosowany w przypadku, gdy wariancje w grupach różnią się od siebie.
+                            Gdy mamy do czynienia z dwiema niezależnymi grupami danych, 
+                            ale [wariancje]{{term:variance}} w tych grupach są od siebie różne (heterogeniczność wariancji), 
+                            możemy skorzystać z testu t-Studenta z korektą Welscha, który jest modyfikacją standardowego testu t-Studenta dla prób niezależnych.
+                            Test ten porównuje średnią $\bar{x}_1$ z pierwszej grupy i $\bar{x}_2$ z drugiej grupy.
+
+                            $$
+                            H_0: \bar{x}_1 = \bar{x}_2
+                            $$
+                            $$
+                            H_a: \bar{x}_1 \neq \bar{x}_2
+                            $$
+                            Inne formy hipotezy alternatywnej to:
+                            $$
+                            H_a: \bar{x}_1 > \bar{x}_2
+                            $$
+                            lub
+                            $$
+                            H_a: \bar{x}_1 < \bar{x}_2
+                            $$
+
+                            Przy założeniu prawdziwości hipotezy zerowej, 
+                            rozkład danych jest rozkładem t-Studenta z $v$ stopniami swobody, 
+                            gdzie $v$ jest obliczane według wzoru Welcha-Satterthwaite'a.
+                            Dla dwóch grup o liczebnościach $n_1$ i $n_2$ oraz wariancjach $s_1^2$ i $s_2^2$,
+                            liczba stopni swobody $v$ jest obliczana według wzoru:
+
+                            $$
+                            v = \frac{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)^2}{\frac{\left( \frac{s_1^2}{n_1} \right)^2}{n_1 - 1} + \frac{\left( \frac{s_2^2}{n_2} \right)^2}{n_2 - 1}}
+                            $$
+                            
           - id: "not-normal"
             label:
               en: "The distribution of at least one group is not [normal]{{term:normal}}"
@@ -210,8 +455,8 @@ items:
                       pl: |
       - id: "more-than-two-samples"
         label:
-          en: I have more than two groups of data
-          pl: Mam więcej niż dwie grupy danych
+          en: From several other groups of data (>2)
+          pl: Od kilku innych grup danych (>2)
         children:
           - id: "is-normal"
             label:
