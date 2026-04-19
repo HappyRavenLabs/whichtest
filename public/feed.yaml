@@ -33,6 +33,15 @@ glossary:
   omnibus:
     en: Omnibus tests are statistical tests that check for overall differences between groups, without specifying which groups differ. 
     pl: Test omnibusowy sprawdza, czy zachodzą jakiekolwiek istotne różnice między grupami danych, ale nie wskazuje, które grupy różnią się między sobą.
+  correlation:
+    en:
+    pl: Korelacja to miara, która określa siłę i współwystępowanie dwóch zmiennych, np. gdy wzrost jednej wartości towarzyszy wzrostowi drugiej, korelacja między nimi jest silna i dodatnia. Ujemna korelacja występuje wtedy, gdy wzrostowi jedenj zmiennej towarzyszy spadek drugiej.
+  outlier:
+    en:
+    pl: Wartość odstająca to wartość skrajnie różna od pozostałych, nietypowa. Niekoniecznie jest ona wynikiem błędu lub oszustwa (np. intensywne opady deszczu powodujące powódź).
+  anomaly:
+    en:
+    pl: Anomalia to wartość rzadka, która jest wynikiem błędu lub celowej manipulacji (oszystwa).  
 items:
   - id: "distribution"
     label: 
@@ -723,50 +732,73 @@ items:
     label:
       en: Is there a relationship between two variables?
       pl: Czy istnieje związek między dwiema zmiennymi?
-      children:
-        - id: "numerical-variables"
-          label:
-            en: Both variables are [numerical]{{term:numerical}}
-            pl: Obie zmienne są [numeryczne]{{term:numerical}}
-          children:
-            - id: "is-normal"
-              label:
-                en: "The distribution of both variables is [normal]{{term:normal}}"
-                pl: "Rozkład obu zmiennych jest [normalny]{{term:normal}}"
-              children:
-                - id: "pearson-correlation"
-                  label:
-                    en: Pearson's correlation
-                    pl: Korelacja Pearsona
-                  content:
-                    en: |
-                    pl: |
-            - id: "not-normal"
-              label:
-                en: "The distribution of at least one variable is not [normal]{{term:normal}}"
-                pl: "Rozkład przynajmniej jednej zmiennej nie jest [normalny]{{term:normal}}"
-              children:
-                - id: "spearman-correlation"
-                  label:
-                    en: Spearman's rank correlation
-                    pl: Korelacja rang Spearmana
-                  content:
-                    en: |
-                    pl: |
-        - id: "categorical-variables"
-          label:
-            en: Both variables are [categorical]{{term:categorical}}
-            pl: Obie zmienne są [kategoryczne]{{term:categorical}}
-          children:
-            - id: "chi-square-test"
-              label:
-                en: Chi-square test of independence
-                pl: Test chi-kwadrat niezależności
-              content:
-                en: |
-                pl: |
+    children:
+      - id: "numerical-variables"
+        label:
+          en: Both variables are [numerical]{{term:numerical}}
+          pl: Obie zmienne są [numeryczne]{{term:numerical}}
+        children:
+          - id: "is-normal"
+            label:
+              en: "The distribution of both variables is [normal]{{term:normal}}"
+              pl: "Rozkład obu zmiennych jest [normalny]{{term:normal}}"
+            children:
+              - id: "pearson-correlation"
+                label:
+                  en: Pearson's correlation
+                  pl: Korelacja Pearsona
+                content:
+                  en: |
+                  pl: |
+
+                    Gdy dane mają rozkład normalny, możemy sprawdzić [korelację]{{term:correlation}}
+                    a dokładniej liniową zależność między nimi za pomocą testu Pearsona.
+                    Współczynnik pearsona $r$ dla $n$ obserwacji zmiennej 
+                    $x$ (ze średnią próby $\bar{x}$) oraz $y$ (ze średnią z próby $\bar{y}$) wyraża się wzorem:
+
+                    $$
+                    r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2 \sum_{i=1}^{n} (y_i - \bar{y})^2}}
+                    $$
+
+                    Korelacja przyjmuje wartości w przedziale $[-1, 1]$. Wartość bezwzględna $\mid r \mid$ mówi o sile
+                    korelacji, natomiast znak — o kierunku. 
+
+                    1. $r > 0$ wzrostowi jednej zmiennej towarzyszy wzrost drugiej,
+                    1. $r < 0$ wzrostowi jednej zmiennej towarzyszy spadek drugiej.
+
+                    Korelacja jest symetryczna, tzn. $r(x,y) = r(y,x)$.
+
+                    > Pamiętaj, **korelacja** nie bada związku przyczynowo-skutkowego między zmiennymi.
+
+                    Uważaj, korelacja Pearsona jest wrażliwa na [obserwacje odstające]{{term:outlier}} w zbiorze.
+
+          - id: "not-normal"
+            label:
+              en: "The distribution of at least one variable is not [normal]{{term:normal}}"
+              pl: "Rozkład przynajmniej jednej zmiennej nie jest [normalny]{{term:normal}}"
+            children:
+              - id: "spearman-correlation"
+                label:
+                  en: Spearman's rank correlation
+                  pl: Korelacja rang Spearmana
+                content:
+                  en: |
+                  pl: |
+      - id: "categorical-variables"
+        label:
+          en: Both variables are [categorical]{{term:categorical}}
+          pl: Obie zmienne są [kategoryczne]{{term:categorical}}
+        children:
+          - id: "chi-square-test"
+            label:
+              en: Chi-square test of independence
+              pl: Test chi-kwadrat niezależności
+            content:
+              en: |
+              pl: |
   - id: "variance"
     label:
       en: Is there a difference in [variances]{{term:variance}} between groups?
       pl: Czy istnieje różnica w [wariancjach]{{term:variance}} między grupami?
+
       
