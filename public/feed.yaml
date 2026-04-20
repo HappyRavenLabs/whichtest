@@ -34,14 +34,29 @@ glossary:
     en: Omnibus tests are statistical tests that check for overall differences between groups, without specifying which groups differ. 
     pl: Test omnibusowy sprawdza, czy zachodzą jakiekolwiek istotne różnice między grupami danych, ale nie wskazuje, które grupy różnią się między sobą.
   correlation:
-    en:
+    en: Correlation is a measure that indicates the strength and co-occurrence of two variables, e.g., when an increase in one value is accompanied by an increase in the other, the correlation between them is strong and positive. Negative correlation occurs when an increase in one variable is accompanied by a decrease in the other.
     pl: Korelacja to miara, która określa siłę i współwystępowanie dwóch zmiennych, np. gdy wzrost jednej wartości towarzyszy wzrostowi drugiej, korelacja między nimi jest silna i dodatnia. Ujemna korelacja występuje wtedy, gdy wzrostowi jedenj zmiennej towarzyszy spadek drugiej.
   outlier:
-    en:
+    en: An outlier is a data point that is significantly different from the others, atypical. It is not necessarily the result of an error or fraud (e.g., heavy rainfall causing flooding).
     pl: Wartość odstająca to wartość skrajnie różna od pozostałych, nietypowa. Niekoniecznie jest ona wynikiem błędu lub oszustwa (np. intensywne opady deszczu powodujące powódź).
   anomaly:
-    en:
-    pl: Anomalia to wartość rzadka, która jest wynikiem błędu lub celowej manipulacji (oszystwa).  
+    en: An anomaly is a rare value that is the result of an error or deliberate manipulation (fraud).
+    pl: Anomalia to wartość rzadka, która jest wynikiem błędu lub celowej manipulacji (oszustwa).
+  dependent_samples:
+    en: Observations in the sample are dependent on each other. An example of dependent data could be a time series, i.e., consecutive values of the same variable over time (e.g., today's temperature measurements are related to yesterday's temperature measurements).
+    pl: "Obserwacje próby zależą od siebie. Przykładem danych zależnych może być szereg czasowy, tj. kolejne wartości tej samej zmiennej w czasie (np. pomiary temperatury dzisiaj są powiązane z pomiarami temperatury wczoraj)."
+  tied_ranks:
+    en: Tied ranks are ranks assigned to data points that have the same value. For example, in the dataset [100, -10, 2, -4, 2], the values 2 are repeated, so the ranks for these values will be equal (3.5), rather than 3 and 4.
+    pl: Rangi wiązane to rangi przypisane danym, które mają tę samą wartość. Na przykład, w zbiorze danych [100, -10, 2, -4, 2], wartości 2 powtarzają się, więc rangi dla tych wartości będą równe (3.5), a nie 3 i 4.
+  dichotomous:
+    en: A dichotomous variable is a variable that takes on only two values, e.g., true-false, female-male or yes-no.
+    pl: Zmienna dychotomiczna to zmienna, która przyjmuje tylko dwie wartości, np. prawda-fałsza, kobieta-mężczyzna albo tak-nie.
+  degrees_of_freedom:
+    en: Degrees of freedom refer to the number of independent values that can vary in an analysis without breaking any constraints. For example, if we have a bag with 4 balls of different colors (we know which) and we draw them one by one, the first ball can be a surprise; the second and third can also be surprises, but the fourth will be obvious because only one ball is left. Therefore, the number of degrees of freedom will be 3.
+    pl: Stopnie swobody to liczba niezależnych wartości, które mogą się swobodnie zmieniać. Przykład: mamy w woreczku 4 kule w różnych kolorach (wiemy jakich), wyciągamy je kolejno. Pierwsza kula może być niespodzianką; druga, trzecie również, ale 4 będzie oczywista, bo została nam już tylko jedna kula. Dlatego liczba stopni swobody wyniesie 3.
+  stationary:
+    en: A stationary time series maintains its statistical property. Typically, it is understood as weak stationarity meaning the mean and variance of a time series remains constant over time.
+    pl: "Stacjonarny szereg czasowy to taki, który zachowuje swoje właściwości statystyczne w czasie. Najczęściej jednak upraszcza się ten wymóg do tzw. słabej stacjonarności, czyli zachowania stałych w czasie: wartości średniej i wariancji"
 items:
   - id: "distribution"
     label: 
@@ -176,7 +191,7 @@ items:
                     H_a: \mu < \mu_0
                     $$
 
-                    Under the assumption of the null hypothesis, the distribution of data is a t-Student distribution with $n-1$ degrees of freedom, where $n$ is the sample size.
+                    Under the assumption of the null hypothesis, the distribution of data is a t-Student distribution with $n-1$ [degrees of freedom]{{term:degrees_of_freedom}}, where $n$ is the sample size.
                   pl: |
                     Test t-Studenta dla jednej próbki służy do porównania średniej wartości w populacji ($\mu$) z wartością teoretyczną ($\mu_0$).
 
@@ -198,7 +213,7 @@ items:
                     H_a: \mu < \mu_0
                     $$
 
-                    Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n-1$ stopniami swobody, gdzie $n$ to liczebność próby.
+                    Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n-1$ [stopniami swobody]{{term:degrees_of_freedom}}, gdzie $n$ to liczebność próby.
           - id: "not-normal"
             label:
               en: "The distribution of the data is not [normal]{{term:normal}}"
@@ -311,9 +326,12 @@ items:
                         H_a: \mu_a < \mu_A
                         $$
 
-                        Under the assumption of the null hypothesis, the distribution of data is a t-Student distribution with $n-1$ degrees of freedom, where $n$ is the number of pairs of data (e.g., number of patients).
-                      pl: | 
-                        Test t-Studenta dla prób sparowanych jest stosowany, gdy dane w obu badanych grupach są ze sobą związane, np. pacjenci przed i po terapii. 
+                        Under the assumption of the null hypothesis, 
+                        the distribution of data is a t-Student 
+                        distribution with $n-1$ [degrees of freedom]{{term:degrees_of_freedom}}, 
+                        where $n$ is the number of pairs of data (e.g., number of patients).
+                      pl: |
+                        Test t-Studenta dla prób sparowanych jest stosowany, gdy dane w obu badanych grupach są ze sobą związane, np. pacjenci przed i po terapii.
                         Test ten porównuje średnią $\mu_a$ z grupy przed manipulacją (np. przed terapią) i $\mu_A$ — z grupy po manipulacji (np. po terapii).
 
                         $$
@@ -332,8 +350,9 @@ items:
                         H_a: \mu_a < \mu_A
                         $$
 
-                        Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n-1$ stopniami swobody, gdzie $n$ to liczebność pary danych (np. liczba pacjentów).
-                        
+                        Przy założeniu prawdziwości hipotezy zerowej, 
+                        rozkład danych jest rozkładem t-Studenta z $n-1$ [stopniami swobody]{{term:degrees_of_freedom}}, gdzie $n$ to liczebność pary danych (np. liczba pacjentów).
+
               - id: "unpaired-samples"
                 label:
                   en: The groups are not [paired]{{term:paired}}
@@ -371,7 +390,7 @@ items:
                             H_a: \mu_1 < \mu_2
                             $$
 
-                            Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n_1 + n_2 - 2$ stopniami swobody, gdzie $n_1$ i $n_2$ to liczebności obu grup.
+                            Przy założeniu prawdziwości hipotezy zerowej, rozkład danych jest rozkładem t-Studenta z $n_1 + n_2 - 2$ [stopniami swobody]{{term:degrees_of_freedom}}, gdzie $n_1$ i $n_2$ to liczebności obu grup.
                   - id: "variances-unequal"
                     label:
                       en: "The groups have unequal [variances]{{term:variance}}"
@@ -401,7 +420,7 @@ items:
                             $$
 
                             Under the assumption of the null hypothesis, the distribution 
-                            of data is a t-Student distribution with $v$ degrees of freedom,
+                            of data is a t-Student distribution with $v$ [stopniami swobody]{{term:degrees_of_freedom}},
                              where $v$ is calculated according to the Welch-Satterthwaite formula.
                             For two groups with sample sizes $n_1$ and $n_2$ and variances
                              $s_1^2$ and $s_2^2$, the number of degrees of freedom $v$ 
@@ -432,7 +451,7 @@ items:
                             $$
 
                             Przy założeniu prawdziwości hipotezy zerowej, 
-                            rozkład danych jest rozkładem t-Studenta z $v$ stopniami swobody, 
+                            rozkład danych jest rozkładem t-Studenta z $v$ [stopniami swobody]{{term:degrees_of_freedom}},
                             gdzie $v$ jest obliczane według wzoru Welcha-Satterthwaite'a.
                             Dla dwóch grup o liczebnościach $n_1$ i $n_2$ oraz wariancjach $s_1^2$ i $s_2^2$,
                             liczba stopni swobody $v$ jest obliczana według wzoru:
@@ -567,7 +586,7 @@ items:
                         H_a: \exists \ i, j \ such \ that \ \mu_i \neq \mu_j
                         $$
 
-                        The ANOVA test requires the calculation of two types of degrees of freedom:
+                        The ANOVA test requires the calculation of two types of [degrees of freedom]{{term:degrees_of_freedom}}:
                         - degrees of freedom between groups:
                           $$
                           df_{between} = k - 1
@@ -595,7 +614,7 @@ items:
                         H_a: \exists \ i, j \ such \ that \ \mu_i \neq \mu_j
                         $$
 
-                        Test ANOVA wymaga obliczenia dwóch rodzajów stopni swobody:
+                        Test ANOVA wymaga obliczenia dwóch rodzajów [stopni swobody]{{term:degrees_of_freedom}}:
                         - stopnie swobody między grupami:
                           $$
                           df_{between} = k - 1
@@ -629,7 +648,7 @@ items:
                         H_a: \exists \ i, j \ such \ that \ \mu_i \neq \mu_j
                         $$
 
-                        Similar to the standard ANOVA test, the Welch's ANOVA test requires the calculation of two types of degrees of freedom:
+                        Similar to the standard ANOVA test, the Welch's ANOVA test requires the calculation of two types of [degrees of freedom]{{term:degrees_of_freedom}}:
                         - degrees of freedom between groups:
                           $$
                           df_{between} = k - 1
@@ -659,7 +678,7 @@ items:
                         H_a: \exists \ i, j \ such \ that \ \mu_i \neq \mu_j
                         $$
 
-                        Podobnie jak standardowy test ANOVA, test z korektą Welscha wymaga obliczenia dwóch rodzajów stopni swobody:
+                        Podobnie jak standardowy test ANOVA, test z korektą Welscha wymaga obliczenia dwóch rodzajów [stopni swobody]{{term:degrees_of_freedom}}:
                         - stopnie swobody między grupami:
                           $$
                           df_{between} = k - 1
@@ -738,67 +757,454 @@ items:
           en: Both variables are [numerical]{{term:numerical}}
           pl: Obie zmienne są [numeryczne]{{term:numerical}}
         children:
-          - id: "is-normal"
+          - id: "independent"
             label:
-              en: "The distribution of both variables is [normal]{{term:normal}}"
-              pl: "Rozkład obu zmiennych jest [normalny]{{term:normal}}"
+              en: Observations in sample are independent
+              pl: Obserwacja są od siebie niezależne
             children:
-              - id: "pearson-correlation"
+              - id: "is-normal"
                 label:
-                  en: Pearson's correlation
-                  pl: Korelacja Pearsona
-                content:
-                  en: |
-                  pl: |
+                  en: "The distribution of both variables is [normal]{{term:normal}}"
+                  pl: "Rozkład obu zmiennych jest [normalny]{{term:normal}}"
+                children:
+                  - id: "pearson-correlation"
+                    label:
+                      en: Pearson's correlation
+                      pl: Korelacja Pearsona
+                    content:
+                      en: |
+                        When data have a [normal]{{term:normal}} [distribution]{{term:distribution}}, 
+                        we can check the [correlation]{{term:correlation}}, more precisely the 
+                        linear relationship between them using Pearson's correlation test.
+                        The Pearson's correlation coefficient $r$ for $n$ observations of variable
+                        $x$ (with sample mean $\bar{x}$) and $y$ (with sample mean $\bar{y}$) 
+                        is expressed by the formula:
 
-                    Gdy dane mają rozkład normalny, możemy sprawdzić [korelację]{{term:correlation}}
-                    a dokładniej liniową zależność między nimi za pomocą testu Pearsona.
-                    Współczynnik pearsona $r$ dla $n$ obserwacji zmiennej 
-                    $x$ (ze średnią próby $\bar{x}$) oraz $y$ (ze średnią z próby $\bar{y}$) wyraża się wzorem:
+                        $$
+                        r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2 \sum_{i=1}^{n} (y_i - \bar{y})^2}}
+                        $$
 
-                    $$
-                    r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2 \sum_{i=1}^{n} (y_i - \bar{y})^2}}
-                    $$
+                        Correlation takes values in the range $[-1, 1]$. 
+                        The absolute value $\mid r \mid$ indicates the 
+                        strength of the correlation, while the sign indicates the direction.
 
-                    Korelacja przyjmuje wartości w przedziale $[-1, 1]$. Wartość bezwzględna $\mid r \mid$ mówi o sile
-                    korelacji, natomiast znak — o kierunku. 
+                        1. $r > 0$ an increase in one variable is associated with an increase in the other,
+                        1. $r < 0$ an increase in one variable is associated with a decrease in the other.
 
-                    1. $r > 0$ wzrostowi jednej zmiennej towarzyszy wzrost drugiej,
-                    1. $r < 0$ wzrostowi jednej zmiennej towarzyszy spadek drugiej.
+                        Correlation is symmetric, i.e., $r(x,y) = r(y,x)$.
 
-                    Korelacja jest symetryczna, tzn. $r(x,y) = r(y,x)$.
+                        > Remember, **correlation** does not imply causation between variables.
 
-                    > Pamiętaj, **korelacja** nie bada związku przyczynowo-skutkowego między zmiennymi.
+                        Be careful, Pearson's correlation is sensitive to 
+                        [outliers]{{term:outlier}} and [anomalies]{{term:anomaly}} in the dataset.
+                      pl: |
 
-                    Uważaj, korelacja Pearsona jest wrażliwa na [obserwacje odstające]{{term:outlier}} w zbiorze.
+                        Gdy dane mają [rozkład]{{term:distribution}} [normalny]{{term:normal}}, możemy sprawdzić [korelację]{{term:correlation}}
+                        a dokładniej liniową zależność między nimi za pomocą testu Pearsona.
+                        Współczynnik pearsona $r$ dla $n$ obserwacji zmiennej 
+                        $x$ (ze średnią próby $\bar{x}$) oraz $y$ (ze średnią z próby $\bar{y}$) wyraża się wzorem:
 
-          - id: "not-normal"
+                        $$
+                        r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2 \sum_{i=1}^{n} (y_i - \bar{y})^2}}
+                        $$
+
+                        Korelacja przyjmuje wartości w przedziale $[-1, 1]$. Wartość bezwzględna $\mid r \mid$ mówi o sile
+                        korelacji, natomiast znak — o kierunku. 
+
+                        1. $r > 0$ wzrostowi jednej zmiennej towarzyszy wzrost drugiej,
+                        1. $r < 0$ wzrostowi jednej zmiennej towarzyszy spadek drugiej.
+
+                        Korelacja jest symetryczna, tzn. $r(x,y) = r(y,x)$.
+
+                        > Pamiętaj, **korelacja** nie bada związku przyczynowo-skutkowego między zmiennymi.
+
+                        Uważaj, korelacja Pearsona jest wrażliwa na [obserwacje odstające]{{term:outlier}} i [anomalie]{{term:anomaly}} w zbiorze.
+
+              - id: "not-normal"
+                label:
+                  en: "The distribution of at least one variable is not [normal]{{term:normal}}"
+                  pl: "Rozkład przynajmniej jednej zmiennej nie jest [normalny]{{term:normal}}"
+                children:
+                  - id: "spearman-correlation"
+                    label:
+                      en: Spearman's rank correlation
+                      pl: Korelacja rang Spearmana
+                    content:
+                      en: |
+                        Spearman's rank correlation is a non-parametric measure of correlation.
+                        It assesses how well the relationship between two variables can be described
+                        using a monotonic function.
+                        Spearman's rank correlation, or more precisely Spearman's rank correlation test,
+                        calculates the correlation coefficient based on the ranks of the data rather than the actual data values.
+                        Therefore, the Spearman's rank correlation coefficient is more robust to outliers and anomalies,
+                        and it does not require the data to be normally distributed.
+
+                        $$
+                        H_0: \text{There is no correlation between the variables}
+                        $$
+                        $$
+                        H_a: \text{There is a correlation between the variables}
+                        $$
+
+                        When the ranks assigned to the data do not repeat 
+                        (i.e., there are no [tied ranks]{{term:tied_ranks}}) or 
+                        there are few tied ranks, we can use a simplified formula 
+                        for Spearman's rank correlation coefficient ($\rho$) [1]:
+
+                        $$
+                        \rho=1-\frac{6\sum_{i=1}^{n}d_i^2}{n(n^2-1)},
+                        $$
+                        where $d_i$ is the difference between the ranks of $x_i$ and $y_i$, and $n$ is the sample size.
+
+                        When we are dealing with tied ranks, 
+                        it is safer to use the general formula for 
+                        Spearman's rank correlation coefficient, which is 
+                        based on Pearson's correlation coefficient but uses 
+                        ranks instead of actual data values.
+
+                        > Remember, **correlation** does not imply causation between variables.
+
+                        As Spearman's rank correlation uses ranks, 
+                        it detects monotonic relationships 
+                        (not necessarily linear), e.g., an exponential or logarithmic relationship.
+
+                        ---
+
+                        [1] Mohr, Donna L., William J. Wilson, and Rudolf J. Freund. "Chapter 14-nonparametric methods." Statistical Methods (2022): 651-683.
+                      pl: |
+                        [Korelacja]{{term:correlation}} Spearmana jest nieparametryczną
+                        alterantywą dla korelacji Pearsona. Test Spearmana, 
+                        a w zasadzie test korelacji [**rang**]{{term:ranks}} Spearmana
+                        oblicza współczynnik korelacji bazując na [rangach]{{term:ranks}} a nie
+                        na rzeczywistych wartościach. W związku z tym, współczynnik korelacji
+                        Spearmana jest bardziej odporny na [wartości odstające]{{term:outlier}} 
+                        i [anomalie]{{term:anomaly}}. Nie wymaga również rozkładu normalnego danych.
+
+                        $$
+                        H_0: \text{Brak korelacji między zmiennymi}
+                        $$
+                        $$
+                        H_a: \text{Istnieje korelacja między zmiennymi}
+                        $$
+
+                        Gdy rangi przypisane danym nie powielają się (nie ma tzw. [rang wiązanych]{{term:tied_ranks}}) 
+                        lub jest ich niewiele, możemy zastosować uproszczony wzór na
+                        współczynnik korelacji rang Spearmana ($\rho$) [1]:
+
+                        $$
+                        \rho=1-\frac{6\sum_{i=1}^{n}d_i^2}{n(n^2-1)},
+                        $$
+                        gdzie $d_i$ to różnica między rangami $x_i$ i $y_i$ a $n$ to liczebność próby.
+
+                        Gdy mamy do czynienia z rangami wiązanymi, bezpieczniej 
+                        jest skorzystać z ogólnego wzoru na współczynnik korelacji rang Spearmana, 
+                        który jest oparty na współczynniku korelacji Pearsona, ale zamiast rzeczywistych wartości danych, wykorzystuje rangi:
+
+                        > Pamiętaj, **korelacja** nie bada związku przyczynowo-skutkowego między zmiennymi.
+
+                        Z uwagi na wykorzystanie rang, korelacja Spearmana wykrywa 
+                        zależności monotoniczne (niekoniecznie liniowe), np. zależność wykładniczą albo logarytmiczną.
+
+                        ---
+
+                        [1] Mohr, Donna L., William J. Wilson, and Rudolf J. Freund. "Chapter 14-nonparametric methods." Statistical Methods (2022): 651-683.
+          - id: "categorical-variables"
             label:
-              en: "The distribution of at least one variable is not [normal]{{term:normal}}"
-              pl: "Rozkład przynajmniej jednej zmiennej nie jest [normalny]{{term:normal}}"
+              en: Both variables are [categorical]{{term:categorical}}
+              pl: Obie zmienne są [kategoryczne]{{term:categorical}}
             children:
-              - id: "spearman-correlation"
+              - id: "paired"
                 label:
-                  en: Spearman's rank correlation
-                  pl: Korelacja rang Spearmana
-                content:
-                  en: |
-                  pl: |
-      - id: "categorical-variables"
-        label:
-          en: Both variables are [categorical]{{term:categorical}}
-          pl: Obie zmienne są [kategoryczne]{{term:categorical}}
-        children:
-          - id: "chi-square-test"
+                  en: "Data are [paired]{{term:paired}}"
+                  pl: "Dane są [sparowane]{{term:paired}}"
+                children:
+                  - id: "mcnemar-test"
+                    label:
+                      en: McNemar's test
+                      pl: Test McNemara
+                    content:
+                      en: |
+                        McNemar's test is used to check the dependence between 
+                        categorical variables when we are dealing with 
+                        dependent ([paired]{{term:paired}}) samples, 
+                        e.g., measurements before and after therapy on the same patients.
+
+                        The requirement for McNemar's test is the dichotomous nature of the variables.
+
+                        Similar to the chi-square test of independence, 
+                        McNemar's test is based on a contingency table, 
+                        but in this case, it is a 2x2 table since the variables are dichotomous.
+                      pl: |
+
+                        Test McNemara służy do sprawdzenia zależności między zmiennymi kategorycznymi,
+                        gdy mamy do czynienia z próbami zależnymi ([sparowanymi]{{term:paired}}), 
+                        np. pomiar przed i po terapii na tych samych pacjentach.
+
+                        Wymogiem testu McNemara jest [**dychotomiczność**]{{term:dichotomous}} zmiennych.
+
+                        Podobnie jak w przypadku testu $\chi^2$ niezależności, 
+                        test McNemara opiera się na tabeli krzyżowej, 
+                        ale w tym przypadku jest to tabela 2x2, ponieważ zmienne są dychotomiczne.
+              - id: "not-paired"
+                label:
+                  en: "Data are not [paired]{{term:paired}}"
+                  pl: "Dane nie są [sparowane]{{term:paired}}"
+                children:
+                  - id: "chi-square-test"
+                    label:
+                      en: Chi-square test of independence
+                      pl: Test chi-kwadrat niezależności
+                    content:
+                      en: |
+
+                        When we are dealing with categorical variables (nominal or ordinal), 
+                        the chi-square test of independence allows us to check whether the variables $x$ and $y$ are dependent on each other.
+
+                        $$
+                        H_0: \text{Variables } x \text{ and } y \text{ are independent}
+                        $$
+                        $$
+                        H_a: \text{There is a significant dependence between variables } x \text{ and } y
+                        $$
+
+                        The number of [degrees of freedom]{{term:degrees_of_freedom}} for the chi-square test of independence is calculated according to the formula:
+
+                        $$
+                        df = (r - 1)(c - 1),
+                        $$
+                        where $r$ is the number of rows and $c$ is the number of columns in the contingency table.
+
+                        The chi-square test of independence is based on a **contingency table**. 
+                        
+                        Let's consider a simple example:
+
+                        > Does the level of education (ordinal variable) depend on gender (nominal variable)?
+
+                        To perform the analysis, we need to prepare a contingency table:
+
+                        | Level of education | Women | Men | ROW TOTAL |
+                        |--------------------|-------|-----|-----------|
+                        | Higher             |  30   | 20  |  **50**  |
+                        | Secondary          |  25   | 35  |  **60**  |
+                        | Primary            |  15   | 10  |  **25**  |
+                        | COLUMN TOTAL       | **70**|**65**| **135** |
+
+                        The number of [degrees of freedom]{{term:degrees_of_freedom}} for the chi-square test of 
+                        independence calculated according to the above formula is: $df = (3 - 1)(2 - 1) = 2$.
+
+                        The chi-square test compares the observed frequencies (e.g., the number of women
+                        with higher education) with the expected frequencies, 
+                        which would be expected if the variables were independent of each other.
+
+                        The expected frequencies are calculated as the product of the row total $R_i$ and the column total $C_j$, divided by the overall sample size $N$.
+                        For the cell (Higher, Women), the expected frequency is:
+
+                        $$
+                        E_{ij} = \frac{(R_i)(C_j)}{N} = \frac{(50)(70)}{135} \approx 25.93
+                        $$
+
+                        Having computed the expected frequency for each combination, 
+                        we can calculate the chi-square test statistic:
+
+                        $$
+                        \chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}},
+                        $$
+                        where $O_{ij}$ is the observed frequency in cell $i,j$,
+                        $E_{ij}$ is the expected frequency in that cell, and $r$ and
+                        $c$ are the number of rows and columns in the contingency table (our table has 3 rows and 2 columns).
+
+                        The chi-square test of independence has several assumptions that must be met:
+                        1. The variables are categorical (we already know that),
+                        1. One observation must fall into one category
+                        (e.g., a person cannot simultaneously belong to the category of *higher education* and *secondary education*),
+                        1. The samples are not [paired]{{term:paired}},
+                        1. A sufficiently large sample size, so that the expected number of observations in most categories is greater than 5.
+                      pl: |
+
+                        Gdy mamy do czynienia ze zmiennymi kategorycznymi (nominalnymi lub porządkowymi),
+                        test niezależności $\chi^2$ (czytaj: chi-kwadrat) umożliwja nam 
+                        sprawdzenie, czy zmienne $x$ i $y$ są od siebie zależne.
+
+                        $$
+                        H_0: \text{Zmienne } x \text{ oraz } y \text{ są niezależne}
+                        $$
+                        $$
+                        H_a: \text{Między zmiennymi } x \text{ oraz } y \text{ występuje istotna zależność}
+                        $$
+
+                        Liczba [stopni swobody]{{term:degrees_of_freedom}} dla testu niezależności $\chi^2$ jest obliczana według wzoru:
+
+                        $$
+                        df = (r - 1)(c - 1),
+                        $$
+                        gdzie $r$ to liczba wierszy, a $c$ to liczba kolumn w tabeli krzyżowej.
+
+                        Test niezależności $\chi^2$ opiera się na **tabeli krzyżowej**. 
+                        
+                        Rozważmy prosty przykład:
+
+                        > Czy poziom wykształcenia (zmienna porządkowa) zależy od płci (zmienna nominalna).
+
+                        W celu wykonania analizy, musimy przygotować tabelę krzyżową:
+
+                        | Poziom wykształcenia | Kobiety | Mężczyźni | SUMA (wiersze) |
+                        |----------------------|---------|-----------|------|
+                        | Wyższe               |    30   |    20     |  **50**  |
+                        | Średnie              |    25   |    35     |  **60**  |
+                        | Podstawowe           |    15   |    10     |  **25**  |
+                        | SUMA (kolumny)       |  **70** |    **65** | **135** |
+
+                        Liczba [stopni swobody]{{term:degrees_of_freedom}} dla testu niezależności 
+                        obliczona wg powyższego wzoru wynosi: $df = (3 - 1)(2 - 1) = 2$.
+
+                        Test $\chi^2$ porównuje obserwowane częstotliwości (np. liczba kobiet z wykształceniem wyższym) 
+                        z oczekiwanymi częstotliwościami, które byłyby spodziewane, gdyby zmienne były od siebie niezależne.
+
+                        Wartości oczekiwane są obliczane jako iloczyn sumy wiersza $i$ i sumy kolumny $j$, podzielony przez całkowitą liczebność próby.
+                        Dla komórki (Wyższe, Kobiety) wartość oczekiwana wynosi:
+
+                        $$
+                        E_{ij} = \frac{(R_i)(C_j)}{N} = \frac{(50)(70)}{135} \approx 25.93
+                        $$
+
+                        Po obliczeniu wartości oczekiwanej dla każdej kombinacji, możemy obliczyć statystykę testową $\chi^2$:
+
+                        $$
+                        \chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}},
+                        $$
+
+                        gdzie $O_{ij}$ to obserwowana liczba przypadków w komórce $i,j$, 
+                        a $E_{ij}$ to oczekiwana liczba przypadków w tej komórce, zaś $r$ i $c$ to liczba wierszy i kolumn w tabeli krzyżowej (nasza tabela ma 3 wiersze i 2 kolumny).
+
+                        Test niezależności $\chi^2$ ma kilka założeń, które muszą być spełnione:
+                        1. zmienne są kategoryczne (to już wiemy),
+                        1. jedna obserwacja musi przypadać na jedną kategorię 
+                        (np. osoba badana nie może należeć jednoczeście do kategorii *wykształcenie wyższe* oraz *wykształcenie średnie*)
+                        1. próbki nie są [sparowane]{{term:paired}},
+                        1. dość duża liczebność próby, aby oczekiwana liczba obserwacji w większości kategorii była większa niż 5.
+
+          - id: "dependent"
             label:
-              en: Chi-square test of independence
-              pl: Test chi-kwadrat niezależności
-            content:
-              en: |
-              pl: |
+              en: Observations in sample are [dependent]{{term:dependent_samples}}
+              pl: Obserwacja są od siebie [zależne]{{term:dependent_samples}}
+            children:       
+              - id: "timeseries"
+                label: 
+                  en: Data is a time series
+                  pl: Dane to szereg czasowy
+                children:
+                  - id: "stationarity"
+                    label: 
+                      en: "Time series is [stationary]{{term:stationary}}"
+                      pl: "Szereg czasowy jest [stacjonarny]{{term:stationary}}"
+                    children:
+                      - id: "granger"
+                        label:
+                          en: "Granger's causality test"
+                          pl: "Test przyczynowości Grangera"   
+                        content:
+                          en: |
+                            Granger causality test checks if lagged (historical) values of variable $x$
+                            allow for bettwe forecasting of variable $y$.
+
+                            This test relies on VAR model (vector autoregression), where each
+                            value of a time series is a linear combination of its lagged values and/or lagged
+                            values of other time series.
+
+                            For Granger causality test, there are two models defined:
+                            1. **constrained model** relying only of the lagged values of a time series itself:
+
+                            $$
+                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \epsilon_i,
+                            $$
+                            where $m$ is the number of historical values of variable $y$.
+
+                            2. **unconstrained model** taking into account also lagged values of variable $x$:
+
+                            $$
+                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \sum_{j=1}^m \beta_j x_{i-j} + \epsilon_i,
+                            $$         
+
+                            In the problem stated this way, null hypothesis is the following:
+
+                            $$
+                            H_0: \beta_1 = \beta_2 = \beta_3 = \ldots = 0
+                            $$
+
+                            what can be understood as: *lagged values of $x$ do not help to predict the values of $y$.
+
+                            $$
+                            H_a: \beta_1 = \beta_2 = \beta_3 = \ldots \neq 0
+                            $$             
+
+                            > Granger causality **is not the true causality relationship** (in physical sense) 
+                            > it is just about predictibility of one variable when knowing the other.              
+
+                          pl: |
+                            Test przyczynowości Grangera sprawdza, czy
+                            historyczne wartości zmiennej $x$ pomagają
+                            przewidzieć przyszłe wartości zmiennej $y$.
+
+                            Test operuje na modelu VAR (ang. *vector auto regression*), gdzie 
+                            każda wartość szeregu czasowego jest liniową kombinacją swoich historycznych wartości i/lub
+                            innych szeregów czasowych.
+
+                            Dla testu Grangera zdefiniowane są dwa modele:
+                            1. **model ograniczony**, który bazuje wyłącznie na wartościach przeszłych zmiennej prognozowanej ($y$):
+
+                            $$
+                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \epsilon_i,
+                            $$
+                            gdzie $m$ to liczba historycznych wartości zmiennej $y$.
+
+                            2. **model nieograniczony**, który uwzględnia również wartości przeszłe zmiennej $x$:
+
+                            $$
+                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \sum_{j=1}^m \beta_j x_{i-j} + \epsilon_i,
+                            $$
+
+                            W tak postawionym problemie, hipoteza zerowa brzmi:
+
+                            $$
+                            H_0: \beta_1 = \beta_2 = \beta_3 = \ldots = 0
+                            $$
+
+                            co możemy tłumaczyć jako: *wartości opóźnione zmiennej $x$ nie pomagają przewidzieć wartości zmiennej $y$.
+
+                            $$
+                            H_a: \beta_1 = \beta_2 = \beta_3 = \ldots \neq 0
+                            $$
+
+                            > Przyczynowość w sensie Grangera to **nie rzeczywisty związek przyczynowo skutkowy** 
+                            > w sensie fizycznym, a określa przewidywalność jedenj zmiennej na podstawie drugiej.     
+
   - id: "variance"
     label:
       en: Is there a difference in [variances]{{term:variance}} between groups?
       pl: Czy istnieje różnica w [wariancjach]{{term:variance}} między grupami?
+    children:
+      - id: "unpaired"
+        label:
+          en: Data are not [paired]{{term:paired}}
+          pl: Dane nie są [sparowane]{{term:paired}}
+        children:
+          - id: "levene-test"
+            label:
+              en: "Levene's test"
+              pl: "Test Levene'a"
+            content:
+              en: | 
+              pl: | 
+                Test Levene'a sprawdza homogeniczność [wariancji]{{term:variance}}, 
+                tzn. czy wariancje w grupach są równe.
 
-      
+                $$
+                H_0: \text{Wariance są równe}
+                $$
+                $$
+                H_a: \text{Wariancje są różne}
+                $$
+
+
+          
+
