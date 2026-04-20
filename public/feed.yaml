@@ -908,6 +908,101 @@ items:
                         ---
 
                         [1] Mohr, Donna L., William J. Wilson, and Rudolf J. Freund. "Chapter 14-nonparametric methods." Statistical Methods (2022): 651-683.
+          - id: "dependent"
+            label:
+              en: Observations in sample are [dependent]{{term:dependent_samples}}
+              pl: Obserwacja są od siebie [zależne]{{term:dependent_samples}}
+            children:       
+              - id: "timeseries"
+                label: 
+                  en: Data is a time series
+                  pl: Dane to szereg czasowy
+                children:
+                  - id: "stationarity"
+                    label: 
+                      en: "Time series is [stationary]{{term:stationary}}"
+                      pl: "Szereg czasowy jest [stacjonarny]{{term:stationary}}"
+                    children:
+                      - id: "granger"
+                        label:
+                          en: "Granger's causality test"
+                          pl: "Test przyczynowości Grangera"   
+                        content:
+                          en: |
+                            Granger causality test checks if lagged (historical) values of variable $x$
+                            allow for bettwe forecasting of variable $y$.
+
+                            This test relies on VAR model (vector autoregression), where each
+                            value of a time series is a linear combination of its lagged values and/or lagged
+                            values of other time series.
+
+                            For Granger causality test, there are two models defined:
+                            1. **constrained model** relying only of the lagged values of a time series itself:
+
+                            $$
+                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \epsilon_i,
+                            $$
+                            where $m$ is the number of historical values of variable $y$.
+
+                            2. **unconstrained model** taking into account also lagged values of variable $x$:
+
+                            $$
+                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \sum_{j=1}^m \beta_j x_{i-j} + \epsilon_i,
+                            $$         
+
+                            In the problem stated this way, null hypothesis is the following:
+
+                            $$
+                            H_0: \beta_1 = \beta_2 = \beta_3 = \ldots = 0
+                            $$
+
+                            what can be understood as: *lagged values of $x$ do not help to predict the values of $y$.
+
+                            $$
+                            H_a: \beta_1 = \beta_2 = \beta_3 = \ldots \neq 0
+                            $$             
+
+                            > Granger causality **is not the true causality relationship** (in physical sense) 
+                            > it is just about predictibility of one variable when knowing the other.              
+
+                          pl: |
+                            Test przyczynowości Grangera sprawdza, czy
+                            historyczne wartości zmiennej $x$ pomagają
+                            przewidzieć przyszłe wartości zmiennej $y$.
+
+                            Test operuje na modelu VAR (ang. *vector auto regression*), gdzie 
+                            każda wartość szeregu czasowego jest liniową kombinacją swoich historycznych wartości i/lub
+                            innych szeregów czasowych.
+
+                            Dla testu Grangera zdefiniowane są dwa modele:
+                            1. **model ograniczony**, który bazuje wyłącznie na wartościach przeszłych zmiennej prognozowanej ($y$):
+
+                            $$
+                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \epsilon_i,
+                            $$
+                            gdzie $m$ to liczba historycznych wartości zmiennej $y$.
+
+                            2. **model nieograniczony**, który uwzględnia również wartości przeszłe zmiennej $x$:
+
+                            $$
+                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \sum_{j=1}^m \beta_j x_{i-j} + \epsilon_i,
+                            $$
+
+                            W tak postawionym problemie, hipoteza zerowa brzmi:
+
+                            $$
+                            H_0: \beta_1 = \beta_2 = \beta_3 = \ldots = 0
+                            $$
+
+                            co możemy tłumaczyć jako: *wartości opóźnione zmiennej $x$ nie pomagają przewidzieć wartości zmiennej $y$.
+
+                            $$
+                            H_a: \beta_1 = \beta_2 = \beta_3 = \ldots \neq 0
+                            $$
+
+                            > Przyczynowość w sensie Grangera to **nie rzeczywisty związek przyczynowo skutkowy** 
+                            > w sensie fizycznym, a określa przewidywalność jedenj zmiennej na podstawie drugiej.     
+
       - id: "categorical-variables"
         label:
           en: Both variables are [categorical]{{term:categorical}}
@@ -1083,100 +1178,6 @@ items:
                     1. próbki nie są [sparowane]{{term:paired}},
                     1. dość duża liczebność próby, aby oczekiwana liczba obserwacji w większości kategorii była większa niż 5.
 
-          - id: "dependent"
-            label:
-              en: Observations in sample are [dependent]{{term:dependent_samples}}
-              pl: Obserwacja są od siebie [zależne]{{term:dependent_samples}}
-            children:       
-              - id: "timeseries"
-                label: 
-                  en: Data is a time series
-                  pl: Dane to szereg czasowy
-                children:
-                  - id: "stationarity"
-                    label: 
-                      en: "Time series is [stationary]{{term:stationary}}"
-                      pl: "Szereg czasowy jest [stacjonarny]{{term:stationary}}"
-                    children:
-                      - id: "granger"
-                        label:
-                          en: "Granger's causality test"
-                          pl: "Test przyczynowości Grangera"   
-                        content:
-                          en: |
-                            Granger causality test checks if lagged (historical) values of variable $x$
-                            allow for bettwe forecasting of variable $y$.
-
-                            This test relies on VAR model (vector autoregression), where each
-                            value of a time series is a linear combination of its lagged values and/or lagged
-                            values of other time series.
-
-                            For Granger causality test, there are two models defined:
-                            1. **constrained model** relying only of the lagged values of a time series itself:
-
-                            $$
-                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \epsilon_i,
-                            $$
-                            where $m$ is the number of historical values of variable $y$.
-
-                            2. **unconstrained model** taking into account also lagged values of variable $x$:
-
-                            $$
-                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \sum_{j=1}^m \beta_j x_{i-j} + \epsilon_i,
-                            $$         
-
-                            In the problem stated this way, null hypothesis is the following:
-
-                            $$
-                            H_0: \beta_1 = \beta_2 = \beta_3 = \ldots = 0
-                            $$
-
-                            what can be understood as: *lagged values of $x$ do not help to predict the values of $y$.
-
-                            $$
-                            H_a: \beta_1 = \beta_2 = \beta_3 = \ldots \neq 0
-                            $$             
-
-                            > Granger causality **is not the true causality relationship** (in physical sense) 
-                            > it is just about predictibility of one variable when knowing the other.              
-
-                          pl: |
-                            Test przyczynowości Grangera sprawdza, czy
-                            historyczne wartości zmiennej $x$ pomagają
-                            przewidzieć przyszłe wartości zmiennej $y$.
-
-                            Test operuje na modelu VAR (ang. *vector auto regression*), gdzie 
-                            każda wartość szeregu czasowego jest liniową kombinacją swoich historycznych wartości i/lub
-                            innych szeregów czasowych.
-
-                            Dla testu Grangera zdefiniowane są dwa modele:
-                            1. **model ograniczony**, który bazuje wyłącznie na wartościach przeszłych zmiennej prognozowanej ($y$):
-
-                            $$
-                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \epsilon_i,
-                            $$
-                            gdzie $m$ to liczba historycznych wartości zmiennej $y$.
-
-                            2. **model nieograniczony**, który uwzględnia również wartości przeszłe zmiennej $x$:
-
-                            $$
-                            y_i = \alpha_0 + \sum_{j=1}^m \alpha_j y_{i-j} + \sum_{j=1}^m \beta_j x_{i-j} + \epsilon_i,
-                            $$
-
-                            W tak postawionym problemie, hipoteza zerowa brzmi:
-
-                            $$
-                            H_0: \beta_1 = \beta_2 = \beta_3 = \ldots = 0
-                            $$
-
-                            co możemy tłumaczyć jako: *wartości opóźnione zmiennej $x$ nie pomagają przewidzieć wartości zmiennej $y$.
-
-                            $$
-                            H_a: \beta_1 = \beta_2 = \beta_3 = \ldots \neq 0
-                            $$
-
-                            > Przyczynowość w sensie Grangera to **nie rzeczywisty związek przyczynowo skutkowy** 
-                            > w sensie fizycznym, a określa przewidywalność jedenj zmiennej na podstawie drugiej.     
 
   - id: "variance"
     label:
