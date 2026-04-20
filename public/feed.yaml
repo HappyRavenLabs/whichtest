@@ -53,7 +53,7 @@ glossary:
     pl: Zmienna dychotomiczna to zmienna, która przyjmuje tylko dwie wartości, np. prawda-fałsza, kobieta-mężczyzna albo tak-nie.
   degrees_of_freedom:
     en: Degrees of freedom refer to the number of independent values that can vary in an analysis without breaking any constraints. For example, if we have a bag with 4 balls of different colors (we know which) and we draw them one by one, the first ball can be a surprise; the second and third can also be surprises, but the fourth will be obvious because only one ball is left. Therefore, the number of degrees of freedom will be 3.
-    pl: Stopnie swobody to liczba niezależnych wartości, które mogą się swobodnie zmieniać. Przykład: mamy w woreczku 4 kule w różnych kolorach (wiemy jakich), wyciągamy je kolejno. Pierwsza kula może być niespodzianką; druga, trzecie również, ale 4 będzie oczywista, bo została nam już tylko jedna kula. Dlatego liczba stopni swobody wyniesie 3.
+    pl: "Stopnie swobody to liczba niezależnych wartości, które mogą się swobodnie zmieniać. Przykład: mamy w woreczku 4 kule w różnych kolorach (wiemy jakich), wyciągamy je kolejno. Pierwsza kula może być niespodzianką; druga, trzecie również, ale 4 będzie oczywista, bo została nam już tylko jedna kula. Dlatego liczba stopni swobody wyniesie 3.""
   stationary:
     en: A stationary time series maintains its statistical property. Typically, it is understood as weak stationarity meaning the mean and variance of a time series remains constant over time.
     pl: "Stacjonarny szereg czasowy to taki, który zachowuje swoje właściwości statystyczne w czasie. Najczęściej jednak upraszcza się ten wymóg do tzw. słabej stacjonarności, czyli zachowania stałych w czasie: wartości średniej i wariancji"
