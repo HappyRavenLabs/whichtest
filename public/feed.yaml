@@ -908,180 +908,180 @@ items:
                         ---
 
                         [1] Mohr, Donna L., William J. Wilson, and Rudolf J. Freund. "Chapter 14-nonparametric methods." Statistical Methods (2022): 651-683.
-          - id: "categorical-variables"
+      - id: "categorical-variables"
+        label:
+          en: Both variables are [categorical]{{term:categorical}}
+          pl: Obie zmienne są [kategoryczne]{{term:categorical}}
+        children:
+          - id: "paired"
             label:
-              en: Both variables are [categorical]{{term:categorical}}
-              pl: Obie zmienne są [kategoryczne]{{term:categorical}}
+              en: "Data are [paired]{{term:paired}}"
+              pl: "Dane są [sparowane]{{term:paired}}"
             children:
-              - id: "paired"
+              - id: "mcnemar-test"
                 label:
-                  en: "Data are [paired]{{term:paired}}"
-                  pl: "Dane są [sparowane]{{term:paired}}"
-                children:
-                  - id: "mcnemar-test"
-                    label:
-                      en: McNemar's test
-                      pl: Test McNemara
-                    content:
-                      en: |
-                        McNemar's test is used to check the dependence between 
-                        categorical variables when we are dealing with 
-                        dependent ([paired]{{term:paired}}) samples, 
-                        e.g., measurements before and after therapy on the same patients.
+                  en: McNemar's test
+                  pl: Test McNemara
+                content:
+                  en: |
+                    McNemar's test is used to check the dependence between 
+                    categorical variables when we are dealing with 
+                    dependent ([paired]{{term:paired}}) samples, 
+                    e.g., measurements before and after therapy on the same patients.
 
-                        The requirement for McNemar's test is the dichotomous nature of the variables.
+                    The requirement for McNemar's test is the dichotomous nature of the variables.
 
-                        Similar to the chi-square test of independence, 
-                        McNemar's test is based on a contingency table, 
-                        but in this case, it is a 2x2 table since the variables are dichotomous.
-                      pl: |
+                    Similar to the chi-square test of independence, 
+                    McNemar's test is based on a contingency table, 
+                    but in this case, it is a 2x2 table since the variables are dichotomous.
+                  pl: |
 
-                        Test McNemara służy do sprawdzenia zależności między zmiennymi kategorycznymi,
-                        gdy mamy do czynienia z próbami zależnymi ([sparowanymi]{{term:paired}}), 
-                        np. pomiar przed i po terapii na tych samych pacjentach.
+                    Test McNemara służy do sprawdzenia zależności między zmiennymi kategorycznymi,
+                    gdy mamy do czynienia z próbami zależnymi ([sparowanymi]{{term:paired}}), 
+                    np. pomiar przed i po terapii na tych samych pacjentach.
 
-                        Wymogiem testu McNemara jest [**dychotomiczność**]{{term:dichotomous}} zmiennych.
+                    Wymogiem testu McNemara jest [**dychotomiczność**]{{term:dichotomous}} zmiennych.
 
-                        Podobnie jak w przypadku testu $\chi^2$ niezależności, 
-                        test McNemara opiera się na tabeli krzyżowej, 
-                        ale w tym przypadku jest to tabela 2x2, ponieważ zmienne są dychotomiczne.
-              - id: "not-paired"
+                    Podobnie jak w przypadku testu $\chi^2$ niezależności, 
+                    test McNemara opiera się na tabeli krzyżowej, 
+                    ale w tym przypadku jest to tabela 2x2, ponieważ zmienne są dychotomiczne.
+          - id: "not-paired"
+            label:
+              en: "Data are not [paired]{{term:paired}}"
+              pl: "Dane nie są [sparowane]{{term:paired}}"
+            children:
+              - id: "chi-square-test"
                 label:
-                  en: "Data are not [paired]{{term:paired}}"
-                  pl: "Dane nie są [sparowane]{{term:paired}}"
-                children:
-                  - id: "chi-square-test"
-                    label:
-                      en: Chi-square test of independence
-                      pl: Test chi-kwadrat niezależności
-                    content:
-                      en: |
+                  en: Chi-square test of independence
+                  pl: Test chi-kwadrat niezależności
+                content:
+                  en: |
 
-                        When we are dealing with categorical variables (nominal or ordinal), 
-                        the chi-square test of independence allows us to check whether the variables $x$ and $y$ are dependent on each other.
+                    When we are dealing with categorical variables (nominal or ordinal), 
+                    the chi-square test of independence allows us to check whether the variables $x$ and $y$ are dependent on each other.
 
-                        $$
-                        H_0: \text{Variables } x \text{ and } y \text{ are independent}
-                        $$
-                        $$
-                        H_a: \text{There is a significant dependence between variables } x \text{ and } y
-                        $$
+                    $$
+                    H_0: \text{Variables } x \text{ and } y \text{ are independent}
+                    $$
+                    $$
+                    H_a: \text{There is a significant dependence between variables } x \text{ and } y
+                    $$
 
-                        The number of [degrees of freedom]{{term:degrees_of_freedom}} for the chi-square test of independence is calculated according to the formula:
+                    The number of [degrees of freedom]{{term:degrees_of_freedom}} for the chi-square test of independence is calculated according to the formula:
 
-                        $$
-                        df = (r - 1)(c - 1),
-                        $$
-                        where $r$ is the number of rows and $c$ is the number of columns in the contingency table.
+                    $$
+                    df = (r - 1)(c - 1),
+                    $$
+                    where $r$ is the number of rows and $c$ is the number of columns in the contingency table.
 
-                        The chi-square test of independence is based on a **contingency table**. 
-                        
-                        Let's consider a simple example:
+                    The chi-square test of independence is based on a **contingency table**. 
+                    
+                    Let's consider a simple example:
 
-                        > Does the level of education (ordinal variable) depend on gender (nominal variable)?
+                    > Does the level of education (ordinal variable) depend on gender (nominal variable)?
 
-                        To perform the analysis, we need to prepare a contingency table:
+                    To perform the analysis, we need to prepare a contingency table:
 
-                        | Level of education | Women | Men | ROW TOTAL |
-                        |--------------------|-------|-----|-----------|
-                        | Higher             |  30   | 20  |  **50**  |
-                        | Secondary          |  25   | 35  |  **60**  |
-                        | Primary            |  15   | 10  |  **25**  |
-                        | COLUMN TOTAL       | **70**|**65**| **135** |
+                    | Level of education | Women | Men | ROW TOTAL |
+                    |--------------------|-------|-----|-----------|
+                    | Higher             |  30   | 20  |  **50**  |
+                    | Secondary          |  25   | 35  |  **60**  |
+                    | Primary            |  15   | 10  |  **25**  |
+                    | COLUMN TOTAL       | **70**|**65**| **135** |
 
-                        The number of [degrees of freedom]{{term:degrees_of_freedom}} for the chi-square test of 
-                        independence calculated according to the above formula is: $df = (3 - 1)(2 - 1) = 2$.
+                    The number of [degrees of freedom]{{term:degrees_of_freedom}} for the chi-square test of 
+                    independence calculated according to the above formula is: $df = (3 - 1)(2 - 1) = 2$.
 
-                        The chi-square test compares the observed frequencies (e.g., the number of women
-                        with higher education) with the expected frequencies, 
-                        which would be expected if the variables were independent of each other.
+                    The chi-square test compares the observed frequencies (e.g., the number of women
+                    with higher education) with the expected frequencies, 
+                    which would be expected if the variables were independent of each other.
 
-                        The expected frequencies are calculated as the product of the row total $R_i$ and the column total $C_j$, divided by the overall sample size $N$.
-                        For the cell (Higher, Women), the expected frequency is:
+                    The expected frequencies are calculated as the product of the row total $R_i$ and the column total $C_j$, divided by the overall sample size $N$.
+                    For the cell (Higher, Women), the expected frequency is:
 
-                        $$
-                        E_{ij} = \frac{(R_i)(C_j)}{N} = \frac{(50)(70)}{135} \approx 25.93
-                        $$
+                    $$
+                    E_{ij} = \frac{(R_i)(C_j)}{N} = \frac{(50)(70)}{135} \approx 25.93
+                    $$
 
-                        Having computed the expected frequency for each combination, 
-                        we can calculate the chi-square test statistic:
+                    Having computed the expected frequency for each combination, 
+                    we can calculate the chi-square test statistic:
 
-                        $$
-                        \chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}},
-                        $$
-                        where $O_{ij}$ is the observed frequency in cell $i,j$,
-                        $E_{ij}$ is the expected frequency in that cell, and $r$ and
-                        $c$ are the number of rows and columns in the contingency table (our table has 3 rows and 2 columns).
+                    $$
+                    \chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}},
+                    $$
+                    where $O_{ij}$ is the observed frequency in cell $i,j$,
+                    $E_{ij}$ is the expected frequency in that cell, and $r$ and
+                    $c$ are the number of rows and columns in the contingency table (our table has 3 rows and 2 columns).
 
-                        The chi-square test of independence has several assumptions that must be met:
-                        1. The variables are categorical (we already know that),
-                        1. One observation must fall into one category
-                        (e.g., a person cannot simultaneously belong to the category of *higher education* and *secondary education*),
-                        1. The samples are not [paired]{{term:paired}},
-                        1. A sufficiently large sample size, so that the expected number of observations in most categories is greater than 5.
-                      pl: |
+                    The chi-square test of independence has several assumptions that must be met:
+                    1. The variables are categorical (we already know that),
+                    1. One observation must fall into one category
+                    (e.g., a person cannot simultaneously belong to the category of *higher education* and *secondary education*),
+                    1. The samples are not [paired]{{term:paired}},
+                    1. A sufficiently large sample size, so that the expected number of observations in most categories is greater than 5.
+                  pl: |
 
-                        Gdy mamy do czynienia ze zmiennymi kategorycznymi (nominalnymi lub porządkowymi),
-                        test niezależności $\chi^2$ (czytaj: chi-kwadrat) umożliwja nam 
-                        sprawdzenie, czy zmienne $x$ i $y$ są od siebie zależne.
+                    Gdy mamy do czynienia ze zmiennymi kategorycznymi (nominalnymi lub porządkowymi),
+                    test niezależności $\chi^2$ (czytaj: chi-kwadrat) umożliwja nam 
+                    sprawdzenie, czy zmienne $x$ i $y$ są od siebie zależne.
 
-                        $$
-                        H_0: \text{Zmienne } x \text{ oraz } y \text{ są niezależne}
-                        $$
-                        $$
-                        H_a: \text{Między zmiennymi } x \text{ oraz } y \text{ występuje istotna zależność}
-                        $$
+                    $$
+                    H_0: \text{Zmienne } x \text{ oraz } y \text{ są niezależne}
+                    $$
+                    $$
+                    H_a: \text{Między zmiennymi } x \text{ oraz } y \text{ występuje istotna zależność}
+                    $$
 
-                        Liczba [stopni swobody]{{term:degrees_of_freedom}} dla testu niezależności $\chi^2$ jest obliczana według wzoru:
+                    Liczba [stopni swobody]{{term:degrees_of_freedom}} dla testu niezależności $\chi^2$ jest obliczana według wzoru:
 
-                        $$
-                        df = (r - 1)(c - 1),
-                        $$
-                        gdzie $r$ to liczba wierszy, a $c$ to liczba kolumn w tabeli krzyżowej.
+                    $$
+                    df = (r - 1)(c - 1),
+                    $$
+                    gdzie $r$ to liczba wierszy, a $c$ to liczba kolumn w tabeli krzyżowej.
 
-                        Test niezależności $\chi^2$ opiera się na **tabeli krzyżowej**. 
-                        
-                        Rozważmy prosty przykład:
+                    Test niezależności $\chi^2$ opiera się na **tabeli krzyżowej**. 
+                    
+                    Rozważmy prosty przykład:
 
-                        > Czy poziom wykształcenia (zmienna porządkowa) zależy od płci (zmienna nominalna).
+                    > Czy poziom wykształcenia (zmienna porządkowa) zależy od płci (zmienna nominalna).
 
-                        W celu wykonania analizy, musimy przygotować tabelę krzyżową:
+                    W celu wykonania analizy, musimy przygotować tabelę krzyżową:
 
-                        | Poziom wykształcenia | Kobiety | Mężczyźni | SUMA (wiersze) |
-                        |----------------------|---------|-----------|------|
-                        | Wyższe               |    30   |    20     |  **50**  |
-                        | Średnie              |    25   |    35     |  **60**  |
-                        | Podstawowe           |    15   |    10     |  **25**  |
-                        | SUMA (kolumny)       |  **70** |    **65** | **135** |
+                    | Poziom wykształcenia | Kobiety | Mężczyźni | SUMA (wiersze) |
+                    |----------------------|---------|-----------|------|
+                    | Wyższe               |    30   |    20     |  **50**  |
+                    | Średnie              |    25   |    35     |  **60**  |
+                    | Podstawowe           |    15   |    10     |  **25**  |
+                    | SUMA (kolumny)       |  **70** |    **65** | **135** |
 
-                        Liczba [stopni swobody]{{term:degrees_of_freedom}} dla testu niezależności 
-                        obliczona wg powyższego wzoru wynosi: $df = (3 - 1)(2 - 1) = 2$.
+                    Liczba [stopni swobody]{{term:degrees_of_freedom}} dla testu niezależności 
+                    obliczona wg powyższego wzoru wynosi: $df = (3 - 1)(2 - 1) = 2$.
 
-                        Test $\chi^2$ porównuje obserwowane częstotliwości (np. liczba kobiet z wykształceniem wyższym) 
-                        z oczekiwanymi częstotliwościami, które byłyby spodziewane, gdyby zmienne były od siebie niezależne.
+                    Test $\chi^2$ porównuje obserwowane częstotliwości (np. liczba kobiet z wykształceniem wyższym) 
+                    z oczekiwanymi częstotliwościami, które byłyby spodziewane, gdyby zmienne były od siebie niezależne.
 
-                        Wartości oczekiwane są obliczane jako iloczyn sumy wiersza $i$ i sumy kolumny $j$, podzielony przez całkowitą liczebność próby.
-                        Dla komórki (Wyższe, Kobiety) wartość oczekiwana wynosi:
+                    Wartości oczekiwane są obliczane jako iloczyn sumy wiersza $i$ i sumy kolumny $j$, podzielony przez całkowitą liczebność próby.
+                    Dla komórki (Wyższe, Kobiety) wartość oczekiwana wynosi:
 
-                        $$
-                        E_{ij} = \frac{(R_i)(C_j)}{N} = \frac{(50)(70)}{135} \approx 25.93
-                        $$
+                    $$
+                    E_{ij} = \frac{(R_i)(C_j)}{N} = \frac{(50)(70)}{135} \approx 25.93
+                    $$
 
-                        Po obliczeniu wartości oczekiwanej dla każdej kombinacji, możemy obliczyć statystykę testową $\chi^2$:
+                    Po obliczeniu wartości oczekiwanej dla każdej kombinacji, możemy obliczyć statystykę testową $\chi^2$:
 
-                        $$
-                        \chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}},
-                        $$
+                    $$
+                    \chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}},
+                    $$
 
-                        gdzie $O_{ij}$ to obserwowana liczba przypadków w komórce $i,j$, 
-                        a $E_{ij}$ to oczekiwana liczba przypadków w tej komórce, zaś $r$ i $c$ to liczba wierszy i kolumn w tabeli krzyżowej (nasza tabela ma 3 wiersze i 2 kolumny).
+                    gdzie $O_{ij}$ to obserwowana liczba przypadków w komórce $i,j$, 
+                    a $E_{ij}$ to oczekiwana liczba przypadków w tej komórce, zaś $r$ i $c$ to liczba wierszy i kolumn w tabeli krzyżowej (nasza tabela ma 3 wiersze i 2 kolumny).
 
-                        Test niezależności $\chi^2$ ma kilka założeń, które muszą być spełnione:
-                        1. zmienne są kategoryczne (to już wiemy),
-                        1. jedna obserwacja musi przypadać na jedną kategorię 
-                        (np. osoba badana nie może należeć jednoczeście do kategorii *wykształcenie wyższe* oraz *wykształcenie średnie*)
-                        1. próbki nie są [sparowane]{{term:paired}},
-                        1. dość duża liczebność próby, aby oczekiwana liczba obserwacji w większości kategorii była większa niż 5.
+                    Test niezależności $\chi^2$ ma kilka założeń, które muszą być spełnione:
+                    1. zmienne są kategoryczne (to już wiemy),
+                    1. jedna obserwacja musi przypadać na jedną kategorię 
+                    (np. osoba badana nie może należeć jednoczeście do kategorii *wykształcenie wyższe* oraz *wykształcenie średnie*)
+                    1. próbki nie są [sparowane]{{term:paired}},
+                    1. dość duża liczebność próby, aby oczekiwana liczba obserwacji w większości kategorii była większa niż 5.
 
           - id: "dependent"
             label:
