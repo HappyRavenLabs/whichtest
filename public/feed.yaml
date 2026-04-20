@@ -1195,15 +1195,24 @@ items:
               pl: "Test Levene'a"
             content:
               en: | 
+                Levene's test checks [variance]{{term:variable}} homogeneity,
+                meaning variance equality across groups.
+
+                $$
+                H_0: \text{Variances are equal}
+                $$
+                $$
+                H_a: \text{Variances differ}
+                $$
               pl: | 
                 Test Levene'a sprawdza homogeniczność [wariancji]{{term:variance}}, 
                 tzn. czy wariancje w grupach są równe.
 
                 $$
-                H_0: \text{Wariance są równe}
+                H_0: \text{Wariancje są równe}
                 $$
                 $$
-                H_a: \text{Wariancje są różne}
+                H_a: \text{Wariancje nie są równe}
                 $$
 
 
