@@ -1248,10 +1248,10 @@ items:
               en: I have [numerical]{{term:numerical}} data
               pl: Mam dane [liczbowe]{{term:numerical}}
             children:
-              - id: "irr"
+              - id: "icc"
                 label:
-                  en: Inter-rater reliability score
-                  pl: Współczynnik zgodności między sędziami (IRR)
+                  en: Inter-class correlation coefficient (ICC)
+                  pl: Współczynnik korelacji między oceniającymi (ICC)
                 content:
                   en: |
                   pl: |
@@ -1294,10 +1294,10 @@ items:
               en: I have [numerical]{{term:numerical}} data
               pl: Mam dane [liczbowe]{{term:numerical}}
             children:
-              - id: "irr"
+              - id: "icc"
                 label:
-                  en: Inter-rater reliability score
-                  pl: Współczynnik zgodności między sędziami (IRR)
+                  en: Inter-class correlation coefficient (ICC)
+                  pl: Współczynnik korelacji między oceniającymi (ICC)
                 content:
                   en: |
                   pl: |

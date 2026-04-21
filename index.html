@@ -500,12 +500,130 @@ body {
   margin-bottom: 32px;
 }
 
+.authors-content {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 32px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.citation-section {
+  padding: 24px;
+  background: var(--md-surface-2);
+  border-radius: var(--md-radius);
+  border: 1px solid var(--md-outline-var);
+}
+
+.citation-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--md-on-surface);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.citation-tabs {
+  display: flex;
+  background: var(--md-surface-3);
+  border-radius: var(--md-radius-sm);
+  padding: 4px;
+  margin-bottom: 16px;
+  border: 1px solid var(--md-outline-var);
+}
+
+.citation-tab {
+  flex: 1;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  border-radius: var(--md-radius-sm);
+  font-family: var(--md-font);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--md-on-surface-var);
+  cursor: pointer;
+  transition: all var(--md-transition);
+}
+
+.citation-tab.active {
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+  box-shadow: 0 2px 4px rgba(26,115,232,.2);
+}
+
+.citation-tab:hover:not(.active) {
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+}
+
+.citation-content {
+  position: relative;
+}
+
+.citation-text {
+  display: none;
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline-var);
+  border-radius: var(--md-radius-sm);
+  padding: 16px;
+  font-family: var(--md-mono);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--md-on-surface);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.citation-text.active {
+  display: block;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+  border: none;
+  border-radius: var(--md-radius-sm);
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--md-transition);
+  opacity: 0.8;
+}
+
+.copy-btn:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.copy-btn.copied {
+  background: #34a853;
+}
+
+.authors-separator {
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--md-outline) 20%,
+    var(--md-outline) 80%,
+    transparent
+  );
+  border-radius: 1px;
+  align-self: stretch;
+}
+
 .authors-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
-  max-width: 800px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
 }
 
 .author-card {
@@ -527,10 +645,10 @@ body {
 }
 
 .author-avatar {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  border: 4px solid var(--md-primary);
+  border: 3px solid var(--md-primary);
   margin-bottom: 16px;
   object-fit: cover;
   transition: all var(--md-transition);
@@ -543,14 +661,14 @@ body {
 }
 
 .author-name {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--md-on-surface);
   margin-bottom: 8px;
 }
 
 .author-role {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--md-primary);
   font-weight: 500;
   margin-bottom: 12px;
@@ -559,10 +677,11 @@ body {
 }
 
 .author-description {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--md-on-surface-var);
   line-height: 1.5;
   margin-bottom: 16px;
+  text-align: left;
 }
 
 .author-links {
@@ -591,10 +710,30 @@ body {
   transform: scale(1.1);
 }
 
+@media (max-width: 1024px) {
+  .authors-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .authors-separator {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--md-outline) 20%,
+      var(--md-outline) 80%,
+      transparent
+    );
+    align-self: center;
+  }
+}
+
 @media (max-width: 768px) {
   .authors-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
   
   .authors-section {
@@ -602,9 +741,18 @@ body {
     padding: 24px;
   }
   
+  .citation-section {
+    padding: 20px;
+  }
+  
   .author-avatar {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+  }
+  
+  .citation-text {
+    font-size: 12px;
+    max-height: 150px;
   }
 }
 
@@ -1105,8 +1253,27 @@ function renderAuthors() {
   const authorsSection = document.querySelector('.authors-section');
   if (!authorsSection || !authors.length) return;
 
-  const authorsTitle = currentLang === 'pl' ? 'Poznaj Autorów' : 'Meet the Authors';
+  const authorsTitle = currentLang === 'pl' ? 'Poznaj Autorów i Cytowanie' : 'Meet the Authors & Citation';
+  const citationTitle = currentLang === 'pl' ? 'Cytuj to narzędzie' : 'Cite this tool';
+  const textTabLabel = currentLang === 'pl' ? 'Tekst' : 'Text';
+  const bibtexTabLabel = 'BiBTeX';
+  const copyLabel = currentLang === 'pl' ? 'Kopiuj' : 'Copy';
+  const copiedLabel = currentLang === 'pl' ? 'Skopiowano!' : 'Copied!';
   
+  // Citation texts
+  const textCitation = currentLang === 'pl' 
+    ? `Walczak, J. (2026). WhichTest? - Interaktywne narzędzie do wyboru testów statystycznych. Happy Raven Labs. https://happyravenlabs.github.io/whichtest/`
+    : `Walczak, J. (2026). WhichTest? - Interactive statistical test selection tool. Happy Raven Labs. https://happyravenlabs.github.io/whichtest/`;
+
+  const bibtexCitation = `@misc{walczak2026whichtest,
+  title={WhichTest? - Interactive statistical test selection tool},
+  author={Walczak, Jakub},
+  year={2026},
+  publisher={Happy Raven Labs},
+  url={https://happyravenlabs.github.io/whichtest/},
+  note={Web application for selecting appropriate statistical tests}
+}`;
+
   const authorsGrid = authors.map(author => {
     const name = getLocalizedText(author.name, currentLang) || author.id;
     const role = getLocalizedText(author.role, currentLang) || '';
@@ -1134,10 +1301,95 @@ function renderAuthors() {
 
   authorsSection.innerHTML = `
     <h2 class="authors-title">${authorsTitle}</h2>
-    <div class="authors-grid">
-      ${authorsGrid}
+    <div class="authors-content">
+      <div class="authors-grid">
+        ${authorsGrid}
+      </div>
+      <div class="authors-separator"></div>
+      <div class="citation-section">
+        <h3 class="citation-title">${citationTitle}</h3>
+        <div class="citation-tabs">
+          <button class="citation-tab active" data-tab="text">${textTabLabel}</button>
+          <button class="citation-tab" data-tab="bibtex">${bibtexTabLabel}</button>
+        </div>
+        <div class="citation-content">
+          <div class="citation-text active" data-content="text">${textCitation}</div>
+          <div class="citation-text" data-content="bibtex">${bibtexCitation}</div>
+          <button class="copy-btn" data-copy-label="${copyLabel}" data-copied-label="${copiedLabel}">${copyLabel}</button>
+        </div>
+      </div>
     </div>
   `;
+
+  // Add event listeners for citation functionality
+  setupCitationTabs();
+}
+
+function setupCitationTabs() {
+  const tabs = document.querySelectorAll('.citation-tab');
+  const contents = document.querySelectorAll('.citation-text');
+  const copyBtn = document.querySelector('.copy-btn');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetTab = tab.dataset.tab;
+      
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Update active content
+      contents.forEach(content => {
+        content.classList.toggle('active', content.dataset.content === targetTab);
+      });
+    });
+  });
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const activeContent = document.querySelector('.citation-text.active');
+      if (!activeContent) return;
+
+      try {
+        await navigator.clipboard.writeText(activeContent.textContent);
+        
+        // Visual feedback
+        const originalText = copyBtn.textContent;
+        const copiedText = copyBtn.dataset.copiedLabel;
+        
+        copyBtn.textContent = copiedText;
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+        
+      } catch (err) {
+        console.error('Failed to copy citation:', err);
+        
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = activeContent.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        // Visual feedback for fallback
+        const originalText = copyBtn.textContent;
+        const copiedText = copyBtn.dataset.copiedLabel;
+        
+        copyBtn.textContent = copiedText;
+        copyBtn.classList.add('copied');
+        
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }
+    });
+  }
 }
 
 /* ── Boot ────────────────────────────────────────── */
