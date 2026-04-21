@@ -57,6 +57,12 @@ glossary:
   stationary:
     en: A stationary time series maintains its statistical property. Typically, it is understood as weak stationarity meaning the mean and variance of a time series remains constant over time.
     pl: "Stacjonarny szereg czasowy to taki, który zachowuje swoje właściwości statystyczne w czasie. Najczęściej jednak upraszcza się ten wymóg do tzw. słabej stacjonarności, czyli zachowania stałych w czasie: wartości średniej i wariancji"
+  nominal:
+    en: Nominal data is a subset of categorical data that cannot be translated into numbers and which does not have a natural order, e.g. gender or eye color.
+    pl: Dane nominalne to podzbiór danych kategorycznych, których nie możemy przełożyć na liczby i które nie mają naturalnego porządku, np. płeć lub kolor oczu
+  ordinal:
+    en: "Ordinal data are types of categorical data that show natural order, np. education level or city size defined as: small, medium, large (when defined as citizens number it is not categorical)"     
+    pl: "Dane porządkowe to rodzaj danych kategorycznych, które mają naturalny porządek, np. poziom wykształcenia, wielkość miasta zdefiniowana jako: małe, średnie, duże (gdy wielkość jest zdefiniowana jako liczba mieszkańców, nie mówimy wtedy o zmiennej porządkowej)"
 items:
   - id: "distribution"
     label: 
@@ -1215,6 +1221,115 @@ items:
                 H_a: \text{Wariancje nie są równe}
                 $$
 
+  - id: "conformity"
+    label:
+      en: "Are expert scores compliant?"
+      pl: "Czy oceny ekspertów są zgodne?"
+    content:
+      en: |
+        When a group of experts is asked to grade something, it is unavoidable
+        that there occur differences in their opinions. One teacher may grade a
+        student's work as a 4 while another may give it a 4.5; one expert may find
+        a tool comfortable while another may think the opposite.
+      pl: |
+        Zdarza się, że przy ocenie ekspertów występują różnice w ich opiniach,
+        to naturalne. Jeden nauczyciel może ocenić pracę studenta na 4 a inny na 4,5;
+        jeden ekspert może uznać narzędzie za wygodne podczas gdy inny — wręcz przeciwnie.
+
+        W takich sytuacjach musimy zbadać zgodność między opiniami sędziów (ekspertów).
+    children:
+      - id: "two-judges"
+        label:
+          en: I have two judges (experts)
+          pl: Mam dwóch sędziów (ekspertów)
+        children:
+          - id: "numerical"
+            label:
+              en: I have [numerical]{{term:numerical}} data
+              pl: Mam dane [liczbowe]{{term:numerical}}
+            children:
+              - id: "irr"
+                label:
+                  en: Inter-rater reliability score
+                  pl: Współczynnik zgodności między sędziami (IRR)
+                content:
+                  en: |
+                  pl: |
+          - id: "categorical"
+            label:
+              en: I have [categorical]{{term:categorical}} data
+              pl: Mam dane [kategoryczne]{{term:categorical}}
+            children:
+              - id: "nominal"
+                label:
+                  en: I have [nominal]{{term:nominal}} data
+                  pl: Mam dane [nominalne]{{term:nominal}}
+                children:
+                  - id: "cohens-kappa"
+                    label:
+                      en: Cohen's kappa
+                      pl: Kappa Cohena
+                    content:
+                      en: |
+                      pl: |
+              - id: "ordinal"
+                label:
+                  en: I have [ordinal]{{term:ordinal}} data
+                  pl: Mam dane [porządkowe]{{term:ordinal}}
+                children:
+                  - id: "weighted-cohens-kappa"
+                    label:
+                      en: Weighted Cohen's kappa
+                      pl: Ważona Kappa Cohena
+                    content:
+                      en: |
+                      pl: |
+      - id: "more-than-two-judges"
+        label:
+          en: I have more than two judges (experts)
+          pl: Mam więcej niż dwóch sędziów (ekspertów)
+        children:
+          - id: "numerical"
+            label:
+              en: I have [numerical]{{term:numerical}} data
+              pl: Mam dane [liczbowe]{{term:numerical}}
+            children:
+              - id: "irr"
+                label:
+                  en: Inter-rater reliability score
+                  pl: Współczynnik zgodności między sędziami (IRR)
+                content:
+                  en: |
+                  pl: |
+          - id: "categorical"
+            label:
+              en: I have [categorical]{{term:categorical}} data
+              pl: Mam dane [kategoryczne]{{term:categorical}}
+            children:
+              - id: "nominal"
+                label:
+                  en: I have [nominal]{{term:nominal}} data
+                  pl: Mam dane [nominalne]{{term:nominal}}
+                children:
+                  - id: "fleiss-kappa"
+                    label:
+                      en: Fleiss' kappa
+                      pl: Kappa Fleissa
+                    content:
+                      en: |
+                      pl: |              
+              - id: "ordinal"
+                label:
+                  en: I have [ordinal]{{term:ordinal}} data
+                  pl: Mam dane [porządkowe]{{term:ordinal}}
+                children:
+                  - id: "kendall-w"
+                    label:
+                      en: Kendall's W statistic
+                      pl: Wartość W Kendalla
+                    content:
+                      en: |
+                      pl: |
 
           
 
