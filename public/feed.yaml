@@ -1114,12 +1114,21 @@ items:
                     $E_{ij}$ is the expected frequency in that cell, and $r$ and
                     $c$ are the number of rows and columns in the contingency table (our table has 3 rows and 2 columns).
 
-                    The chi-square test of independence has several assumptions that must be met:
+                    The chi-square test of independence has several assumptions that must be met [1]:
                     1. The variables are categorical (we already know that),
                     1. One observation must fall into one category
                     (e.g., a person cannot simultaneously belong to the category of *higher education* and *secondary education*),
                     1. The samples are not [paired]{{term:paired}},
                     1. A sufficiently large sample size, so that the expected number of observations in most categories is greater than 5.
+
+                    > The chi-square test of independence can also be applied to numerical 
+                    > variables when we divide them into categories, e.g., the size of a city expressed by 
+                    > the number of inhabitants can be divided into categories: *small* (up to 100,000 inhabitants), 
+                    > *medium* (from 100,000 to 500,000 inhabitants), and *large* (above 500,000 inhabitants).
+
+                    --- 
+
+                    [1] McHugh, Mary L. "The chi-square test of independence." Biochemia medica 23.2 (2013): 143-149.
                   pl: |
 
                     Gdy mamy do czynienia ze zmiennymi kategorycznymi (nominalnymi lub porządkowymi),
@@ -1177,12 +1186,19 @@ items:
                     gdzie $O_{ij}$ to obserwowana liczba przypadków w komórce $i,j$, 
                     a $E_{ij}$ to oczekiwana liczba przypadków w tej komórce, zaś $r$ i $c$ to liczba wierszy i kolumn w tabeli krzyżowej (nasza tabela ma 3 wiersze i 2 kolumny).
 
-                    Test niezależności $\chi^2$ ma kilka założeń, które muszą być spełnione:
+                    Test niezależności $\chi^2$ ma kilka założeń, które muszą być spełnione [1]:
                     1. zmienne są kategoryczne (to już wiemy),
                     1. jedna obserwacja musi przypadać na jedną kategorię 
                     (np. osoba badana nie może należeć jednoczeście do kategorii *wykształcenie wyższe* oraz *wykształcenie średnie*)
                     1. próbki nie są [sparowane]{{term:paired}},
                     1. dość duża liczebność próby, aby oczekiwana liczba obserwacji w większości kategorii była większa niż 5.
+
+                    > Test $\chi^2$ niezależności można stosować również do zmiennych liczbowych, gdy podzielimy je na kategorie, np.
+                    > wielkość miasta wyrażona liczbą mieszkańców możemy podzielić na kategorie: *małe* (do 100 tys. mieszkańców), *średnie* (od 100 tys. do 500 tys. mieszkańców) i *duże* (powyżej 500 tys. mieszkańców). 
+                    > Wtedy możemy sprawdzić, czy wielkość miasta jest zależna od np. poziomu zadowolenia jego mieszkańców.
+                    ---
+                    
+                    [1] McHugh, Mary L. "The chi-square test of independence." Biochemia medica 23.2 (2013): 143-149.
 
 
   - id: "variance"
