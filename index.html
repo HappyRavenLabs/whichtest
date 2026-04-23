@@ -653,6 +653,7 @@ body {
   object-fit: cover;
   transition: all var(--md-transition);
   background: var(--md-surface-3);
+  cursor: help;
 }
 
 .author-card:hover .author-avatar {
@@ -665,6 +666,7 @@ body {
   font-weight: 600;
   color: var(--md-on-surface);
   margin-bottom: 8px;
+  cursor: help;
 }
 
 .author-role {
@@ -674,14 +676,6 @@ body {
   margin-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-.author-description {
-  font-size: 13px;
-  color: var(--md-on-surface-var);
-  line-height: 1.5;
-  margin-bottom: 16px;
-  text-align: left;
 }
 
 .author-links {
@@ -885,15 +879,12 @@ body {
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-left">
-      <span id="footer-text">Made with &#10084; by <a href="https://github.com/HappyRavenLabs" target="_blank" rel="noopener noreferrer">HappyRavenLabs</a> and <a href="https://www.p.lodz.pl" target="_blank" rel="noopener noreferrer">Lodz University of Technology</a></span>
+      <span id="footer-text">Made by <a href="https://orcid.org/0000-0002-5632-9484" target="_blank" rel="noopener noreferrer">J. Walczak</a></span>
     </div>
     <div class="footer-right">
-      <span class="footer-logo-box">
+      <!-- <span class="footer-logo-box">
         <img src="public/favicon.svg" alt="WhichTest icon">
-      </span>
-      <span class="footer-logo-box">
-        <img src="public/tul.png" alt="TUL">
-      </span>
+      </span> -->
     </div>
   </div>
 </footer>
@@ -1284,14 +1275,17 @@ function renderAuthors() {
       return `<a href="${link.url}" class="author-link" title="${title}" target="_blank" rel="noopener">${link.icon}</a>`;
     }).join('');
 
+    // Escape the description for safe use in data attribute
+    const safeDescription = description.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
     return `
       <div class="author-card">
         <img src="${author.img}" 
              alt="${name}" 
-             class="author-avatar">
-        <h3 class="author-name">${name}</h3>
+             class="author-avatar tooltip-term"
+             data-tip="${safeDescription}">
+        <h3 class="author-name tooltip-term" data-tip="${safeDescription}">${name}</h3>
         <div class="author-role">${role}</div>
-        <p class="author-description">${description}</p>
         <div class="author-links">
           ${linksHtml}
         </div>

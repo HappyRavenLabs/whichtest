@@ -4,8 +4,8 @@ authors:
       en: "Dr. Jakub Walczak"
       pl: "Dr Jakub Walczak"
     role:
-      en: "AI Researcher"
-      pl: "Badacz AI"
+      en: "Assistant researcher in AI"
+      pl: "Adiunkt"
     img: "public/jwalczak.png"
     description:
       en: "Jakub Walczak, since 2023 assistant researcher at the Institute of Information Technology of the Lodz University of Technology. Since 2019, he has been active in scientific research, collaborating on implementation and research projects in the field of artificial intelligence, particularly machine learning and its applications in various fields."
@@ -29,3 +29,4 @@ authors:
           en: "ORCiD"
           pl: "ORCiD"
         icon: "🎓"
+        
