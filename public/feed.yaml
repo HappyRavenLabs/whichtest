@@ -1247,105 +1247,119 @@ items:
         that there occur differences in their opinions. One teacher may grade a
         student's work as a 4 while another may give it a 4.5; one expert may find
         a tool comfortable while another may think the opposite.
+
+        Before we choose the right text, we need to ask ourselves what kind of conformity we are looking for
+        and we have three categories to choose from [1].
+
+        1. **consensus** - all judges (experts) must agree on the rating, e.g., all must rate the student's work as a 4 or all must find the tool comfortable.
+        2. **consistency** - judges (experts) must agree on the ordering of the ratings, e.g., all must rate work A higher than work B, but they do not have to agree on whether work A deserves a 4 or a 4.5.
+        3. **measurement** - treats the judges' (experts') ratings as measurements consisting of a true score and error, and agreement among judges (experts) is understood as the degree to which their ratings are in agreement with the true value of the object being rated.
+
+        ---
+
+        [1] Stemler, Steven E. "A comparison of consensus, consistency, and measurement approaches to estimating interrater reliability." Practical Assessment, Research, and Evaluation 9.1 (2004).
       pl: |
         Zdarza się, że przy ocenie ekspertów występują różnice w ich opiniach,
         to naturalne. Jeden nauczyciel może ocenić pracę studenta na 4 a inny na 4,5;
         jeden ekspert może uznać narzędzie za wygodne podczas gdy inny — wręcz przeciwnie.
 
         W takich sytuacjach musimy zbadać zgodność między opiniami sędziów (ekspertów).
+
+        Zanim jednak wybierzemy właściwy tekst, musimy odpowiedzieć sobie na pytanie, o jaką zgodność nam chodzi
+        a mamy do dyspozycji trzy kategorie [1].
+
+        1. **pełna zgodność**  - wszyscy sędziowie (eksperci) muszą się zgodzić co do oceny, np. wszyscy muszą ocenić pracę na 4 lub wszyscy muszą uznać narzędzie za wygodne.  
+        2. **spójna kolejność**  - sędziowie (eksperci) muszą być zgodni co do tego, że jedna praca jest lepsza od drugiej, np. wszyscy muszą ocenić pracę A wyżej niż pracę B, ale nie muszą się zgadzać co do tego, czy praca A zasługuje na 4 czy 4,5.
+        3. **zgodność z prawdą** - traktuje wyniki sędziów (ekspertów) jako pomiary składające się z części prawdziwej i błędu, a zgodność między sędziami (ekspertami) jest rozumiana jako stopień, w jakim ich oceny są zgodne z prawdziwą wartością ocenianego obiektu.
+
+        ---
+
+        [1] Stemler, Steven E. "A comparison of consensus, consistency, and measurement approaches to estimating interrater reliability." Practical Assessment, Research, and Evaluation 9.1 (2004).
     children:
-      - id: "two-judges"
+      - id: "consensus"
         label:
-          en: I have two judges (experts)
-          pl: Mam dwóch sędziów (ekspertów)
+          en: I want to check for consensus
+          pl: Chcę sprawdzić pełną zgodność
+        content:
+          en: |
+            To check for **consensus** among judges (experts), we need 
+            to know how many judges (experts) we have received ratings from.
+          pl: |
+            Chcąc sprawdzić **pełną zgodność** między sędziami (ekspertami), 
+            musimy jeszcze wiedzieć, od ile sędziów (ekspertów) otrzymaliśmy oceny.
         children:
-          - id: "numerical"
+          - id: "two-judges"
             label:
-              en: I have [numerical]{{term:numerical}} data
-              pl: Mam dane [liczbowe]{{term:numerical}}
+              en: We have ratings from two judges (experts)
+              pl: Mamy oceny od dwóch sędziów (ekspertów)
             children:
-              - id: "icc"
-                label:
-                  en: Inter-class correlation coefficient (ICC)
-                  pl: Współczynnik korelacji między oceniającymi (ICC)
-                content:
-                  en: |
-                  pl: |
-          - id: "categorical"
-            label:
-              en: I have [categorical]{{term:categorical}} data
-              pl: Mam dane [kategoryczne]{{term:categorical}}
-            children:
-              - id: "nominal"
+              - id: "nominal-data"
                 label:
                   en: I have [nominal]{{term:nominal}} data
                   pl: Mam dane [nominalne]{{term:nominal}}
                 children:
-                  - id: "cohens-kappa"
+                  - id: "percent-agreement"
+                    label:
+                      en: Percent agreement
+                      pl: Procent zgodności
+                    content:
+                      en: |
+                      pl: |
+                  - id: "cohen-kappa"
                     label:
                       en: Cohen's kappa
                       pl: Kappa Cohena
                     content:
                       en: |
                       pl: |
-              - id: "ordinal"
+                  - id: "krippendorff-alpha"
+                    label:
+                      en: Krippendorff's alpha
+                      pl: Alfa Krippendorffa
+                    content:
+                      en: |
+                      pl: |
+              - id: "ordinal-data"
                 label:
                   en: I have [ordinal]{{term:ordinal}} data
                   pl: Mam dane [porządkowe]{{term:ordinal}}
                 children:
-                  - id: "weighted-cohens-kappa"
+                  - id: "weighted-cohens-happa"
                     label:
                       en: Weighted Cohen's kappa
-                      pl: Ważona Kappa Cohena
+                      pl: Ważona kappa Cohena
                     content:
                       en: |
                       pl: |
-      - id: "more-than-two-judges"
-        label:
-          en: I have more than two judges (experts)
-          pl: Mam więcej niż dwóch sędziów (ekspertów)
-        children:
-          - id: "numerical"
+                  - id: "krippendorff-alpha"
+                    label:
+                      en: Krippendorff's alpha
+                      pl: Alfa Krippendorffa
+                    content:
+                      en: |
+                      pl: |                                          
+          - id: "more-than-two-judges"
             label:
-              en: I have [numerical]{{term:numerical}} data
-              pl: Mam dane [liczbowe]{{term:numerical}}
+              en: We have ratings from more than two judges (experts)
+              pl: Mamy oceny od więcej niż dwóch sędziów (ekspertów)
             children:
-              - id: "icc"
-                label:
-                  en: Inter-class correlation coefficient (ICC)
-                  pl: Współczynnik korelacji między oceniającymi (ICC)
-                content:
-                  en: |
-                  pl: |
-          - id: "categorical"
-            label:
-              en: I have [categorical]{{term:categorical}} data
-              pl: Mam dane [kategoryczne]{{term:categorical}}
-            children:
-              - id: "nominal"
+              - id: "nominal-data"
                 label:
                   en: I have [nominal]{{term:nominal}} data
                   pl: Mam dane [nominalne]{{term:nominal}}
-                children:
-                  - id: "fleiss-kappa"
-                    label:
-                      en: Fleiss' kappa
-                      pl: Kappa Fleissa
-                    content:
-                      en: |
-                      pl: |              
-              - id: "ordinal"
+              - id: "ordinal-data"
                 label:
                   en: I have [ordinal]{{term:ordinal}} data
                   pl: Mam dane [porządkowe]{{term:ordinal}}
-                children:
-                  - id: "kendall-w"
-                    label:
-                      en: Kendall's W statistic
-                      pl: Wartość W Kendalla
-                    content:
-                      en: |
-                      pl: |
-
-          
-
+              - id: "numerical-data"
+                label:
+                  en: I have [numerical]{{term:numerical}} data
+                  pl: Mam dane [numeryczne]{{term:numerical}}   
+      - id: "consistency"
+        label:
+          en: I want to check for consistency
+          pl: Chcę sprawdzić spójną kolejność
+      - id: "measurement"
+        label:
+          en: I want to check for agreement with the truth
+          pl: Chcę sprawdzić zgodność z prawdą

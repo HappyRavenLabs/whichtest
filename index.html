@@ -1219,12 +1219,6 @@ function render() {
 
   app.innerHTML = `
     ${backBtn}
-    ${localizedContent ? `
-      <div class="content-card fade-in" style="margin-bottom:${children.length ? '22px' : '0'}">
-        <div class="content-name">${nodeTitle}</div>
-        <div class="md-body" id="node-content">${renderContent(localizedContent, glossary)}</div>
-      </div>
-    ` : ''}
     ${children.length > 0 ? `
       <div class="section-label fade-in">${isHome
         ? (currentLang === 'pl' ? 'Przegladaj testy' : 'Browse tests')
@@ -1236,6 +1230,12 @@ function render() {
             <span class="chip-count">${(ch.children || []).length || (ch.content ? 1 : 0)}</span>
           </button>
         `).join('')}
+      </div>
+    ` : ''}
+    ${localizedContent ? `
+      <div class="content-card fade-in" style="margin-bottom:${children.length ? '22px' : '0'}">
+        <div class="content-name">${nodeTitle}</div>
+        <div class="md-body" id="node-content">${renderContent(localizedContent, glossary)}</div>
       </div>
     ` : ''}
     ${children.length === 0 && !localizedContent ? `
