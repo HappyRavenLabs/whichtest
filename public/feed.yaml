@@ -765,8 +765,8 @@ items:
         children:
           - id: "ordinal-categorical"
             label:
-              en: The [categorical]{{term:categorical}} variable is ordinal
-              pl: Zmienna [kategoryczna]{{term:categorical}} jest porządkowa
+              en: The [categorical]{{term:categorical}} variable is [ordinal]{{term:ordinal}}
+              pl: Zmienna [kategoryczna]{{term:categorical}} jest [porządkowa]{{term:ordinal}}
             children:
               - id: "anomalies-and-small-data"
                 label:
