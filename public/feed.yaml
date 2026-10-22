@@ -230,29 +230,29 @@ items:
                   en: "The distribution of the data is roughly symmetric"
                   pl: "Rozkład danych jest mniej więcej symetryczny"
                 children:
-                - id: "wilcoxon-signed-rank-test"
-                  label:
-                    en: "Wilcoxon signed-rank test"
-                    pl: "Test Wilcoxona dla jednej próbki"
-                  content:
-                    en: |
+                  - id: "wilcoxon-signed-rank-test"
+                    label:
+                      en: "Wilcoxon signed-rank test"
+                      pl: "Test Wilcoxona dla jednej próbki"
+                    content:
+                      en: |
 
-                    pl: |
-                      Test Wilcoxona dla jednej próbki pozwala ocenić, 
-                      czy istnieje istotna różnica między medianą z badanej próby ($M$) a wartością teoretyczną ($M_0$). 
+                      pl: |
+                        Test Wilcoxona dla jednej próbki pozwala ocenić, 
+                        czy istnieje istotna różnica między medianą z badanej próby ($M$) a wartością teoretyczną ($M_0$). 
 
-                      $$
-                      H_0: M = M_0
-                      $$
-                      $$
-                      H_a: M \neq M_0
-                      $$
+                        $$
+                        H_0: M = M_0
+                        $$
+                        $$
+                        H_a: M \neq M_0
+                        $$
 
 
-                      Dla danych o [rozkładzie]{{term:distribution}} symetrycznym, 
-                      test Wilcoxona dla jednej próbki jest uznawany za lepszy, 
-                      ponieważ, w przeciwieństwie do testu znaków, bierze pod uwagę 
-                      nie tylko kierunek różnicy, ale także jej wielkość.
+                        Dla danych o [rozkładzie]{{term:distribution}} symetrycznym, 
+                        test Wilcoxona dla jednej próbki jest uznawany za lepszy, 
+                        ponieważ, w przeciwieństwie do testu znaków, bierze pod uwagę 
+                        nie tylko kierunek różnicy, ale także jej wielkość.
               - id: "not-symmetric"
                 label:
                   en: "[The distribution]{{term:distribution}} of the data is rather not symmetric"
@@ -295,7 +295,7 @@ items:
 
       - id: "two-samples"
         label:
-          en: From the other group of data
+          en: The other group of data
           pl: Od innej grupy danych
         children:
           - id: "is-normal-two-samples"
@@ -557,7 +557,7 @@ items:
                         
       - id: "more-than-two-samples"
         label:
-          en: From several other groups of data (>2)
+          en: Several other groups of data (>2)
           pl: Od kilku innych grup danych (>2)
         children:
           - id: "is-normal-more-than-two-samples"
