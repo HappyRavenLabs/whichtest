@@ -168,7 +168,7 @@ items:
           en: Theoretically expected value
           pl: Teoretycznej wartości
         children:
-          - id: "is-normal"
+          - id: "is-normal-single-sample"
             label: 
               en: "The distribution of the data is [normal]{{term:normal}}"
               pl: "Rozkład danych jest [normalny]{{term:normal}}"
@@ -298,7 +298,7 @@ items:
           en: From the other group of data
           pl: Od innej grupy danych
         children:
-          - id: "is-normal"
+          - id: "is-normal-two-samples"
             label: 
               en: "The distribution of both groups is [normal]{{term:normal}}"
               pl: "Rozkład w obu grupach jest [normalny]{{term:normal}}"
@@ -466,17 +466,17 @@ items:
                             v = \frac{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)^2}{\frac{\left( \frac{s_1^2}{n_1} \right)^2}{n_1 - 1} + \frac{\left( \frac{s_2^2}{n_2} \right)^2}{n_2 - 1}}
                             $$
                             
-          - id: "not-normal"
+          - id: "not-normal-two-samples"
             label:
               en: "The distribution of at least one group is not [normal]{{term:normal}}"
               pl: "Rozkład przynajmniej jednej grupy nie jest [normalny]{{term:normal}}"
             children:
-              - id: "paired-samples"
+              - id: "paired-samples-non-normal"
                 label:
                   en: The groups are [paired]{{term:paired}}
                   pl: Grupy są [sparowane]{{term:paired}}
                 children:
-                  - id: "wilcoxon-signed-rank-test"
+                  - id: "wilcoxon-signed-rank-test-paired-samples"
                     label:
                       en: Wilcoxon signed-rank test
                       pl: Test Wilcoxona dla prób sparowanych
@@ -524,7 +524,7 @@ items:
                         $$
                         H_a: M_a < M_A
                         $$
-              - id: "unpaired-samples"
+              - id: "unpaired-samples-non-normal"
                 label:
                   en: The groups are not [paired]{{term:paired}}
                   pl: Grupy nie są [sparowane]{{term:paired}}
@@ -560,12 +560,12 @@ items:
           en: From several other groups of data (>2)
           pl: Od kilku innych grup danych (>2)
         children:
-          - id: "is-normal"
+          - id: "is-normal-more-than-two-samples"
             label:
               en: "The distribution of all groups is [normal]{{term:normal}}?"
               pl: "Rozkład we wszystkich grupach jest [normalny]{{term:normal}}?"
             children:
-              - id: "variances-equal"
+              - id: "variances-equal-more-than-two-samples"
                 label:
                   en: "All groups have equal [variances]{{term:variance}}"
                   pl: "Wszystkie grupy mają równe [wariancje]{{term:variance}}"
@@ -632,7 +632,7 @@ items:
                         gdzie $n$ to liczebność całej próby (**suma liczebności próbek ze wszystkich grup**), a $k$ to liczba grup.
 
                         Rekomendowany test post-hoc po teście ANOVA to test Tukeya.
-              - id: "variances-unequal"
+              - id: "variances-unequal-more-than-two-samples"
                 label:
                   en: "At least one group has different [variance]{{term:variance}}"
                   pl: "Przynajmniej jedna grupa ma inną [wariancję]{{term:variance}}"
@@ -701,7 +701,7 @@ items:
                         $$
 
                         Rekomendowany test post-hoc po teście ANOVA z korektą Welscha to test Games-Howell'a.
-          - id: "not-normal"
+          - id: "not-normal-more-than-two-samples"
             label:
               en: "The distribution of at least one group is not [normal]{{term:normal}}"
               pl: "Rozkład przynajmniej jednej grupy nie jest [normalny]{{term:normal}}"
@@ -718,7 +718,7 @@ items:
                     content:
                       en: |
                       pl: |
-              - id: "unpaired-samples"
+              - id: "unpaired-samples-more-than-two-samples"
                 label:
                   en: The groups are not [paired]{{term:paired}}
                   pl: Grupy nie są [sparowane]{{term:paired}}
@@ -878,7 +878,7 @@ items:
               en: Observations in sample are independent
               pl: Obserwacja są od siebie niezależne
             children:
-              - id: "is-normal"
+              - id: "is-normal-numerical-variables"
                 label:
                   en: "The distribution of both variables is [normal]{{term:normal}}"
                   pl: "Rozkład obu zmiennych jest [normalny]{{term:normal}}"
@@ -936,12 +936,12 @@ items:
 
                         Uważaj, korelacja Pearsona jest wrażliwa na [obserwacje odstające]{{term:outlier}} i [anomalie]{{term:anomaly}} w zbiorze.
 
-              - id: "not-normal"
+              - id: "not-normal-numerical-variables"
                 label:
                   en: "The distribution of at least one variable is not [normal]{{term:normal}}"
                   pl: "Rozkład przynajmniej jednej zmiennej nie jest [normalny]{{term:normal}}"
                 children:
-                  - id: "spearman-correlation"
+                  - id: "spearman-correlation-numerical-variables"
                     label:
                       en: Spearman's rank correlation
                       pl: Korelacja rang Spearmana
@@ -1119,7 +1119,7 @@ items:
                             > Przyczynowość w sensie Grangera to **nie rzeczywisty związek przyczynowo skutkowy** 
                             > w sensie fizycznym, a określa przewidywalność jedenj zmiennej na podstawie drugiej.     
 
-      - id: "categorical-variables"
+      - id: "both-categorical-variables"
         label:
           en: Both variables are [categorical]{{term:categorical}}
           pl: Obie zmienne są [kategoryczne]{{term:categorical}}
@@ -1422,7 +1422,7 @@ items:
                     content:
                       en: |
                       pl: |
-                  - id: "krippendorff-alpha"
+                  - id: "krippendorff-alpha-ordinal-data"
                     label:
                       en: Krippendorff's alpha
                       pl: Alfa Krippendorffa
@@ -1453,11 +1453,11 @@ items:
               en: We have ratings from more than two judges (experts)
               pl: Mamy oceny od więcej niż dwóch sędziów (ekspertów)
             children:
-              - id: "nominal-data"
+              - id: "nominal-data-more-than-two-judges"
                 label:
                   en: I have [nominal]{{term:nominal}} data
                   pl: Mam dane [nominalne]{{term:nominal}}
-              - id: "ordinal-data"
+              - id: "ordinal-data-more-than-two-judges"
                 label:
                   en: I have [ordinal]{{term:ordinal}} data
                   pl: Mam dane [porządkowe]{{term:ordinal}}
