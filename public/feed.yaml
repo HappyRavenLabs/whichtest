@@ -706,7 +706,7 @@ items:
               en: "The distribution of at least one group is not [normal]{{term:normal}}"
               pl: "Rozkład przynajmniej jednej grupy nie jest [normalny]{{term:normal}}"
             children:
-              - id: "paired-samples"
+              - id: "paired-samples-2"
                 label:
                   en: The groups are [paired]{{term:paired}}
                   pl: Grupy są [sparowane]{{term:paired}}
@@ -1124,7 +1124,7 @@ items:
           en: Both variables are [categorical]{{term:categorical}}
           pl: Obie zmienne są [kategoryczne]{{term:categorical}}
         children:
-          - id: "paired"
+          - id: "paired-1"
             label:
               en: "Data are [paired]{{term:paired}}"
               pl: "Dane są [sparowane]{{term:paired}}"
